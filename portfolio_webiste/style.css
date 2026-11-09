@@ -42,7 +42,7 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.05}
 
 /* Hero */
 .hero{position:relative;overflow:hidden;min-height:calc(100svh - 60px);padding:.9rem clamp(1rem,3.5vw,2.4rem) 1.2rem;border-bottom:1px solid var(--line);display:flex;flex-direction:column;justify-content:flex-start}
-.mega{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:0;font-family:var(--font-display);font-weight:900;font-size:clamp(9rem,23vw,21rem);line-height:.85;letter-spacing:0;white-space:nowrap;text-align:center;color:var(--red);user-select:none;margin:0;pointer-events:none}
+.mega{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:0;font-family:var(--font-display);font-weight:900;font-size:clamp(5rem,15.5vw,15rem);line-height:.85;letter-spacing:0;white-space:nowrap;text-align:center;color:var(--red);user-select:none;margin:0;pointer-events:none}
 .hero-topline{position:relative;z-index:2;display:flex;justify-content:space-between;gap:1rem;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
 .open-dot i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--red-bright);margin-right:.45rem;animation:pulse 1.6s infinite}
 .mega span{display:inline-block;animation:rise .8s cubic-bezier(.2,.8,.2,1) both}
@@ -203,7 +203,7 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.05}
 /* ---- Responsive: desktop → laptop → tablet → all phones ---- */
 /* Short laptop screens: shrink the hero further so it fits in one view */
 @media(min-width:1025px) and (max-height:820px){
-  .mega{font-size:20vw}
+  .mega{font-size:15vw}
   .hero-photo img{max-height:48vh;max-width:300px}
   .hello{font-size:1.8rem}
   .hero-left h2{font-size:2.6rem}
@@ -236,7 +236,7 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.05}
   .tool-grid{grid-template-columns:repeat(3,1fr)}
 }
 @media(max-width:768px){
-  .mega{font-size:24vw}
+  .mega{font-size:15.5vw}
   .hero-grid{grid-template-columns:1fr}
   .hero-left,.hero-right{text-align:left}
   .hero-photo img{max-height:420px}
@@ -250,7 +250,7 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.05}
   .contact-form{padding:1.4rem 1.1rem}
 }
 @media(max-width:640px){
-  .mega{font-size:26vw}
+  .mega{font-size:15.5vw}
   .hero-photo img{max-height:400px}
   .photo-circle{width:min(88%,360px)}
   .badge-rot{width:72px;height:72px;top:4px;right:4px}
@@ -263,7 +263,7 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.05}
   .foot-tag p:first-child{font-size:1.15rem}
 }
 @media(max-width:480px){
-  .mega{font-size:28vw}
+  .mega{font-size:16vw}
   .hero-photo img{max-height:380px;max-width:300px}
   .photo-circle{width:min(90%,320px)}
   .cards-5{grid-template-columns:1fr}
@@ -276,7 +276,7 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.05}
   .back-top{left:.8rem;bottom:.8rem;padding:.5rem .8rem}
 }
 @media(max-width:360px){
-  .mega{font-size:30vw}
+  .mega{font-size:16vw}
   .hero-photo img{max-height:330px;max-width:260px}
   .photo-circle{width:min(92%,280px)}
   .topnav a{font-size:.7rem}
