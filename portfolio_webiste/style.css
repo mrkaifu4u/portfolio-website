@@ -264,7 +264,9 @@ a.sec-kicker:hover{text-decoration:underline}
 .tool-grid b{display:block;font-family:var(--font-display);font-weight:800;font-size:1.15rem;letter-spacing:-.01em;color:var(--cream);line-height:1;margin-bottom:.3rem}
 .tool-grid b i{font-style:normal;color:var(--red-bright)}
 .tools-quote{margin-top:1.3rem;background:linear-gradient(150deg,rgba(232,17,45,.16),var(--panel));border:1px solid rgba(255,34,56,.45);border-left:4px solid var(--red-bright);border-radius:10px;padding:1.2rem;font-size:.95rem;color:var(--cream-dim)}
-.tools-quote cite{display:block;margin-top:.7rem;font-style:normal;color:var(--red-bright);font-size:.85rem}
+.tools-quote b{color:var(--cream)}
+.tools-quote cite{display:block;margin-top:.75rem;font-style:normal;font-size:.66rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.tools-quote cite span{color:var(--red-bright)}
 .lang{margin-top:1rem;color:var(--muted);font-size:.9rem}
 .lang strong{color:var(--cream)}
 
