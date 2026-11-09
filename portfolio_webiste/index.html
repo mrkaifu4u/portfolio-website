@@ -6,11 +6,11 @@
   <title>Mohamad Kaifoddin — AI/ML Engineer | Portfolio</title>
   <meta name="description" content="Portfolio of Mohamad Kaifoddin, AI/ML Engineer in Hyderabad, India. Python, Scikit-learn, NLP, data pipelines and model deployment. ML Engineer at Artmac Soft Pvt Ltd." />
   <meta property="og:title" content="Mohamad Kaifoddin — AI/ML Engineer" />
-  <meta property="og:description" content="I build, train and deploy machine learning models that work in production — not just in notebooks." />
+  <meta property="og:description" content="I build machine learning models that are practical, accurate and ready for production." />
   <meta property="og:image" content="kaif_1.jpeg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23c1272d'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='%23f2e3c6' font-family='Arial' font-weight='bold'>MK</text></svg>" />
 </head>
@@ -18,248 +18,205 @@
   <div class="progress" id="progress" aria-hidden="true"></div>
   <div class="cursor" id="cursor" aria-hidden="true"></div>
 
-  <header class="nav" id="top">
-    <a class="logo" href="#top" aria-label="Mohamad Kaifoddin — home">MK<span>.</span></a>
-    <nav class="nav-links" id="navLinks" aria-label="Main navigation">
-      <a href="#work">Work</a>
-      <a href="#experience">Experience</a>
-      <a href="#skills">Skills</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <div class="nav-right">
-      <a class="btn btn-small" href="#contact">Hire Me</a>
-      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">☰</button>
-    </div>
-  </header>
+  <div class="poster">
+    <!-- TOP BAR : exactly like the reference -->
+    <header class="topbar">
+      <span>Creative Portfolio</span>
+      <nav class="topnav" aria-label="Sections">
+        <a href="#services">What I Do</a>
+        <a href="#work">Work</a>
+        <a href="#experience">Experience</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <span class="available"><i></i> Available for Freelance</span>
+    </header>
 
-  <main>
     <!-- HERO -->
     <section class="hero" id="home">
-      <div class="hero-top">
-        <span>Creative Portfolio</span>
-        <span class="available"><i></i> Available for work</span>
-      </div>
-
-      <h1 class="mega" aria-label="Portfolio">
-        <span class="mega-line"><span>P</span><span>O</span><span>R</span><span>T</span><span>F</span><span>O</span><span>L</span><span>I</span><span>O</span></span>
-      </h1>
+      <h1 class="mega" aria-label="Portfolio"><span>P</span><span>O</span><span>R</span><span>T</span><span>F</span><span>O</span><span>L</span><span>I</span><span>O</span></h1>
 
       <div class="hero-grid">
         <div class="hero-left reveal">
           <p class="eyebrow">AI / ML / Data</p>
           <p class="hero-sub">Machine Learning<br />Model Deployment<br />Data Pipelines</p>
           <blockquote class="hero-quote">
-            “I build machine learning models<br />that are practical, accurate<br />and ready for production.”
+            <span class="qmark">“</span>
+            I build machine learning models that are practical, accurate and ready for production.
           </blockquote>
-          <p class="hero-role">— Mohamad Kaifoddin</p>
+          <p class="signature">Mohamad Kaifoddin</p>
         </div>
 
         <div class="hero-photo reveal" id="heroPhoto">
-          <div class="photo-ring" aria-hidden="true"></div>
-          <img src="kaif_1.jpeg" alt="Mohamad Kaifoddin, AI/ML Engineer, in a navy suit" />
-          <div class="photo-badge">Hyderabad, India</div>
+          <div class="photo-circle" aria-hidden="true"></div>
+          <div class="photo-glow" aria-hidden="true"></div>
+          <img src="kaif_1-removebg-preview.png" alt="Mohamad Kaifoddin, AI/ML Engineer, arms crossed" />
+          <div class="badge-rot" aria-hidden="true">
+            <svg viewBox="0 0 120 120"><defs><path id="circ" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs><text><textPath href="#circ">DESIGNING INTELLIGENT SYSTEMS • BUILDING MODELS THAT WORK • </textPath></text><text x="60" y="68" class="badge-star">✦</text></svg>
+          </div>
         </div>
 
         <div class="hero-right reveal">
           <h2>Mohamad<br />Kaifoddin</h2>
           <p class="role">AI/ML Engineer</p>
-          <p class="hero-text">AI/ML Engineer with 1+ year of hands-on experience building, training and deploying machine learning models using Python and Scikit-learn. Currently driving end-to-end ML workflows at Artmac Soft — from data preparation and experimentation to API deployment and production support.</p>
+          <p class="hero-text">I’m an AI/ML Engineer crafting clean, practical and user-focused machine learning solutions. I help teams turn messy data into models that predict, classify and grow through thoughtful engineering.</p>
+          <div class="stats">
+            <div class="stat"><span class="stat-icon">◉</span><strong><span class="count" data-target="1">0</span>+</strong><span>Years<br />Experience</span></div>
+            <div class="stat"><span class="stat-icon">▦</span><strong><span class="count" data-target="10">0</span>+</strong><span>Models<br />Trained</span></div>
+            <div class="stat"><span class="stat-icon">✓</span><strong><span class="count" data-target="3">0</span>+</strong><span>Models<br />Deployed</span></div>
+          </div>
           <div class="hero-cta">
             <a class="btn btn-red" href="#work">View My Work →</a>
-            <a class="btn btn-ghost" href="mailto:shaikhkaif7014@gmail.com">Email Me</a>
-          </div>
-          <div class="stats">
-            <div class="stat"><strong><span class="count" data-target="10">0</span>+</strong><span>ML models<br />trained</span></div>
-            <div class="stat"><strong><span class="count" data-target="80">0</span>%</strong><span>Churn model<br />accuracy</span></div>
-            <div class="stat"><strong><span class="count" data-target="3">0</span>+</strong><span>Models deployed<br />via REST APIs</span></div>
+            <a class="btn btn-ghost" href="Mohamad_Kaifoddin_AI_ML_Engineer_1-3Yrs.pdf" target="_blank" rel="noopener">Download Resume</a>
           </div>
         </div>
       </div>
-
-      <a class="scroll-hint" href="#services">Scroll ↓</a>
     </section>
-
-    <!-- MARQUEE -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-track">
-        <span>Python ✦ Scikit-learn ✦ Pandas ✦ NumPy ✦ NLP ✦ TF-IDF ✦ SQL ✦ MongoDB ✦ REST APIs ✦ FastAPI ✦ Docker ✦ AWS ✦ Git ✦ Linux ✦&nbsp;</span>
-        <span>Python ✦ Scikit-learn ✦ Pandas ✦ NumPy ✦ NLP ✦ TF-IDF ✦ SQL ✦ MongoDB ✦ REST APIs ✦ FastAPI ✦ Docker ✦ AWS ✦ Git ✦ Linux ✦&nbsp;</span>
-      </div>
-    </div>
 
     <!-- WHAT I DO -->
-    <section class="section" id="services">
-      <div class="section-head reveal">
-        <h2 class="section-title">What I Do</h2>
-        <p class="section-note">End-to-end machine learning — not just model training.</p>
-      </div>
+    <section class="block" id="services">
+      <h2 class="block-title reveal">What I Do</h2>
       <div class="cards-5">
-        <article class="card reveal"><div class="card-icon">🧠</div><h3>ML Model Development</h3><p>Classification and prediction models with Python and Scikit-learn, tuned systematically for better accuracy.</p></article>
-        <article class="card reveal"><div class="card-icon">⚙️</div><h3>Data Pipelines</h3><p>Preprocessing pipelines for missing values, categorical encoding and feature scaling — tested on 10,000+ records.</p></article>
-        <article class="card reveal"><div class="card-icon">💬</div><h3>NLP &amp; Text Classification</h3><p>Tokenization, stop-word removal and TF-IDF vectorization to turn unstructured text into structured data.</p></article>
-        <article class="card reveal"><div class="card-icon">🔌</div><h3>API Integration</h3><p>Connecting trained models to backend services through REST API endpoints for real-time predictions.</p></article>
-        <article class="card reveal"><div class="card-icon">🗄️</div><h3>Data Handling</h3><p>Extracting and managing training datasets with SQL, MySQL and MongoDB — 30% faster data preparation.</p></article>
+        <article class="card reveal"><div class="card-icon">🧠</div><h3>ML Model Development</h3><p>Classification and prediction models with Python and Scikit-learn, tuned for better accuracy.</p></article>
+        <article class="card reveal"><div class="card-icon">⚙️</div><h3>Data Pipelines</h3><p>Preprocessing pipelines for missing values, encoding and scaling — tested on 10,000+ records.</p></article>
+        <article class="card reveal"><div class="card-icon">💬</div><h3>NLP &amp; Text Classification</h3><p>Tokenization, stop-word removal and TF-IDF to turn unstructured text into structured data.</p></article>
+        <article class="card reveal"><div class="card-icon">🔌</div><h3>API Integration</h3><p>Connecting trained models to backend services through REST APIs for real-time predictions.</p></article>
+        <article class="card reveal"><div class="card-icon">🗄️</div><h3>Data Handling</h3><p>SQL, MySQL and MongoDB for training data — streamlining preparation by an estimated 30%.</p></article>
       </div>
     </section>
 
-    <!-- PROCESS + FEATURED WORK -->
-    <section class="section split">
+    <!-- MY PROCESS + FEATURED WORK -->
+    <section class="block split">
       <div class="process reveal">
-        <h2 class="section-title">My Process</h2>
+        <h2 class="block-title">My Process</h2>
         <ol class="steps">
-          <li><span>01</span><div><h3>Discover</h3><p>Understand the business problem, the data available and what success looks like.</p></div></li>
-          <li><span>02</span><div><h3>Prepare Data</h3><p>Clean, encode and scale the data. Handle missing values and build the pipeline.</p></div></li>
-          <li><span>03</span><div><h3>Train &amp; Tune</h3><p>Train and compare models, tune hyperparameters and validate honestly.</p></div></li>
-          <li><span>04</span><div><h3>Deploy</h3><p>Ship the model behind a REST API so the backend can use it in real time.</p></div></li>
-          <li><span>05</span><div><h3>Support &amp; Improve</h3><p>Monitor in production, fix issues and iterate — accuracy improved 8–10% across iterations.</p></div></li>
+          <li><span>01</span><div><h3>Discover</h3><p>Understanding the problem, the data and what success looks like.</p></div></li>
+          <li><span>02</span><div><h3>Prepare Data</h3><p>Cleaning, encoding and scaling — building a pipeline that holds up.</p></div></li>
+          <li><span>03</span><div><h3>Train &amp; Tune</h3><p>Training and comparing models, tuning hyperparameters, validating honestly.</p></div></li>
+          <li><span>04</span><div><h3>Deploy</h3><p>Shipping the model behind a REST API so the backend can use it in real time.</p></div></li>
+          <li><span>05</span><div><h3>Improve</h3><p>Monitoring in production and iterating — accuracy up 8–10% across iterations.</p></div></li>
         </ol>
       </div>
 
       <div class="work" id="work">
         <div class="work-head reveal">
-          <h2 class="section-title">Featured Work</h2>
-          <a href="#experience">View experience →</a>
+          <h2 class="block-title">Featured Work</h2>
+          <a href="#experience">View more projects →</a>
         </div>
         <div class="projects">
           <article class="project reveal">
-            <div class="project-visual churn"><span class="project-tag">Python · Scikit-learn</span><h3>We predict<br />churn.</h3><p>Logistic Regression · 80% accuracy</p></div>
-            <div class="project-body">
-              <h3>Customer Churn Prediction</h3>
-              <p class="project-meta">May 2025 – Jun 2025</p>
-              <p>End-to-end supervised ML pipeline on 5,000+ customer records — data cleaning, missing-value handling, feature encoding and train-test splitting. Trained and evaluated a Logistic Regression model at ~80% classification accuracy.</p>
-              <div class="chips"><span>Python</span><span>Scikit-learn</span><span>Logistic Regression</span><span>Pandas</span></div>
-            </div>
+            <div class="project-visual churn"><span class="project-tag">Python · Scikit-learn</span><h3>We predict<br />churn.</h3><p>Logistic Regression · ~80% accuracy · 5,000+ records</p><span class="project-arrow">↗</span></div>
+            <h3 class="project-name">Customer Churn Prediction</h3><p class="project-cat">Machine Learning · May – Jun 2025</p>
           </article>
           <article class="project reveal">
-            <div class="project-visual nlp"><span class="project-tag">Python · TF-IDF · NLP</span><h3>Read. Classify.<br />Sort resumes.</h3><p>200+ resumes categorized</p></div>
-            <div class="project-body">
-              <h3>Resume Screening &amp; Text Classification (NLP)</h3>
-              <p class="project-meta">Jun 2025 – Jul 2025</p>
-              <p>An NLP system that automatically categorizes 200+ resumes by job relevance — tokenization, stop-word removal and TF-IDF vectorization, with multiple classification models trained and compared.</p>
-              <div class="chips"><span>Python</span><span>NLP</span><span>TF-IDF</span><span>Text Classification</span></div>
-            </div>
+            <div class="project-visual nlp"><span class="project-tag">Python · TF-IDF · NLP</span><h3>Read. Classify.<br />Sort resumes.</h3><p>200+ resumes categorized by job relevance</p><span class="project-arrow">↗</span></div>
+            <h3 class="project-name">Resume Screening — NLP</h3><p class="project-cat">Text Classification · Jun – Jul 2025</p>
+          </article>
+          <article class="project reveal">
+            <div class="project-visual prod"><span class="project-tag">Python · REST APIs</span><h3>10+ models.<br />In production.</h3><p>3+ models deployed via REST API endpoints</p><span class="project-arrow">↗</span></div>
+            <h3 class="project-name">End-to-End ML at Artmac Soft</h3><p class="project-cat">ML Engineering · Apr 2025 – Present</p>
+          </article>
+          <article class="project reveal">
+            <div class="project-visual data"><span class="project-tag">SQL · MongoDB</span><h3>Clean data.<br />Faster models.</h3><p>10,000+ records · 30% faster preparation</p><span class="project-arrow">↗</span></div>
+            <h3 class="project-name">Data Pipelines &amp; Preparation</h3><p class="project-cat">Data Engineering · SQL / MongoDB</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- EXPERIENCE -->
-    <section class="section" id="experience">
-      <div class="section-head reveal">
-        <h2 class="section-title">Experience</h2>
-        <p class="section-note">Where I’ve done the work.</p>
-      </div>
-      <article class="job reveal">
-        <div class="job-head">
-          <div><h3>ML Engineer — Artmac Soft Pvt Ltd</h3><p class="job-meta">Hyderabad · April 2025 – Present</p></div>
-          <span class="job-badge">Current Role</span>
-        </div>
-        <ul class="job-list">
-          <li>Developed and trained <strong>10+ machine learning models</strong> using Python and Scikit-learn across multiple structured datasets for classification and prediction.</li>
-          <li>Engineered data preprocessing pipelines handling missing values, categorical encoding and feature scaling across datasets of <strong>10,000+ records</strong>.</li>
-          <li>Extracted and managed training datasets using SQL and MongoDB, streamlining data preparation time by an estimated <strong>30%</strong>.</li>
-          <li>Tuned model hyperparameters systematically, improving evaluation accuracy by approximately <strong>8–10%</strong> across iterations.</li>
-          <li>Integrated <strong>3+ trained ML models</strong> into backend services through REST API endpoints, enabling real-time prediction access.</li>
-          <li>Maintained version control with Git across all project branches and worked within Linux environments for development and testing.</li>
-        </ul>
-      </article>
-
-      <div class="edu-grid">
+    <!-- EXPERIENCE + EDUCATION -->
+    <section class="block" id="experience">
+      <div class="exp-grid">
         <div class="reveal">
-          <h2 class="section-title small">Education</h2>
+          <h2 class="block-title">Experience</h2>
+          <article class="job">
+            <h3>ML Engineer — Artmac Soft Pvt Ltd</h3>
+            <p class="job-meta">Hyderabad · April 2025 – Present</p>
+            <ul>
+              <li>Developed and trained <strong>10+ ML models</strong> with Python and Scikit-learn for classification and prediction.</li>
+              <li>Built preprocessing pipelines across datasets of <strong>10,000+ records</strong>.</li>
+              <li>Cut data preparation time by an estimated <strong>30%</strong> using SQL and MongoDB.</li>
+              <li>Improved accuracy by <strong>8–10%</strong> through systematic hyperparameter tuning.</li>
+              <li>Integrated <strong>3+ models</strong> into backend services via REST APIs.</li>
+              <li>Git version control and Linux environments for development and testing.</li>
+            </ul>
+          </article>
+        </div>
+        <div class="reveal">
+          <h2 class="block-title">Education</h2>
           <ol class="timeline">
             <li><strong>MCA — Master of Computer Applications</strong><span>2026 – Pursuing</span></li>
             <li><strong>Bachelor of Computer Science</strong><span>College of Computer Science and Information Technology · Jun 2021 – Dec 2024</span></li>
             <li><strong>HSC — Shivaji MahaVidyalaya</strong><span>Jun 2020 – Feb 2021</span></li>
             <li><strong>SSC — Shri Mukundraj Vidyalaya</strong><span>Jun 2018 – Mar 2019</span></li>
           </ol>
-        </div>
-        <div class="reveal">
-          <h2 class="section-title small">Certification &amp; Languages</h2>
           <div class="cert">
             <strong>Field Technician – Computing &amp; Peripherals (ELE/Q4601)</strong>
-            <p>NSQF Level 4 — Certified by ESSCI under the National Skill Development Corporation. Computer hardware fundamentals, system installations, troubleshooting and peripheral maintenance. Certified 09 July 2023.</p>
+            <p>NSQF Level 4 — ESSCI / National Skill Development Corporation. Certified 09 July 2023.</p>
           </div>
-          <div class="chips large"><span>English — Advanced</span><span>Hindi — Advanced</span><span>Marathi — Advanced</span></div>
         </div>
       </div>
     </section>
 
-    <!-- SKILLS -->
-    <section class="section" id="skills">
-      <div class="section-head reveal">
-        <h2 class="section-title">Tools I Use</h2>
-        <p class="section-note">The stack I reach for every day — levels as stated on my resume.</p>
-      </div>
-      <div class="skill-groups">
-        <div class="skill-group reveal">
-          <h3>Machine Learning</h3>
-          <div class="chips"><span>Python</span><span>Scikit-learn</span><span>Pandas</span><span>NumPy</span><span>NLP — Basics</span><span>Transformers — Beginner</span></div>
-        </div>
-        <div class="skill-group reveal">
-          <h3>Backend &amp; APIs</h3>
-          <div class="chips"><span>REST APIs</span><span>Spring Boot</span><span>FastAPI — Learning</span><span>Java</span><span>JavaScript</span><span>C</span><span>C++</span></div>
-        </div>
-        <div class="skill-group reveal">
-          <h3>Databases</h3>
-          <div class="chips"><span>SQL</span><span>MySQL</span><span>MongoDB</span></div>
-        </div>
-        <div class="skill-group reveal">
-          <h3>Cloud, DevOps &amp; Tools</h3>
-          <div class="chips"><span>AWS — Basics</span><span>Docker — Basic</span><span>ML Deployment — Basic</span><span>Git</span><span>Linux</span><span>Postman</span><span>JIRA</span></div>
+    <!-- ABOUT ME + TOOLS I USE -->
+    <section class="block split about-split" id="about">
+      <div class="about reveal">
+        <h2 class="block-title">About Me</h2>
+        <div class="about-inner">
+          <img src="kaif_2.jpeg" alt="Portrait of Mohamad Kaifoddin" />
+          <div>
+            <p>I’m an AI/ML Engineer with a passion for turning messy, real-world data into models people can actually use. I believe great ML is not just about accuracy — it’s about clean pipelines, honest evaluation, and a model that survives contact with production.</p>
+            <ul class="traits">
+              <li>Detail-oriented</li>
+              <li>Problem solver</li>
+              <li>End-to-end thinking</li>
+              <li>Always learning</li>
+            </ul>
+          </div>
         </div>
       </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section class="section about" id="about">
-      <div class="about-photo reveal">
-        <img src="kaif_2.jpeg" alt="Portrait of Mohamad Kaifoddin" />
-      </div>
-      <div class="about-text reveal">
-        <h2 class="section-title">About Me</h2>
-        <p>I’m an AI/ML Engineer with a passion for turning messy, real-world data into models people can actually use. I believe great ML is not just about accuracy — it’s about clean pipelines, honest evaluation, and a model that survives contact with production.</p>
-        <ul class="traits">
-          <li>Detail-oriented</li>
-          <li>Problem solver</li>
-          <li>End-to-end thinking</li>
-          <li>Always learning</li>
-        </ul>
-        <p class="about-note">Currently: ML Engineer at Artmac Soft Pvt Ltd, Hyderabad · Pursuing MCA (2026).</p>
+      <div class="tools reveal">
+        <h2 class="block-title">Tools I Use</h2>
+        <div class="tool-grid">
+          <span><b>Py</b>Python</span><span><b>Sk</b>Scikit-learn</span><span><b>Pd</b>Pandas</span><span><b>Np</b>NumPy</span><span><b>SQL</b>SQL / MySQL</span><span><b>Mg</b>MongoDB</span><span><b>Git</b>Git</span><span><b>Lx</b>Linux</span><span><b>Pm</b>Postman</span><span><b>Ji</b>JIRA</span>
+        </div>
+        <blockquote class="tools-quote">
+          <span class="qmark">“</span>
+          I build machine learning models that are practical, accurate and ready for production — not just in notebooks.
+          <cite>— Mohamad Kaifoddin, from my resume summary</cite>
+        </blockquote>
+        <p class="lang">Languages: <strong>English</strong> · <strong>Hindi</strong> · <strong>Marathi</strong> — all Advanced</p>
       </div>
     </section>
 
-    <!-- CONTACT -->
-    <section class="section contact" id="contact">
-      <div class="contact-left reveal">
-        <h2 class="section-title">Let’s Collaborate</h2>
-        <p>Have a project in mind, or just want to say hi? I’d love to hear from you.</p>
+    <!-- LET'S COLLABORATE + SCAN TO CONNECT -->
+    <footer class="block footer" id="contact">
+      <div class="foot-col reveal">
+        <h2 class="block-title">Let’s Collaborate</h2>
+        <p>Have a project in mind or just want to say hi? I’d love to hear from you.</p>
         <ul class="contact-list">
-          <li><strong>Email</strong><a href="mailto:shaikhkaif7014@gmail.com">shaikhkaif7014@gmail.com</a></li>
-          <li><strong>Phone</strong><a href="tel:+917057547014">+91-7057547014</a></li>
-          <li><strong>Location</strong><span>Hyderabad, Telangana, India</span></li>
-          <li><strong>GitHub</strong><a href="https://github.com/mrkaifu4u" target="_blank" rel="noopener">github.com/mrkaifu4u</a></li>
+          <li><a href="mailto:shaikhkaif7014@gmail.com">✉ shaikhkaif7014@gmail.com</a></li>
+          <li><a href="tel:+917057547014">☎ +91-7057547014</a></li>
+          <li>📍 Hyderabad, Telangana, India</li>
+          <li><a href="https://github.com/mrkaifu4u" target="_blank" rel="noopener">⌘ github.com/mrkaifu4u</a></li>
         </ul>
       </div>
-      <form class="contact-form reveal" id="contactForm" novalidate>
-        <label>Name<input type="text" name="name" placeholder="Your name" required /></label>
-        <label>Email<input type="email" name="email" placeholder="you@example.com" required /></label>
-        <label>Message<textarea name="message" rows="4" placeholder="Tell me about your project…" required></textarea></label>
-        <button class="btn btn-red" type="submit">Send Message</button>
-        <p class="form-note" id="formNote" role="status"></p>
-        <p class="form-small">This form shows a success message only — it does not save or send messages anywhere. For a reply, email me directly.</p>
-      </form>
-    </section>
-  </main>
+      <div class="foot-col reveal">
+        <h2 class="block-title">Scan to Connect</h2>
+        <div class="qr-row">
+          <figure><img src="qr-github.png" alt="QR code linking to Mohamad Kaifoddin's GitHub profile" /><figcaption>GitHub</figcaption></figure>
+          <figure><img src="qr-email.png" alt="QR code to email Mohamad Kaifoddin" /><figcaption>Email</figcaption></figure>
+        </div>
+      </div>
+      <div class="foot-col foot-tag reveal">
+        <p>Designing<br />intelligent systems.<br />Building models<br />that work.</p>
+        <p class="signature">Mohamad Kaifoddin</p>
+        <p class="foot-small">© 2026 Mohamad Kaifoddin · Hyderabad, India</p>
+      </div>
+    </footer>
+  </div>
 
-  <footer class="footer">
-    <p>Building intelligent systems.<br />Shipping models that work.</p>
-    <p class="footer-name">— Mohamad Kaifoddin</p>
-    <p class="footer-small">© 2026 Mohamad Kaifoddin · Hyderabad, India · Built with HTML, CSS &amp; JavaScript</p>
-    <a href="#top" class="back-top" id="backTop">Back to top ↑</a>
-  </footer>
-
+  <a href="#home" class="back-top" id="backTop">Back to top ↑</a>
   <script src="script.js"></script>
 </body>
 </html>
