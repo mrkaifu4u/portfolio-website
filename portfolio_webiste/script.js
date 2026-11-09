@@ -133,6 +133,18 @@
     card.addEventListener('mouseleave', function () { card.style.transform = ''; });
   });
 
+  // Contact form — success message only (no backend, nothing is sent or saved)
+  var contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!contactForm.checkValidity()) { contactForm.reportValidity(); return; }
+      var ok = document.getElementById('formSuccess');
+      if (ok) { ok.hidden = false; }
+      contactForm.reset();
+    });
+  }
+
   // Custom cursor dot (desktop only)
   var cursor = document.getElementById('cursor');
   if (cursor && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
