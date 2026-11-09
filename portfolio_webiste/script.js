@@ -18,27 +18,20 @@
   if (window.gsap) {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Hero entrance — transform only, never opacity: content must stay
-    // fully visible even if an animation is interrupted or slow.
-    gsap.from('.mega span', { y: 60, duration: 0.8, stagger: 0.06, ease: 'power3.out' });
-    gsap.from('.hero-left', { x: -40, duration: 0.9, delay: 0.3, ease: 'power3.out' });
-    gsap.from('.hero-right', { x: 40, duration: 0.9, delay: 0.4, ease: 'power3.out' });
-    gsap.from('#heroPhoto', { scale: 0.88, duration: 1, delay: 0.2, ease: 'back.out(1.4)' });
-    gsap.from('.topbar', { y: -20, duration: 0.7, ease: 'power2.out' });
+    // No entrance or scroll animation at all on the hero and What I Do:
+    // those sections are shown instantly, fully bright, with no fade or
+    // dimming effect of any kind.
+    gsap.set(['.hero .reveal', '.cards-5 .card'], { clearProps: 'all', opacity: 1 });
 
-    // Scroll reveal for every section — transform only, one tween per element
+    // Scroll reveal for the other sections — transform only, one tween
+    // per element, never opacity.
     gsap.utils.toArray('.reveal').forEach(function (el) {
+      if (el.closest('.hero') || el.closest('.cards-5')) return;
       gsap.from(el, {
         y: 36, duration: 0.9, ease: 'power3.out',
         scrollTrigger: { trigger: el, start: 'top 88%', once: true }
       });
     });
-
-    // Safety: never leave an element stuck mid-animation — clear all
-    // entrance transforms a moment after load.
-    setTimeout(function () {
-      gsap.set(['.mega span', '.hero-left', '.hero-right', '#heroPhoto', '.topbar', '.reveal'], { clearProps: 'transform,opacity' });
-    }, 2600);
 
     // Animated counters — only real resume numbers
     document.querySelectorAll('.count').forEach(function (el) {
