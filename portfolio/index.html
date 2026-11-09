@@ -252,7 +252,7 @@
                         <a href="https://x.com/shaikhkaif_4u" target="_blank" rel="noopener noreferrer" class="social-btn"><i class="fab fa-x-twitter"></i></a>
                     </div>
                 </div>
-                <form class="contact-form" action="contact-submit.php" method="POST" id="contactForm" novalidate>
+                <form class="contact-form" id="contactForm" novalidate>
                     <div class="form-group">
                         <input type="text" name="name" id="formName" placeholder="Name" required>
                         <div class="error-message" id="nameError"></div>
@@ -313,135 +313,12 @@
     </div>
 
     <!-- ===== JavaScript ===== -->
-    <script src="api.js"></script>
     <script>
-        // 1. Load configuration dynamically from Google Sheets
-        document.addEventListener('DOMContentLoaded', async () => {
-            try {
-                // Fetch configuration data
-                const config = await Api.getAdminData();
-                if (config) {
-                    // Update Navbar Logo
-                    if (config.navbarLogo) {
-                        const logoLink = document.querySelector('.nav-logo a');
-                        if (logoLink) {
-                            let logoText = config.navbarLogo;
-                            if (logoText.endsWith('.')) {
-                                logoLink.innerHTML = `${logoText.slice(0, -1)}<span class="dot">.</span>`;
-                            } else {
-                                logoLink.innerHTML = `${logoText}<span class="dot">.</span>`;
-                            }
-                        }
-                    }
-                    
-                    // Update Portfolio Name (Hero and Footer)
-                    if (config.portfolioName) {
-                        const heroName = document.querySelector('.hero-name');
-                        if (heroName) heroName.textContent = config.portfolioName;
-                        
-                        const footerP = document.querySelector('footer p');
-                        if (footerP) {
-                            const currentYear = new Date().getFullYear();
-                            footerP.innerHTML = `&copy; ${currentYear} ${config.portfolioName}. All rights reserved.`;
-                        }
-                    }
-                    
-                    // Update Resume Viewer and Download Links
-                    if (config.resumeLink) {
-                        let viewLink = config.resumeLink;
-                        if (viewLink.includes('drive.google.com') && !viewLink.includes('/preview')) {
-                            if (viewLink.includes('/view')) {
-                                viewLink = viewLink.replace('/view', '/preview');
-                            } else if (viewLink.includes('id=')) {
-                                const idMatch = viewLink.match(/id=([^&]+)/);
-                                if (idMatch) {
-                                    viewLink = `https://drive.google.com/file/d/${idMatch[1]}/preview`;
-                                }
-                            } else if (viewLink.includes('/d/')) {
-                                const parts = viewLink.split('/d/');
-                                if (parts.length > 1) {
-                                    const docId = parts[1].split('/')[0];
-                                    viewLink = `https://drive.google.com/file/d/${docId}/preview`;
-                                }
-                            }
-                        }
-                        
-                        const resumeIframe = document.querySelector('#resumeModal iframe');
-                        if (resumeIframe) resumeIframe.src = viewLink;
-                        
-                        let downloadLink = config.resumeLink;
-                        if (downloadLink.includes('drive.google.com')) {
-                            let docId = '';
-                            if (downloadLink.includes('/d/')) {
-                                const parts = downloadLink.split('/d/');
-                                docId = parts[1].split('/')[0];
-                            } else if (downloadLink.includes('id=')) {
-                                const idMatch = downloadLink.match(/id=([^&]+)/);
-                                docId = idMatch ? idMatch[1] : '';
-                            }
-                            if (docId) {
-                                downloadLink = `https://drive.google.com/uc?export=download&id=${docId}`;
-                            }
-                        }
-                        const downloadBtn = document.querySelector('#resumeModal .download-btn');
-                        if (downloadBtn) downloadBtn.href = downloadLink;
-                    }
-                    
-                    // Update Social Links
-                    if (config.instagramLink) {
-                        const igBtn = document.querySelector('.social-btn i.fa-instagram');
-                        if (igBtn) igBtn.parentElement.href = config.instagramLink;
-                    }
-                    if (config.linkedinLink) {
-                        const liBtn = document.querySelector('.social-btn i.fa-linkedin-in');
-                        if (liBtn) liBtn.parentElement.href = config.linkedinLink;
-                    }
-                    if (config.githubLink) {
-                        const ghBtn = document.querySelector('.social-btn i.fa-github');
-                        if (ghBtn) ghBtn.parentElement.href = config.githubLink;
-                        
-                        const navGhBtn = document.querySelector('.btn-github');
-                        if (navGhBtn) navGhBtn.href = config.githubLink;
-                    }
-                    if (config.xLink) {
-                        const xBtn = document.querySelector('.social-btn i.fa-x-twitter');
-                        if (xBtn) xBtn.parentElement.href = config.xLink;
-                    }
-                    
-                    // Update Email
-                    if (config.email) {
-                        const emailIcon = document.querySelector('.info-item i.fa-envelope');
-                        if (emailIcon && emailIcon.nextElementSibling) {
-                            emailIcon.nextElementSibling.textContent = config.email;
-                        }
-                    }
-                    
-                    // Update Location
-                    if (config.location) {
-                        const locIcon = document.querySelector('.info-item i.fa-map-marker-alt');
-                        if (locIcon && locIcon.nextElementSibling) {
-                            locIcon.nextElementSibling.textContent = config.location;
-                        }
-                    }
-                    
-                    // Update or Inject Phone Number
-                    if (config.phone) {
-                        const phoneIcon = document.querySelector('.info-item i.fa-phone');
-                        if (!phoneIcon) {
-                            const emailItem = document.querySelector('.info-item i.fa-envelope');
-                            if (emailItem && emailItem.parentElement) {
-                                const phoneDiv = document.createElement('div');
-                                phoneDiv.className = 'info-item';
-                                phoneDiv.innerHTML = `<i class="fas fa-phone"></i><span>${config.phone}</span>`;
-                                emailItem.parentElement.parentNode.insertBefore(phoneDiv, emailItem.parentElement.nextSibling);
-                            }
-                        } else if (phoneIcon.nextElementSibling) {
-                            phoneIcon.nextElementSibling.textContent = config.phone;
-                        }
-                    }
-                }
-            } catch (err) {
-                console.error("Failed to load portfolio database configuration:", err);
+        // 1. Footer year
+        document.addEventListener('DOMContentLoaded', () => {
+            const footerP = document.querySelector('footer p');
+            if (footerP) {
+                footerP.innerHTML = `&copy; ${new Date().getFullYear()} Mohamad Kaifoddin. All rights reserved.`;
             }
         });
 
@@ -488,7 +365,7 @@
             }
         });
 
-        // 5. Contact Form Submission with Custom Validation & Google Sheets Database
+        // 5. Contact Form Submission with Custom Validation (frontend-only)
         const contactForm = document.getElementById('contactForm');
         const formStatus = document.getElementById('formStatus');
         const submitBtn = document.getElementById('submitBtn');
@@ -550,38 +427,18 @@
                     message: messageTextarea.value.trim()
                 };
 
-                try {
-                    // Send to Google Sheets API Client
-                    const result = await Api.saveContact(payload);
+                // Frontend-only: no backend, so just show the success message.
+                submitBtn.disabled = false;
+                if (btnText) btnText.textContent = 'Send Message';
+                if (submitSpinner) submitSpinner.style.display = 'none';
 
-                    submitBtn.disabled = false;
-                    if (btnText) btnText.textContent = 'Send Message';
-                    if (submitSpinner) submitSpinner.style.display = 'none';
+                contactForm.reset();
+                nameInput.style.borderColor = 'var(--glass-border)';
+                emailInput.style.borderColor = 'var(--glass-border)';
+                purposeSelect.style.borderColor = 'var(--glass-border)';
+                messageTextarea.style.borderColor = 'var(--glass-border)';
 
-                    if (result.result === 'success') {
-                        contactForm.reset();
-                        nameInput.style.borderColor = 'var(--glass-border)';
-                        emailInput.style.borderColor = 'var(--glass-border)';
-                        purposeSelect.style.borderColor = 'var(--glass-border)';
-                        messageTextarea.style.borderColor = 'var(--glass-border)';
-
-                        showSuccessPopup('Your message has been sent successfully.');
-                    } else {
-                        throw new Error(result.message || 'Error reported by server');
-                    }
-
-                } catch (error) {
-                    console.error('Submission failed:', error);
-                    
-                    submitBtn.disabled = false;
-                    if (btnText) btnText.textContent = 'Send Message';
-                    if (submitSpinner) submitSpinner.style.display = 'none';
-
-                    if (formStatus) {
-                        formStatus.textContent = error.message || 'Something went wrong. Please try again later.';
-                        formStatus.style.color = 'var(--secondary)';
-                    }
-                }
+                showSuccessPopup('Your message has been sent successfully.');
             });
         }
 
