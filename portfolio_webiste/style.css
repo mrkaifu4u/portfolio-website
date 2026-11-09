@@ -54,7 +54,7 @@ a.sec-kicker:hover{text-decoration:underline}
 
 /* Hero */
 .hero{position:relative;overflow:hidden;min-height:calc(100svh - 64px);padding:.5rem clamp(1rem,3.5vw,2.4rem) .8rem;border-bottom:1px solid var(--line);display:flex;flex-direction:column;justify-content:flex-start}
-.mega{position:absolute;top:24%;left:50%;transform:translate(-50%,-50%) scaleY(1.25);z-index:0;font-family:var(--font-display);font-weight:900;font-size:clamp(3rem,9.5vw,11rem);font-size:13.8cqw;line-height:.85;letter-spacing:0;white-space:nowrap;text-align:center;color:var(--red);user-select:none;margin:0;pointer-events:none}
+.mega{position:absolute;top:20%;left:50%;transform:translate(-50%,-50%) scaleY(1.1);z-index:0;font-family:var(--font-display);font-weight:900;font-size:clamp(3rem,9.5vw,11rem);font-size:13.8cqw;line-height:.85;letter-spacing:0;white-space:nowrap;text-align:center;color:var(--red);user-select:none;margin:0;pointer-events:none}
 .hero-topline{position:relative;z-index:2;display:flex;justify-content:space-between;gap:1rem;font-size:.82rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
 .open-dot i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--red-bright);margin-right:.45rem;animation:pulse 1.6s infinite}
 .mega span{display:inline-block;animation:rise .8s cubic-bezier(.2,.8,.2,1) both}
@@ -62,9 +62,9 @@ a.sec-kicker:hover{text-decoration:underline}
 @keyframes rise{from{transform:translateY(44px)}to{transform:translateY(0)}}
 .mega span:hover{color:var(--red-bright);transform:translateY(-8px) rotate(-2deg);transition:transform .25s,color .25s}
 .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:.9fr 1.3fr 190px;gap:1.5rem;align-items:end;margin-top:0;flex:1}
-.hero-left{align-self:center;margin-top:3.5rem}
-.hello{font-family:var(--font-script);font-size:3rem;color:var(--cream);line-height:1.1}
-.hero-left h2{font-family:var(--font-name);font-weight:400;font-size:clamp(3.4rem,6vw,5.2rem);letter-spacing:.01em;line-height:1.02;margin-top:.2rem}
+.hero-left{align-self:center;margin-top:4.5rem}
+.hello{font-family:var(--font-script);font-size:2.7rem;color:var(--cream);line-height:1.1}
+.hero-left h2{font-family:var(--font-name);font-weight:400;font-size:clamp(3.4rem,6vw,4.8rem);letter-spacing:.01em;line-height:1.02;margin-top:.2rem}
 .hero-side-note{color:var(--cream-dim);font-size:1.1rem;line-height:1.55;background:rgba(7,7,8,.78);padding:.45rem .7rem;border-radius:8px;text-shadow:0 1px 6px rgba(0,0,0,.7)}
 .hero-right{display:flex;flex-direction:column;justify-content:flex-end;gap:1.4rem}
 .hero-right .stats{flex-direction:column;gap:1.3rem;border-top:none;padding-top:0;margin-bottom:0}
