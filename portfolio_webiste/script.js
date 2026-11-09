@@ -18,27 +18,27 @@
   if (window.gsap) {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Hero entrance
-    gsap.from('.mega span', { y: 60, opacity: 0, duration: 0.8, stagger: 0.06, ease: 'power3.out' });
-    gsap.from('.hero-left', { x: -40, opacity: 0, duration: 0.9, delay: 0.3, ease: 'power3.out' });
-    gsap.from('.hero-right', { x: 40, opacity: 0, duration: 0.9, delay: 0.4, ease: 'power3.out' });
-    gsap.from('#heroPhoto', { scale: 0.88, opacity: 0, duration: 1, delay: 0.2, ease: 'back.out(1.4)' });
-    gsap.from('.topbar', { y: -20, opacity: 0, duration: 0.7, ease: 'power2.out' });
+    // Hero entrance — transform only, never opacity: content must stay
+    // fully visible even if an animation is interrupted or slow.
+    gsap.from('.mega span', { y: 60, duration: 0.8, stagger: 0.06, ease: 'power3.out' });
+    gsap.from('.hero-left', { x: -40, duration: 0.9, delay: 0.3, ease: 'power3.out' });
+    gsap.from('.hero-right', { x: 40, duration: 0.9, delay: 0.4, ease: 'power3.out' });
+    gsap.from('#heroPhoto', { scale: 0.88, duration: 1, delay: 0.2, ease: 'back.out(1.4)' });
+    gsap.from('.topbar', { y: -20, duration: 0.7, ease: 'power2.out' });
 
-    // Scroll reveal for every section
+    // Scroll reveal for every section — transform only, one tween per element
     gsap.utils.toArray('.reveal').forEach(function (el) {
-      gsap.fromTo(el, { y: 36, opacity: 0 }, {
-        y: 0, opacity: 1, duration: 0.9, ease: 'power3.out',
+      gsap.from(el, {
+        y: 36, duration: 0.9, ease: 'power3.out',
         scrollTrigger: { trigger: el, start: 'top 88%', once: true }
       });
     });
-    // Cards / projects stagger in
-    gsap.utils.toArray('.cards-5, .projects').forEach(function (group) {
-      gsap.from(group.children, {
-        y: 40, opacity: 0, duration: 0.7, stagger: 0.09, ease: 'power3.out',
-        scrollTrigger: { trigger: group, start: 'top 88%', once: true }
-      });
-    });
+
+    // Safety: never leave an element stuck mid-animation — clear all
+    // entrance transforms a moment after load.
+    setTimeout(function () {
+      gsap.set(['.mega span', '.hero-left', '.hero-right', '#heroPhoto', '.topbar', '.reveal'], { clearProps: 'transform,opacity' });
+    }, 2600);
 
     // Animated counters — only real resume numbers
     document.querySelectorAll('.count').forEach(function (el) {
