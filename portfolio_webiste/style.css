@@ -1,16 +1,17 @@
 /* Mohamad Kaifoddin — Portfolio, same-to-same as the reference poster.
    Dark maroon / cream, thin red rules, dense poster grid. */
 :root{
-  --bg:#0d0d0d; --bg2:#140808; --panel:#20090c; --panel2:#1d1d1d;
-  --cream:#f2e3c6; --cream-dim:#d8c6a4; --muted:#a8a29e;
-  --red:#c1272d; --red-bright:#e8452c; --line:rgba(193,39,45,.35); --line-soft:rgba(242,227,198,.13);
-  --font-display:'Archivo',system-ui,sans-serif;
+  --bg:#070708; --bg2:#101013; --panel:#101013; --panel2:#1d1d1d;
+  --cream:#f5f3ef; --cream-dim:#d8d2c6; --muted:#b6b3ac;
+  --red:#e8112d; --red-bright:#ff2238; --red-deep:#4d060f; --line:rgba(255,255,255,.1); --line-soft:rgba(255,255,255,.06);
+  --font-display:'Anton','Archivo',sans-serif;
   --font-head:'Archivo',system-ui,sans-serif;
-  --font-body:'Inter',system-ui,sans-serif;
+  --font-body:'Archivo',system-ui,sans-serif;
+  --font-script:'Caveat',cursive;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:#050202;color:var(--cream);font-family:var(--font-body);line-height:1.6;overflow-x:hidden}
+body{background:#070708;color:var(--cream);font-family:var(--font-body);line-height:1.6;overflow-x:hidden}
 ::selection{background:var(--red);color:var(--cream)}
 img{max-width:100%;display:block}
 a{color:inherit}
@@ -39,25 +40,25 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.05}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(232,69,44,.55)}50%{box-shadow:0 0 0 7px rgba(232,69,44,0)}}
 
 /* Hero */
-.hero{padding:1rem clamp(1rem,3.5vw,2.4rem) 2.4rem;border-bottom:1px solid var(--line);background:radial-gradient(ellipse 90% 70% at 50% 0%,rgba(193,39,45,.14),transparent 60%),radial-gradient(ellipse 70% 60% at 50% 100%,rgba(242,227,198,.05),transparent 60%)}
-.mega{font-family:var(--font-display);font-weight:900;font-size:clamp(3.6rem,12.5vw,9.5rem);line-height:1;letter-spacing:.02em;text-align:center;color:var(--cream);user-select:none;margin:.6rem 0 .4rem}
+.hero{padding:1.2rem clamp(1rem,3.5vw,2.4rem) 3.4rem;border-bottom:1px solid var(--line);min-height:760px;display:flex;flex-direction:column;justify-content:center;background:radial-gradient(ellipse 90% 70% at 50% 0%,rgba(193,39,45,.14),transparent 60%),radial-gradient(ellipse 70% 60% at 50% 100%,rgba(242,227,198,.05),transparent 60%)}
+.mega{font-family:var(--font-display);font-weight:400;font-size:clamp(4rem,13.5vw,11rem);line-height:1;letter-spacing:.02em;text-align:center;color:var(--cream);user-select:none;margin:.8rem 0 1rem}
 .mega span{display:inline-block;animation:rise .8s cubic-bezier(.2,.8,.2,1) both}
 .mega span:nth-child(2){animation-delay:.05s}.mega span:nth-child(3){animation-delay:.1s}.mega span:nth-child(4){animation-delay:.15s}.mega span:nth-child(5){animation-delay:.2s}.mega span:nth-child(6){animation-delay:.25s}.mega span:nth-child(7){animation-delay:.3s}.mega span:nth-child(8){animation-delay:.35s}.mega span:nth-child(9){animation-delay:.4s}
 @keyframes rise{from{transform:translateY(44px)}to{transform:translateY(0)}}
 .mega span:hover{color:var(--red-bright);transform:translateY(-8px) rotate(-2deg);transition:transform .25s,color .25s}
-.hero-grid{display:grid;grid-template-columns:1fr 1.15fr 1.15fr;gap:2rem;align-items:start;margin-top:.6rem}
+.hero-grid{display:grid;grid-template-columns:1fr 1.2fr 1.15fr;gap:2.6rem;align-items:center;margin-top:1rem;flex:1}
 .eyebrow{font-family:var(--font-display);font-weight:800;font-size:1.6rem;letter-spacing:.03em}
 .hero-sub{color:var(--muted);text-transform:uppercase;letter-spacing:.14em;font-size:.82rem;margin:.6rem 0 1.4rem}
 .hero-quote{font-size:1.08rem;line-height:1.5;color:var(--cream);border-left:3px solid var(--red);padding-left:1rem}
 .qmark{color:var(--red-bright);font-size:2rem;line-height:0;vertical-align:-.4em;margin-right:.2rem}
-.signature{font-family:'Playfair Display',serif;font-style:italic;font-size:1.4rem;color:var(--cream-dim);margin-top:.9rem}
+.signature{font-family:var(--font-script);font-size:1.9rem;color:var(--cream-dim);margin-top:.9rem}
 
 /* Hero photo — transparent cut-out, red circle + red rim light */
-.hero-photo{position:relative;display:flex;align-items:flex-end;justify-content:center;text-align:center;min-height:400px;padding-top:1.2rem;will-change:transform}
-.photo-circle{position:absolute;left:50%;top:0%;width:min(78%,350px);aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle at 50% 32%,#c1272d,#7a1216 62%,#2a0507);box-shadow:0 0 110px rgba(232,69,44,.55);animation:breathe 4s ease-in-out infinite}
+.hero-photo{position:relative;display:flex;align-items:flex-end;justify-content:center;text-align:center;min-height:520px;padding-top:1.2rem;will-change:transform}
+.photo-circle{position:absolute;left:50%;top:0%;width:min(84%,420px);aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle at 50% 32%,#e8112d,#a3101f 55%,#4d060f);box-shadow:0 0 110px rgba(232,17,45,.55);animation:breathe 4s ease-in-out infinite}
 @keyframes breathe{0%,100%{box-shadow:0 0 70px rgba(193,39,45,.35)}50%{box-shadow:0 0 120px rgba(232,69,44,.6)}}
 .photo-glow{position:absolute;left:50%;bottom:2%;width:70%;height:26px;transform:translateX(-50%);background:radial-gradient(ellipse at center,rgba(232,69,44,.5),transparent 70%);filter:blur(6px)}
-.hero-photo img{position:relative;z-index:2;width:auto;max-width:88%;max-height:430px;height:auto;object-fit:contain;margin:0 auto;filter:brightness(1.18) contrast(1.08) drop-shadow(10px 0 0 rgba(193,39,45,.85)) drop-shadow(14px 0 22px rgba(232,69,44,.55)) drop-shadow(-4px 0 10px rgba(193,39,45,.35));transition:transform .5s cubic-bezier(.2,.8,.2,1),filter .5s}
+.hero-photo img{position:relative;z-index:2;width:auto;max-width:92%;max-height:540px;height:auto;object-fit:contain;margin:0 auto;filter:brightness(1.18) contrast(1.08) drop-shadow(10px 0 0 rgba(193,39,45,.85)) drop-shadow(14px 0 22px rgba(232,69,44,.55)) drop-shadow(-4px 0 10px rgba(193,39,45,.35));transition:transform .5s cubic-bezier(.2,.8,.2,1),filter .5s}
 .hero-photo:hover img{transform:scale(1.05) translateY(-6px);filter:drop-shadow(14px 0 2px rgba(232,69,44,.95)) drop-shadow(20px 0 34px rgba(232,69,44,.75)) drop-shadow(-6px 0 14px rgba(193,39,45,.5))}
 .badge-rot{position:absolute;z-index:3;top:2%;right:2%;width:96px;height:96px;animation:spin 18s linear infinite}
 .badge-rot:hover{animation-duration:4s}
@@ -67,7 +68,7 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.05}
 .hero-right h2{font-family:var(--font-display);font-weight:900;font-size:clamp(1.9rem,3.4vw,2.7rem);letter-spacing:.01em;line-height:1.08}
 .role{color:var(--red-bright);font-weight:700;letter-spacing:.18em;text-transform:uppercase;font-size:.82rem;margin:.4rem 0 .9rem}
 .hero-text{color:var(--cream-dim);font-size:.96rem;margin-bottom:1.3rem}
-.stats{display:flex;gap:1.4rem;border-top:1px solid var(--line-soft);padding-top:1.1rem;margin-bottom:1.4rem}
+.stats{display:flex;gap:1.6rem;border-top:1px solid var(--line-soft);padding-top:1.3rem;margin-bottom:1.8rem}
 .stat{text-align:left}
 .stat-icon{display:block;color:var(--red-bright);font-size:1.1rem}
 .stat strong{display:block;font-family:var(--font-display);font-weight:800;font-size:1.9rem}
@@ -82,12 +83,12 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.05}
 
 /* What I Do */
 .cards-5{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;width:100%}
-.card{background:#2b1013;border:1px solid rgba(242,227,198,.22);border-radius:10px;padding:1.5rem 1.2rem;min-height:230px;display:flex;flex-direction:column;justify-content:flex-start;transition:transform .3s,border-color .3s,background .3s,box-shadow .3s}
+.card{background:var(--panel);border:1px solid var(--line-soft);border-radius:10px;padding:1.5rem 1.2rem;min-height:230px;display:flex;flex-direction:column;justify-content:flex-start;transition:transform .3s,border-color .3s,background .3s,box-shadow .3s}
 .card:hover{transform:translateY(-8px) scale(1.02);border-color:var(--red);background:var(--panel2);box-shadow:0 16px 32px rgba(0,0,0,.45),0 0 0 1px rgba(232,69,44,.3)}
 .card-icon{font-size:1.5rem;margin-bottom:.7rem;transition:transform .3s}
 .card:hover .card-icon{transform:scale(1.3) rotate(-6deg)}
 .card h3{font-size:1rem;margin-bottom:.45rem}
-.card p{font-size:.88rem;color:var(--cream-dim)}
+.card p{font-size:.88rem;color:var(--muted)}
 
 /* Split: process + work */
 .split{display:grid;grid-template-columns:1fr 1.9fr;gap:2.6rem}
@@ -186,6 +187,7 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.05}
   .topnav{display:none}
 }
 @media(max-width:640px){
+  .hero{min-height:auto}
   .hero-grid{grid-template-columns:1fr}
   .projects{grid-template-columns:1fr}
   .cards-5{grid-template-columns:repeat(2,1fr)}
