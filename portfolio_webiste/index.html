@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800;900&family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=19" />
+  <link rel="stylesheet" href="style.css?v=20" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23c1272d'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='%23f2e3c6' font-family='Arial' font-weight='bold'>MK</text></svg>" />
 </head>
 <body>
@@ -38,10 +38,6 @@
     <section class="hero" id="home">
       <h1 class="mega" aria-label="Portfolio"><span>P</span><span>O</span><span>R</span><span>T</span><span>F</span><span>O</span><span>L</span><span>I</span><span>O</span></h1>
 
-      <div class="hero-topline">
-        <span>AI / ML Engineer</span>
-        <span class="open-dot"><i></i> Open to Opportunities</span>
-      </div>
 
       <div class="hero-grid">
         <div class="hero-left reveal">
@@ -175,6 +171,7 @@
     <section class="block split about-split" id="about">
       <div class="about reveal">
         <h2 class="block-title">About Me</h2>
+        <p class="about-role">ML Engineer · Artmac Soft Pvt Ltd · Hyderabad, India</p>
         <div class="about-inner">
           <img src="kaif_2.jpeg" alt="Portrait of Mohamad Kaifoddin" />
           <div>
@@ -248,10 +245,10 @@
         <h2 class="block-title">Let’s Collaborate</h2>
         <p>Have a project in mind or just want to say hi? I’d love to hear from you.</p>
         <ul class="contact-list">
-          <li><a href="mailto:shaikhkaif7014@gmail.com">✉ shaikhkaif7014@gmail.com</a></li>
-          <li><a href="tel:+917036117014">☎ +91 70361 17014</a></li>
-          <li>📍 Hyderabad, Telangana, India</li>
-          <li><a href="https://github.com/mrkaifu4u" target="_blank" rel="noopener">⌘ github.com/mrkaifu4u</a></li>
+          <li><span class="contact-ic">✉</span><a href="mailto:shaikhkaif7014@gmail.com">shaikhkaif7014@gmail.com</a></li>
+          <li><span class="contact-ic">☎</span><a href="tel:+917036117014">+91 70361 17014</a></li>
+          <li><span class="contact-ic">📍</span>Hyderabad, Telangana, India</li>
+          <li><span class="contact-ic">⌘</span><a href="https://github.com/mrkaifu4u" target="_blank" rel="noopener">github.com/mrkaifu4u</a></li>
         </ul>
       </div>
       <div class="foot-col reveal">
@@ -270,8 +267,21 @@
   </div>
 
   <a href="#home" class="back-top" id="backTop">Back to top ↑</a>
+
+  <!-- SUCCESS POP-UP : Lottie animation from success.json + the same message -->
+  <div class="modal" id="successModal" hidden role="dialog" aria-modal="true" aria-labelledby="successTitle">
+    <div class="modal-card">
+      <div class="modal-anim" id="successAnim" aria-hidden="true"></div>
+      <div class="modal-check" id="successFallback" hidden>✓</div>
+      <h3 id="successTitle">Message sent!</h3>
+      <p class="modal-msg">✓ Thanks! Your message has been received — I'll get back to you soon.</p>
+      <button type="button" class="btn btn-red" id="modalClose">Close</button>
+    </div>
+  </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="script.js?v=19"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <script src="script.js?v=20"></script>
 </body>
 </html>

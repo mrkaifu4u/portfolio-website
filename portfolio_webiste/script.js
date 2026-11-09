@@ -133,6 +133,27 @@
     card.addEventListener('mouseleave', function () { card.style.transform = ''; });
   });
 
+  // Success pop-up — Lottie animation from success.json + the same message
+  var successModal = document.getElementById('successModal');
+  var successAnim = null;
+  if (window.lottie) {
+    try {
+      successAnim = lottie.loadAnimation({ container: document.getElementById('successAnim'), renderer: 'svg', loop: false, autoplay: false, path: 'success.json' });
+    } catch (err) { successAnim = null; }
+  }
+  function openSuccessModal() {
+    if (!successModal) return;
+    successModal.hidden = false;
+    if (successAnim) { successAnim.goToAndPlay(0); }
+    else { var fb = document.getElementById('successFallback'); if (fb) fb.hidden = false; }
+  }
+  function closeSuccessModal() { if (successModal) successModal.hidden = true; }
+  if (successModal) {
+    document.getElementById('modalClose').addEventListener('click', closeSuccessModal);
+    successModal.addEventListener('click', function (e) { if (e.target === successModal) closeSuccessModal(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeSuccessModal(); });
+  }
+
   // Contact form — success message only (no backend, nothing is sent or saved)
   var contactForm = document.getElementById('contactForm');
   if (contactForm) {
@@ -142,6 +163,7 @@
       var ok = document.getElementById('formSuccess');
       if (ok) { ok.hidden = false; }
       contactForm.reset();
+      openSuccessModal();
     });
   }
 
