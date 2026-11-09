@@ -51,8 +51,8 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.05}
 @keyframes rise{from{transform:translateY(44px)}to{transform:translateY(0)}}
 .mega span:hover{color:var(--red-bright);transform:translateY(-8px) rotate(-2deg);transition:transform .25s,color .25s}
 .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr 1fr 200px;gap:2rem;align-items:end;margin-top:.6rem;flex:1}
-.hello{font-family:var(--font-script);font-size:2.6rem;color:var(--cream);line-height:1.1}
-.hero-left h2{font-family:var(--font-name);font-weight:400;font-size:clamp(3rem,5.2vw,4.4rem);letter-spacing:.01em;line-height:1.02;margin-top:.2rem}
+.hello{font-family:var(--font-script);font-size:3rem;color:var(--cream);line-height:1.1}
+.hero-left h2{font-family:var(--font-name);font-weight:400;font-size:clamp(3.4rem,6vw,5.2rem);letter-spacing:.01em;line-height:1.02;margin-top:.2rem}
 .hero-side-note{color:var(--cream-dim);font-size:1.1rem;line-height:1.55;background:rgba(7,7,8,.78);padding:.45rem .7rem;border-radius:8px;text-shadow:0 1px 6px rgba(0,0,0,.7)}
 .hero-right{display:flex;flex-direction:column;justify-content:flex-end;gap:1.4rem}
 .hero-right .stats{flex-direction:column;gap:1.3rem;border-top:none;padding-top:0;margin-bottom:0}
@@ -79,15 +79,15 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.05}
 .badge-rot text{fill:var(--cream-dim);font-size:10.5px;letter-spacing:2.2px;font-family:var(--font-body)}
 .badge-rot .badge-star{fill:var(--red-bright);font-size:22px;text-anchor:middle}
 .hero-right h2{display:none}
-.role{color:var(--red-bright);font-weight:700;letter-spacing:.18em;text-transform:uppercase;font-size:.95rem;margin:.3rem 0 .6rem}
-.hero-text{color:var(--cream-dim);font-size:1.12rem;margin-bottom:.9rem}
+.role{color:var(--red-bright);font-weight:700;letter-spacing:.18em;text-transform:uppercase;font-size:1.05rem;margin:.3rem 0 .6rem}
+.hero-text{color:var(--cream-dim);font-size:1.25rem;margin-bottom:.9rem}
 .stats{display:flex;gap:1.6rem;border-top:1px solid var(--line-soft);padding-top:.9rem;margin-bottom:1.1rem}
 .stat{text-align:left}
 .stat-icon{display:block;color:var(--red-bright);font-size:1.1rem}
 .stat strong{display:block;font-family:var(--font-display);font-weight:800;font-size:1.6rem}
 .stat>span:last-child{font-size:.88rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;line-height:1.3}
 .hero-cta{display:flex;flex-wrap:wrap;gap:.8rem}
-.btn{display:inline-block;padding:.95rem 1.7rem;border-radius:999px;text-decoration:none;font-weight:600;font-size:1.05rem;border:1px solid transparent;cursor:pointer;transition:transform .25s,box-shadow .25s,background .25s}
+.btn{display:inline-block;padding:1.05rem 1.9rem;border-radius:999px;text-decoration:none;font-weight:600;font-size:1.15rem;border:1px solid transparent;cursor:pointer;transition:transform .25s,box-shadow .25s,background .25s}
 .btn:hover{transform:translateY(-3px) scale(1.02)}
 .btn-red{background:var(--red);color:#fff;box-shadow:0 8px 24px rgba(193,39,45,.35)}
 .btn-red:hover{background:var(--red-bright);box-shadow:0 14px 32px rgba(232,69,44,.45)}
@@ -205,8 +205,8 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.05}
 /* Short laptop screens: shrink the hero further so it fits in one view */
 @media(min-width:1025px) and (max-height:820px){
   .hero-photo img{max-height:58vh;max-width:380px}
-  .hello{font-size:2.1rem}
-  .hero-left h2{font-size:3rem}
+  .hello{font-size:2.4rem}
+  .hero-left h2{font-size:3.4rem}
   .hero-right .stat strong{font-size:2.4rem}
 }
 @media(max-width:1200px){
