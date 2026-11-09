@@ -82,7 +82,7 @@ a.sec-kicker:hover{text-decoration:underline}
 .photo-glow{display:none}
 @keyframes breathe{0%,100%{box-shadow:0 0 70px rgba(193,39,45,.35)}50%{box-shadow:0 0 120px rgba(232,69,44,.6)}}
 .photo-glow{position:absolute;left:50%;bottom:0;width:70%;height:26px;transform:translateX(-50%);background:radial-gradient(ellipse at center,rgba(232,69,44,.5),transparent 70%);filter:blur(6px)}
-.hero-photo img{position:relative;z-index:2;width:auto;max-width:560px;max-height:min(78vh,730px);height:auto;object-fit:contain;margin:0 auto;filter:brightness(1.18) contrast(1.08) drop-shadow(10px 0 0 rgba(193,39,45,.85)) drop-shadow(14px 0 22px rgba(232,69,44,.55)) drop-shadow(-4px 0 10px rgba(193,39,45,.35));transition:transform .5s cubic-bezier(.2,.8,.2,1),filter .5s}
+.hero-photo img{position:relative;z-index:2;width:660px;max-width:none;max-height:min(85vh,850px);height:auto;object-fit:contain;margin:0 auto;filter:brightness(1.18) contrast(1.08) drop-shadow(10px 0 0 rgba(193,39,45,.85)) drop-shadow(14px 0 22px rgba(232,69,44,.55)) drop-shadow(-4px 0 10px rgba(193,39,45,.35));transition:transform .5s cubic-bezier(.2,.8,.2,1),filter .5s}
 .badge-rot{display:none}
 .hero-photo:hover img{transform:scale(1.05) translateY(-6px);filter:drop-shadow(14px 0 2px rgba(232,69,44,.95)) drop-shadow(20px 0 34px rgba(232,69,44,.75)) drop-shadow(-6px 0 14px rgba(193,39,45,.5))}
 .badge-rot{position:absolute;z-index:3;top:-4px;right:-6px;width:88px;height:88px;animation:spin 18s linear infinite}
