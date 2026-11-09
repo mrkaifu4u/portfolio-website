@@ -1,8 +1,8 @@
 /* Mohamad Kaifoddin — Portfolio, same-to-same as the reference poster.
    Dark maroon / cream, thin red rules, dense poster grid. */
 :root{
-  --bg:#0a0405; --bg2:#140808; --panel:#180a0a; --panel2:#200d0d;
-  --cream:#f2e3c6; --cream-dim:#d8c6a4; --muted:#b3a284;
+  --bg:#0d0d0d; --bg2:#140808; --panel:#20090c; --panel2:#1d1d1d;
+  --cream:#f2e3c6; --cream-dim:#d8c6a4; --muted:#a8a29e;
   --red:#c1272d; --red-bright:#e8452c; --line:rgba(193,39,45,.35); --line-soft:rgba(242,227,198,.13);
   --font-display:'Archivo',system-ui,sans-serif;
   --font-head:'Archivo',system-ui,sans-serif;
