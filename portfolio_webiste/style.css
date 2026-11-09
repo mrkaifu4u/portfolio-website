@@ -245,20 +245,25 @@ a.sec-kicker:hover{text-decoration:underline}
 .about-role{color:var(--red-bright);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.82rem;margin:.6rem 0 1.2rem}
 .about-photo{position:relative;flex-shrink:0}
 .about-photo figcaption{position:absolute;left:0;right:0;bottom:0;background:rgba(7,7,8,.88);color:var(--cream);font-size:.68rem;font-weight:700;letter-spacing:.18em;text-align:center;padding:.4rem}
+.about-inner b{color:var(--cream)}
 .traits{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:1.2rem}
-.traits li{border:1px solid var(--line-soft);border-left:3px solid var(--red);border-radius:8px;padding:.7rem .9rem;font-size:.86rem;color:var(--muted);transition:all .25s}
-.traits li strong{color:var(--cream)}
+.traits li{display:flex;gap:.65rem;align-items:center;border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:.7rem .9rem;font-size:.88rem;color:var(--cream-dim);transition:all .25s}
+.traits li b{color:var(--cream)}
 .traits li:hover{border-color:var(--red-bright);background:rgba(193,39,45,.08);transform:translateY(-2px)}
-.lang-bars{display:grid;gap:.8rem;margin-top:1.3rem}
-.lang-bar{display:grid;grid-template-columns:90px 1fr auto;align-items:center;gap:.8rem;font-size:.78rem;letter-spacing:.1em}
-.lang-bar span{color:var(--cream);font-weight:700}
-.lang-bar i{display:block;height:4px;background:var(--red);width:var(--w);border-radius:2px}
-.lang-bar b{color:var(--muted);font-weight:600}
+.tdot{flex:none;width:7px;height:7px;border-radius:50%;background:var(--red-bright);box-shadow:0 0 8px rgba(255,34,56,.75)}
+.lang-row{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.3rem}
+.lang-box{border:1px solid var(--line);padding:.65rem .9rem;min-width:140px;flex:1;transition:border-color .3s,transform .3s}
+.lang-box:hover{border-color:var(--red-bright);transform:translateY(-2px)}
+.lname{font-family:var(--font-display);font-weight:800;font-size:.98rem;letter-spacing:.05em}
+.lvl{font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--red-bright);margin:.2rem 0 .45rem}
+.dots{display:flex;gap:5px}
+.dots i{width:20px;height:5px;background:var(--red)}
 .tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
 .tool-grid span{background:var(--panel);border:1px solid var(--line-soft);border-radius:8px;padding:.8rem .4rem;text-align:center;font-size:.66rem;letter-spacing:.08em;color:var(--muted);transition:transform .25s,border-color .25s,background .25s}
 .tool-grid span:hover{transform:translateY(-4px) scale(1.05);border-color:var(--red-bright);background:var(--panel2);color:var(--cream)}
-.tool-grid b{display:block;font-size:.92rem;letter-spacing:.04em;color:var(--cream);margin-bottom:.15rem}
-.tools-quote{margin-top:1.3rem;background:var(--panel);border:1px solid var(--line-soft);border-left:3px solid var(--red);border-radius:10px;padding:1.2rem;font-size:.95rem;color:var(--cream-dim)}
+.tool-grid b{display:block;font-family:var(--font-display);font-weight:800;font-size:1.15rem;letter-spacing:-.01em;color:var(--cream);line-height:1;margin-bottom:.3rem}
+.tool-grid b i{font-style:normal;color:var(--red-bright)}
+.tools-quote{margin-top:1.3rem;background:linear-gradient(150deg,rgba(232,17,45,.16),var(--panel));border:1px solid rgba(255,34,56,.45);border-left:4px solid var(--red-bright);border-radius:10px;padding:1.2rem;font-size:.95rem;color:var(--cream-dim)}
 .tools-quote cite{display:block;margin-top:.7rem;font-style:normal;color:var(--red-bright);font-size:.85rem}
 .lang{margin-top:1rem;color:var(--muted);font-size:.9rem}
 
