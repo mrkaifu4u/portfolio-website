@@ -883,3 +883,35 @@ a.sec-kicker:hover{text-decoration:underline}
   .viz-bars{top:2rem}
   .viz-chart{bottom:8rem;height:46px}
 }
+
+/* ============================================================
+   v46 — root-cause fixes (2026-11-10).
+   HERO: a live measurement proved the photo element already
+   touches the marquee (0px gap) — the problem was the
+   min-width:1101px block clamping the img to max-width:380px /
+   max-height:540px, so v45's 740px width never took effect and
+   the person rendered only ~316px wide. The dark suit on the
+   black hero also made the lower part hard to see. Fix: widen
+   the photo column to 520px and lift both clamps, plus a soft
+   glow behind the photo so the suit reads against the black.
+   FEATURED WORK: the v44/v45 scrim was a gradient that stayed
+   near-transparent at the top of the headline zone, so graphics
+   still crossed the text. Fix: the bottom band is now SOLID dark
+   (no gradient) and sits above the graphics, and every graphic
+   is confined to the top zone above that band.
+   Desktop only.
+   ============================================================ */
+@media (min-width:1101px){
+  .hero-grid{grid-template-columns:1fr 520px 200px}
+  .hero-photo img{width:520px;max-width:520px;max-height:760px}
+  .hero-photo::before{content:"";position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:580px;height:580px;background:radial-gradient(circle at 50% 62%,rgba(232,17,45,.26),rgba(232,17,45,.09) 55%,transparent 72%);z-index:1;pointer-events:none}
+}
+@media (min-width:769px){
+  .project-visual::before{height:52%;background:rgba(7,7,8,.96);z-index:1}
+  .project-visual h3{z-index:2}
+  .project-num{z-index:2}
+  .viz-line,.viz-net{top:.7rem;height:70px}
+  .viz-rings{top:.8rem}
+  .viz-bars{top:1.8rem}
+  .viz-chart{bottom:9rem;height:40px}
+}
