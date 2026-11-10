@@ -75,16 +75,16 @@ a.sec-kicker:hover{text-decoration:underline}
 .qmark{color:var(--red-bright);font-size:2rem;line-height:0;vertical-align:-.4em;margin-right:.2rem}
 .signature{font-family:var(--font-script);font-size:1.9rem;color:var(--cream-dim);margin-top:.9rem}
 
-/* Hero photo — transparent cut-out, red circle + red rim light */
+/* Hero photo — transparent cut-out, no red glow */
 .hero-photo{position:relative;display:flex;align-items:flex-end;justify-content:center;text-align:center;padding:0;margin-bottom:1.5rem;will-change:transform}
 .hero-photo::after{content:"";position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:min(88%,420px);height:2px;background:linear-gradient(90deg,transparent,var(--red-bright),transparent);z-index:2}
 .photo-circle{display:none}
 .photo-glow{display:none}
 @keyframes breathe{0%,100%{box-shadow:0 0 70px rgba(193,39,45,.35)}50%{box-shadow:0 0 120px rgba(232,69,44,.6)}}
 .photo-glow{position:absolute;left:50%;bottom:0;width:70%;height:26px;transform:translateX(-50%);background:radial-gradient(ellipse at center,rgba(232,69,44,.5),transparent 70%);filter:blur(6px)}
-.hero-photo img{position:relative;z-index:2;width:660px;max-width:none;max-height:min(72vh,720px);height:auto;object-fit:contain;margin:0 auto;filter:brightness(1.18) contrast(1.08) drop-shadow(10px 0 0 rgba(193,39,45,.85)) drop-shadow(14px 0 22px rgba(232,69,44,.55)) drop-shadow(-4px 0 10px rgba(193,39,45,.35));transition:transform .5s cubic-bezier(.2,.8,.2,1),filter .5s}
+.hero-photo img{position:relative;z-index:2;width:660px;max-width:none;max-height:min(72vh,720px);height:auto;object-fit:contain;margin:0 auto;filter:brightness(1.18) contrast(1.08);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
 .badge-rot{display:none}
-.hero-photo:hover img{transform:scale(1.05) translateY(-6px);filter:drop-shadow(14px 0 2px rgba(232,69,44,.95)) drop-shadow(20px 0 34px rgba(232,69,44,.75)) drop-shadow(-6px 0 14px rgba(193,39,45,.5))}
+.hero-photo:hover img{transform:scale(1.05) translateY(-6px)}
 .badge-rot{position:absolute;z-index:3;top:-4px;right:-6px;width:88px;height:88px;animation:spin 18s linear infinite}
 .badge-rot:hover{animation-duration:4s}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -903,7 +903,6 @@ a.sec-kicker:hover{text-decoration:underline}
 @media (min-width:1101px){
   .hero-grid{grid-template-columns:1fr 520px 200px}
   .hero-photo img{width:520px;max-width:520px;max-height:760px}
-  .hero-photo::before{content:"";position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:580px;height:580px;background:radial-gradient(circle at 50% 62%,rgba(232,17,45,.26),rgba(232,17,45,.09) 55%,transparent 72%);z-index:1;pointer-events:none}
 }
 @media (min-width:769px){
   .project-visual::before{height:52%;background:rgba(7,7,8,.96);z-index:1}
