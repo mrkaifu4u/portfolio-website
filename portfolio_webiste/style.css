@@ -915,3 +915,22 @@ a.sec-kicker:hover{text-decoration:underline}
   .viz-bars{top:1.8rem}
   .viz-chart{bottom:9rem;height:40px}
 }
+
+/* ============================================================
+   v47 — Technical Skills empty space (2026-11-10).
+   Root cause (measured live): the detail panel was a grid item
+   forced to grid-row:1, so it (a) pinned itself to the top and
+   never sat beside the button clicked, leaving the space beside
+   lower buttons empty plus a ~300px void below it, and (b) made
+   row 1 as tall as the panel, which pushed the Programming button
+   down and left a ~103px gap between the Machine Learning and
+   Programming buttons. Fix: the panel is now absolutely
+   positioned in the right column (out of the grid flow, so the
+   buttons stay evenly spaced), and JS lines its top up with the
+   clicked button. Desktop only; mobile accordion untouched.
+   ============================================================ */
+@media (min-width:769px){
+  .skill-groups{position:relative}
+  .skill-group .skill-chips{grid-column:auto;grid-row:auto}
+  .skill-group.selected .skill-chips{position:absolute;left:calc(380px + 1.6rem);right:0;top:0;z-index:2}
+}

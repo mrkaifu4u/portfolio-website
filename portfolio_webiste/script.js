@@ -275,8 +275,22 @@
   });
 
   // Technical Skills master-detail (desktop reference: click a category
-  // on the left to show its chips in the detail panel on the right)
+  // on the left to show its chips in the detail panel on the right).
+  // v47: the panel is absolutely positioned in the right column, so
+  // line its top up with the clicked button (it no longer sits
+  // pinned to the top of the section).
   var isDesktop = function () { return window.matchMedia('(min-width:769px)').matches; };
+  var alignSkillPanel = function () {
+    if (!isDesktop()) return;
+    var groups = document.querySelector('.skill-groups');
+    var sel = document.querySelector('.skill-group.selected');
+    if (!groups || !sel) return;
+    var btn = sel.querySelector('.skill-toggle');
+    var chips = sel.querySelector('.skill-chips');
+    if (!btn || !chips) return;
+    var top = btn.getBoundingClientRect().top - groups.getBoundingClientRect().top;
+    chips.style.top = Math.max(0, Math.round(top)) + 'px';
+  };
   document.querySelectorAll('.skill-toggle').forEach(function (btn) {
     btn.addEventListener('click', function () {
       if (!isDesktop()) return;
@@ -289,8 +303,11 @@
       });
       group.classList.add('selected');
       btn.setAttribute('aria-expanded', 'true');
+      alignSkillPanel();
     });
   });
+  alignSkillPanel();
+  window.addEventListener('resize', alignSkillPanel);
 
   // Custom cursor dot (desktop only)
   var cursor = document.getElementById('cursor');
