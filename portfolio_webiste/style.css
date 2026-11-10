@@ -694,8 +694,8 @@ a.sec-kicker:hover{text-decoration:underline}
   .skill-group.selected .skill-toggle{background:var(--red);border-color:var(--red);color:#fff}
   .skill-group.selected .skill-title{color:#fff}
   .skill-group.selected .skill-chev{color:#fff;transform:rotate(-90deg)}
-  .skill-group .skill-chips{display:none;grid-column:2;grid-row:1/7}
-  .skill-group.selected .skill-chips{display:flex;flex-wrap:wrap;gap:.55rem;align-content:flex-start;background:var(--panel);border:1px solid rgba(255,34,56,.5);border-radius:12px;padding:1.5rem;box-shadow:0 0 30px rgba(232,17,45,.12);min-height:100%}
+  .skill-group .skill-chips{display:none;grid-column:2;grid-row:1}
+  .skill-group.selected .skill-chips{display:flex;flex-wrap:wrap;gap:.55rem;align-content:flex-start;align-self:start;background:var(--panel);border:1px solid rgba(255,34,56,.5);border-radius:12px;padding:1.5rem;box-shadow:0 0 30px rgba(232,17,45,.12)}
   .skill-group.selected .skill-chips span{font-size:.95rem;padding:.5rem 1rem}
 
   /* --- Get in Touch: illustration left, form right --- */
