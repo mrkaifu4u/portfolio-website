@@ -167,6 +167,43 @@
     });
   }
 
+  // Mobile hamburger menu (mobile storyboard: MK + hamburger)
+  var navToggle = document.getElementById('navToggle');
+  var topbar = document.querySelector('.topbar');
+  if (navToggle && topbar) {
+    navToggle.addEventListener('click', function () {
+      var open = topbar.classList.toggle('nav-open');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    });
+    document.querySelectorAll('.topnav a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        topbar.classList.remove('nav-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.setAttribute('aria-label', 'Open menu');
+      });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        topbar.classList.remove('nav-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.setAttribute('aria-label', 'Open menu');
+      }
+    });
+  }
+
+  // Technical Skills accordion (mobile storyboard: first group open, rest collapsed)
+  var isMobile = function () { return window.matchMedia('(max-width:768px)').matches; };
+  document.querySelectorAll('.skill-toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (!isMobile()) return;
+      var group = btn.closest('.skill-group');
+      if (!group) return;
+      var open = group.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+
   // Custom cursor dot (desktop only)
   var cursor = document.getElementById('cursor');
   if (cursor && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {

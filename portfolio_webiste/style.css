@@ -408,3 +408,180 @@ a.sec-kicker:hover{text-decoration:underline}
   .photo-circle{width:min(92%,280px)}
   .topnav a{font-size:.7rem}
 }
+
+/* ============================================================
+   MOBILE STORYBOARD LAYER — matches the 13-screen mobile
+   reference (Dark_Portfolio_Mobile_UI_Storyboard.png).
+   Mobile only (max-width 768px and below). Desktop is untouched.
+   Real content only: Kaifoddin, shaikhkaif7014@gmail.com,
+   +91 70361 17014, github.com/mrkaifu4u, resume stats.
+   ============================================================ */
+
+/* --- New elements: neutral on desktop --- */
+.nav-toggle{display:none}
+.hero-photo .hero-photo-m{display:none}
+.project-view{display:none}
+.foot-resume-m{display:none}
+.skill-toggle{display:flex;align-items:center;justify-content:space-between;gap:.6rem;width:100%;background:none;border:0;padding:0;font:inherit;color:inherit;text-align:left;cursor:default}
+.skill-chev{display:none}
+
+@media (max-width:768px){
+  /* --- Base mobile rhythm --- */
+  .poster{border-left:0;border-right:0}
+  .block{padding:2rem 1rem}
+  .sec-head{flex-direction:column;align-items:flex-start;gap:.35rem;padding-bottom:.8rem;margin-bottom:1.4rem}
+  .sec-title{font-size:1.75rem}
+  .sec-kicker{display:none}
+
+  /* --- Top bar + hamburger (storyboard screen 1) --- */
+  .topbar{flex-wrap:nowrap;gap:.8rem;padding:.7rem 1rem}
+  .topnav{display:none;position:absolute;top:100%;left:0;right:0;z-index:60;flex-direction:column;align-items:stretch;gap:0;padding:.4rem 1rem .9rem;background:var(--bg2);border-bottom:1px solid var(--line);box-shadow:0 18px 30px rgba(0,0,0,.5)}
+  .topbar.nav-open .topnav{display:flex}
+  .topnav a{display:block;width:100%;padding:.75rem 0;border-bottom:1px solid var(--line-soft);font-size:.9rem;letter-spacing:.14em}
+  .topnav a:last-child{border-bottom:0}
+  .topnav a::after{display:none}
+  .nav-toggle{display:flex;flex-direction:column;justify-content:center;align-items:stretch;gap:5px;width:40px;height:40px;margin-left:auto;padding:9px 8px;background:none;border:0;cursor:pointer;flex:none}
+  .nav-toggle span{display:block;height:2px;background:var(--cream);border-radius:2px;transition:transform .3s,opacity .3s}
+  .topbar.nav-open .nav-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .topbar.nav-open .nav-toggle span:nth-child(2){opacity:0}
+  .topbar.nav-open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+  /* --- Hero: storyboard mobile layout, no giant letters --- */
+  .mega{display:none}
+  .hero{min-height:auto;padding:1rem 1rem 1.4rem}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:.4rem 1rem;align-items:start}
+  .hero-left,.hero-right{display:contents}
+  .hero-left .hello{grid-column:1/-1;grid-row:1;font-family:var(--font-display);font-weight:800;font-size:.85rem;letter-spacing:.04em;color:#fff;background:var(--red);width:fit-content;padding:.45rem .95rem;border-radius:999px;line-height:1;margin:0 0 .7rem}
+  .hero-left h2{grid-column:1/-1;grid-row:2;font-family:var(--font-display);font-weight:900;font-size:clamp(2.4rem,11vw,2.9rem);line-height:1.04;letter-spacing:0;margin:0}
+  .hero-left .role{grid-column:1/-1;grid-row:3;font-size:.9rem;letter-spacing:.2em;margin:.55rem 0 .6rem}
+  .hero-left .hero-text{grid-column:1;grid-row:4;font-size:.92rem;line-height:1.65;margin:0}
+  .hero-right .hero-side-note{display:none}
+  .hero-right .stats{grid-column:2;grid-row:4;flex-direction:column;gap:.9rem;border-top:0;padding-top:0;margin-bottom:0}
+  .hero-right .stat strong{font-size:1.55rem;line-height:1}
+  .hero-right .stat>span:last-child{font-size:.6rem;letter-spacing:.1em}
+  .hero-photo{grid-column:1/-1;grid-row:5;order:0;margin:1.1rem 0 1.2rem}
+  .hero-photo::after{display:none}
+  .hero-photo img{display:none}
+  .hero-photo .hero-photo-m{display:block;width:100%;max-width:100%;max-height:none;aspect-ratio:4/4.4;object-fit:cover;object-position:top center;border-radius:16px;border:1px solid rgba(232,17,45,.55);box-shadow:0 0 0 1px rgba(232,17,45,.25),0 18px 44px rgba(0,0,0,.55),0 0 46px rgba(232,17,45,.28);filter:none;margin:0}
+  .hero-cta{grid-column:1/-1;grid-row:6;display:flex;flex-wrap:nowrap;gap:.6rem}
+  .hero-cta .btn{flex:1;width:auto;padding:.8rem .5rem;font-size:.85rem;text-align:center;white-space:nowrap}
+
+  /* --- Marquee --- */
+  .marquee{padding:.7rem 0}
+  .marquee-track span{font-size:.85rem}
+
+  /* --- What I Do: stacked rows, icon left (screen 2) --- */
+  .cards-5{grid-template-columns:1fr;gap:.8rem}
+  .card{display:grid;grid-template-columns:52px 1fr;grid-template-areas:"ic title" "ic text";gap:0 .9rem;align-items:start;padding:1.05rem 1rem;min-height:0}
+  .card-ic{grid-area:ic;margin-bottom:0;width:52px;height:52px}
+  .card h3{grid-area:title;margin-bottom:.25rem;font-size:.95rem}
+  .card p{grid-area:text;font-size:.88rem}
+
+  /* --- My Process: vertical timeline, numbered red circles (screen 3) --- */
+  .steps{position:relative}
+  .steps::before{content:"";position:absolute;left:17px;top:20px;bottom:20px;width:2px;background:linear-gradient(var(--red-bright),rgba(232,17,45,.25));z-index:0}
+  .steps li{position:relative;align-items:flex-start;gap:.9rem;padding:1rem 0;border-bottom:0}
+  .steps li:hover{padding-left:0;background:none}
+  .steps li>span{flex:none;width:36px;height:36px;min-width:36px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;position:relative;z-index:1;box-shadow:0 0 0 4px var(--bg)}
+  .steps .step-ic{display:none}
+  .steps h3{font-size:.98rem}
+  .steps p{font-size:.88rem}
+
+  /* --- Featured Work: compact mobile cards (screens 4-5) --- */
+  .projects{grid-template-columns:1fr;gap:1rem;margin-top:1rem}
+  .project-visual{min-height:180px;padding:1rem}
+  .project-visual h3{font-size:1.45rem}
+  .project-badge{left:.9rem;right:auto;top:.9rem}
+  .project-view{display:inline-block;position:absolute;top:.9rem;right:.9rem;z-index:3;background:var(--red);color:#fff;font-weight:800;font-size:.66rem;letter-spacing:.06em;padding:.42rem .7rem;border-radius:999px;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.45)}
+  .project-num{font-size:1.25rem}
+  .project-name{font-size:1rem}
+  .project-meta{font-size:.68rem;gap:.7rem}
+
+  /* --- Work Experience (screen 6) --- */
+  .job-card{padding:1.4rem 1.1rem}
+  .job-top h3{font-size:1.3rem}
+  .job-points{grid-template-columns:1fr;gap:.65rem}
+  .job-points li{font-size:.9rem}
+  .job-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem}
+  .job-stats span{text-align:center;white-space:normal;padding:.55rem .4rem}
+  .job-stats strong{display:block;font-size:1.05rem;margin-right:0;margin-bottom:.15rem}
+
+  /* --- About Me (screen 7) --- */
+  .about-inner{flex-direction:row;gap:1rem;align-items:flex-start}
+  .about-inner img{width:110px}
+  .about-inner p{font-size:.92rem;line-height:1.6}
+  .traits{grid-template-columns:1fr;gap:.55rem}
+  .traits li{font-size:.86rem;padding:.65rem .8rem}
+  .lang-box{min-width:0;flex:1;padding:.6rem .5rem}
+  .lname{font-size:.85rem}
+  .lvl{font-size:.58rem}
+  .dots i{width:14px;height:5px}
+
+  /* --- Tools I Use (screen 8) --- */
+  .tool-grid{grid-template-columns:repeat(3,1fr);gap:.55rem}
+  .tool-grid span{padding:.7rem .3rem;font-size:.6rem}
+  .tool-grid b{font-size:.95rem}
+  .tools-quote{padding:1rem;font-size:.9rem}
+
+  /* --- Technical Skills: accordion on mobile (screen 9) --- */
+  .skill-groups{grid-template-columns:1fr;gap:.7rem}
+  .skill-group{padding:0;overflow:hidden}
+  .skill-group h3{margin:0}
+  .skill-toggle{cursor:pointer;padding:1rem 1.1rem}
+  .skill-toggle .skill-title{font-size:1.02rem}
+  .skill-chev{display:block;color:var(--red-bright);font-size:1.1rem;line-height:1;transition:transform .3s}
+  .skill-group.open .skill-chev{transform:rotate(180deg)}
+  .skill-group.open{border-color:var(--red)}
+  .skill-group.open::before{opacity:1}
+  .skill-chips{display:none;padding:0 1.1rem 1.1rem}
+  .skill-group.open .skill-chips{display:flex}
+
+  /* --- Education & Certification (screen 10) --- */
+  .edu-grid{grid-template-columns:1fr;gap:1.6rem}
+  .timeline li{padding:.8rem 0 .8rem 1.4rem}
+  .edu-year{min-width:78px;font-size:.8rem}
+  .cert-card{padding:1.5rem 1.3rem}
+
+  /* --- Get in Touch (screen 11) --- */
+  .contact-form{padding:1.5rem 1.1rem;border-radius:16px}
+  .contact-form input,.contact-form select,.contact-form textarea{padding:.9rem 1rem;font-size:1rem}
+  .form-send{padding:.95rem;font-size:1rem}
+
+  /* --- Footer: Collaborate + Scan (screens 12-13) --- */
+  .footer{grid-template-columns:1fr;gap:1.8rem}
+  .foot-big{font-size:2.1rem}
+  .contact-list li{font-size:.95rem}
+  .qr-row{justify-content:center;gap:1.6rem}
+  .foot-cta{flex-direction:row;gap:.7rem}
+  .foot-cta .btn{flex:1;text-align:center;padding:.85rem .5rem;font-size:.9rem;white-space:nowrap}
+  .foot-resume-desktop{display:none}
+  .foot-resume-m{display:inline}
+  .foot-tag{text-align:center}
+  .foot-tag p:first-child{text-align:center;font-size:1.15rem}
+  .foot-tag .signature{text-align:center}
+  .foot-bar{flex-direction:column;align-items:center;text-align:center;gap:.45rem;font-size:.68rem}
+}
+
+@media (max-width:480px){
+  .hero-left h2{font-size:clamp(2.2rem,11vw,2.6rem)}
+  .hero-cta .btn{font-size:.8rem;padding:.75rem .4rem}
+  .hero-right .stat strong{font-size:1.4rem}
+  .tool-grid b{font-size:.88rem}
+  .foot-cta .btn{font-size:.85rem}
+}
+
+@media (max-width:360px){
+  /* 320px: hero goes single column, stats become a row */
+  .hero-grid{grid-template-columns:1fr}
+  .hero-left .hero-text{grid-column:1/-1;grid-row:4}
+  .hero-right .stats{grid-column:1/-1;grid-row:5;flex-direction:row;gap:1rem;flex-wrap:wrap}
+  .hero-photo{grid-row:6}
+  .hero-cta{grid-row:7}
+  .hero-right .stat strong{font-size:1.35rem}
+  .about-inner img{width:90px}
+  .about-inner p{font-size:.88rem}
+  .tool-grid b{font-size:.82rem}
+  .job-stats{grid-template-columns:repeat(2,1fr)}
+  .lang-box{padding:.55rem .4rem}
+  .dots i{width:12px}
+}
