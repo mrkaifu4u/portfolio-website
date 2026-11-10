@@ -179,6 +179,26 @@
   var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxIXwrvVjy5i5B5rwu5DCjZE12g5bqf8wruhVQ_IW7CvMUZ6FcG_c9mDTicn_Jk6JB-/exec';
   var contactForm = document.getElementById('contactForm');
   if (contactForm) {
+    // Visitor IP + approximate location (city/region/country) for the
+    // sheet's IP Address and Location columns. Apps Script cannot see
+    // the visitor's IP, so the browser looks it up from a free IP
+    // geolocation service. If the lookup fails or is slow (2.5s cap),
+    // the form still sends without it — the message is never blocked.
+    function getVisitorInfo() {
+      var timeout = new Promise(function (resolve) {
+        setTimeout(function () { resolve({}); }, 2500);
+      });
+      var lookup = fetch('https://ipapi.co/json/')
+        .then(function (r) { return r.ok ? r.json() : {}; })
+        .then(function (d) {
+          if (!d || !d.ip) return {};
+          var parts = [d.city, d.region, d.country_name].filter(function (x) { return x; });
+          return { ip: d.ip, location: parts.join(', ') };
+        })
+        .catch(function () { return {}; });
+      return Promise.race([lookup, timeout]);
+    }
+
     contactForm.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!contactForm.checkValidity()) { contactForm.reportValidity(); return; }
@@ -196,11 +216,15 @@
         deviceType: isMobile ? 'Mobile' : (window.innerWidth <= 1024 ? 'Tablet' : 'Desktop')
       };
       if (sendBtn) { sendBtn.disabled = true; sendBtn.textContent = 'Sending…'; }
-      fetch(FORM_ENDPOINT, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(data)
+      getVisitorInfo().then(function (info) {
+        if (info.ip) data.ip = info.ip;
+        if (info.location) data.location = info.location;
+        return fetch(FORM_ENDPOINT, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(data)
+        });
       }).then(function () {
         if (ok) { ok.hidden = false; ok.textContent = 'Message sent successfully — thank you for reaching out. I\'ll get back to you shortly.'; }
         contactForm.reset();

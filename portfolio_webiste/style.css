@@ -12,7 +12,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-[id]{scroll-margin-top:96px}
+[id]{scroll-margin-top:120px}
 body{background:#070708;color:var(--cream);font-family:var(--font-body);line-height:1.6;overflow-x:hidden}
 ::selection{background:var(--red);color:var(--cream)}
 img{max-width:100%;display:block}
@@ -41,7 +41,7 @@ a.sec-kicker:hover{text-decoration:underline}
 /* Top bar */
 .topbar{position:sticky;top:0;z-index:50;background:var(--bg);display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem clamp(1rem,3.5vw,2.4rem);font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line)}
 .brand{text-decoration:none;line-height:1}
-.brand-mark{display:inline-block;font-family:var(--font-display);font-weight:900;font-size:1.15rem;letter-spacing:.02em;text-transform:none;color:#fff;background:var(--red);padding:.42rem .62rem;border-radius:8px;line-height:1;box-shadow:0 4px 14px rgba(232,17,45,.4);transition:transform .25s,background .25s}
+.brand-mark{display:inline-block;font-family:var(--font-display);font-weight:900;font-size:1.15rem;letter-spacing:.02em;text-transform:none;color:#fff;background:var(--red);padding:.42rem .62rem;border-radius:0;line-height:1;box-shadow:0 4px 14px rgba(232,17,45,.4);transition:transform .25s,background .25s}
 .brand:hover .brand-mark{transform:translateY(-2px) scale(1.05);background:var(--red-bright)}
 .topnav{display:flex;gap:1.4rem}
 .topnav a{text-decoration:none;color:var(--cream-dim);letter-spacing:.22em;font-size:.72rem;position:relative;transition:color .25s}
@@ -100,7 +100,7 @@ a.sec-kicker:hover{text-decoration:underline}
 .stat>span:last-child{font-size:.88rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;line-height:1.3}
 .hero-cta{display:flex;flex-wrap:nowrap;gap:.6rem}
 .hero-cta .btn{padding:.75rem 1rem;font-size:.85rem;white-space:nowrap}
-.btn{display:inline-block;padding:1.05rem 1.9rem;border-radius:999px;text-decoration:none;font-weight:600;font-size:1.15rem;border:1px solid transparent;cursor:pointer;transition:transform .25s,box-shadow .25s,background .25s}
+.btn{display:inline-block;padding:1.05rem 1.9rem;border-radius:0;text-decoration:none;font-weight:600;font-size:1.15rem;border:1px solid transparent;cursor:pointer;transition:transform .25s,box-shadow .25s,background .25s}
 .btn:hover{transform:translateY(-3px) scale(1.02)}
 .btn-red{background:var(--red);color:#fff;box-shadow:0 8px 24px rgba(193,39,45,.35)}
 .btn-red:hover{background:var(--red-bright);box-shadow:0 14px 32px rgba(232,69,44,.45)}
@@ -320,7 +320,7 @@ a.sec-kicker:hover{text-decoration:underline}
 .foot-tag::before{content:"✦";position:absolute;left:-1.5rem;top:.4rem;color:var(--red-bright);font-size:2.4rem;line-height:1;text-shadow:0 0 20px rgba(232,69,44,.8)}
 .foot-tag p:first-child{font-family:var(--font-display);font-weight:800;font-size:1.25rem;letter-spacing:.18em;line-height:2;text-transform:uppercase;text-align:right}
 .foot-small{color:var(--muted);font-size:.82rem;margin-top:1rem}
-.back-top{position:fixed;right:1.2rem;left:auto;bottom:1.2rem;z-index:60;background:var(--red);color:#fff;text-decoration:none;padding:.6rem 1rem;border-radius:999px;font-size:.85rem;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s}
+.back-top{position:fixed;right:1.2rem;left:auto;bottom:1.2rem;z-index:60;background:var(--red);color:#fff;text-decoration:none;padding:.6rem 1rem;border-radius:0;font-size:.85rem;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s}
 .back-top.show{opacity:1;pointer-events:auto}
 .back-top:hover{background:var(--red-bright);transform:translateY(-3px)}
 @media(prefers-reduced-motion:reduce){
@@ -496,7 +496,7 @@ a.sec-kicker:hover{text-decoration:underline}
   .project-visual{min-height:180px;padding:1rem}
   .project-visual h3{font-size:1.45rem}
   .project-badge{left:.9rem;right:auto;top:.9rem}
-  .project-view{display:inline-block;position:absolute;top:.9rem;right:.9rem;z-index:3;background:var(--red);color:#fff;font-weight:800;font-size:.66rem;letter-spacing:.06em;padding:.42rem .7rem;border-radius:999px;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.45)}
+  .project-view{display:inline-block;position:absolute;top:.9rem;right:.9rem;z-index:3;background:var(--red);color:#fff;font-weight:800;font-size:.66rem;letter-spacing:.06em;padding:.42rem .7rem;border-radius:0;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.45)}
   .project-num{font-size:1.25rem}
   .project-name{font-size:1rem}
   .project-meta{font-size:.68rem;gap:.7rem}
@@ -601,7 +601,7 @@ a.sec-kicker:hover{text-decoration:underline}
 
 @media (min-width:769px){
   /* --- Top bar: Hire Me button --- */
-  .hire-me{display:inline-flex;align-items:center;flex:none;background:var(--red);color:#fff;font-weight:800;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.62rem 1.15rem;border-radius:999px;box-shadow:0 4px 14px rgba(232,17,45,.4);transition:transform .25s,background .25s,box-shadow .25s;white-space:nowrap}
+  .hire-me{display:inline-flex;align-items:center;flex:none;background:var(--red);color:#fff;font-weight:800;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.62rem 1.15rem;border-radius:0;box-shadow:0 4px 14px rgba(232,17,45,.4);transition:transform .25s,background .25s,box-shadow .25s;white-space:nowrap}
   .hire-me:hover{background:var(--red-bright);transform:translateY(-2px);box-shadow:0 8px 20px rgba(232,69,44,.5)}
   .topbar{gap:1.2rem}
 
@@ -650,7 +650,7 @@ a.sec-kicker:hover{text-decoration:underline}
   .work-stat span{display:block;margin-top:.5rem;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
   .project-visual{min-height:190px}
   .project-badge{left:.9rem;right:auto}
-  .project-view{display:inline-block;position:absolute;top:.9rem;right:.9rem;z-index:3;background:var(--red);color:#fff;font-weight:800;font-size:.66rem;letter-spacing:.06em;padding:.42rem .7rem;border-radius:999px;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.45)}
+  .project-view{display:inline-block;position:absolute;top:.9rem;right:.9rem;z-index:3;background:var(--red);color:#fff;font-weight:800;font-size:.66rem;letter-spacing:.06em;padding:.42rem .7rem;border-radius:0;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.45)}
 
   /* --- Work Experience: red checkmarks --- */
   .job-points li{padding-left:1.4rem}
@@ -687,7 +687,7 @@ a.sec-kicker:hover{text-decoration:underline}
   .skill-groups{display:grid;grid-template-columns:340px 1fr;gap:.6rem 1.6rem;align-items:start}
   .skill-group{display:contents}
   .skill-group h3{grid-column:1;margin:0}
-  .skill-group .skill-toggle{cursor:pointer;padding:1rem 1.1rem;border:1px solid var(--line-soft);border-radius:10px;background:var(--panel);transition:background .25s,border-color .25s,transform .25s}
+  .skill-group .skill-toggle{cursor:pointer;padding:1rem 1.1rem;border:1px solid var(--line-soft);border-radius:0;background:var(--panel);transition:background .25s,border-color .25s,transform .25s}
   .skill-group .skill-toggle:hover{border-color:var(--red);transform:translateX(4px)}
   .skill-group .skill-title{font-size:1rem}
   .skill-group .skill-chev{display:block;transform:rotate(-90deg);color:var(--muted);font-size:1rem;transition:transform .3s,color .3s}
@@ -798,3 +798,59 @@ a.sec-kicker:hover{text-decoration:underline}
 @media (min-width:769px) and (max-width:1024px){
   .block{padding-top:84px}
 }
+
+/* ============================================================
+   v44 — user fixes (2026-11-10): hero photo merges with marquee,
+   stats clear of PORTFOLIO letters, Featured Work live visuals,
+   square buttons already applied above; desktop only.
+   ============================================================ */
+@media (min-width:769px){
+  /* 1) Hero photo merges with the marquee: no gap below the photo.
+     The photo drops to the hero's bottom edge; the text columns keep
+     their breathing room via bottom padding. */
+  .hero{padding-bottom:0}
+  .hero-photo{margin-bottom:0}
+  .hero-left{padding-bottom:1.4rem}
+  .hero-right{padding-bottom:1.4rem}
+
+  /* 2) Stats clear of the PORTFOLIO letters: letters move up and
+     shrink slightly; the stats stack is more compact so its top
+     ("1+") sits lower. */
+  .mega{top:12%;font-size:12.5cqw}
+  .hero-right .stat strong{font-size:2.2rem}
+  .hero-right .stats{gap:.7rem}
+
+  /* 3) Featured Work: clean live visuals.
+     A dark scrim keeps the headline on a clean area; the graphics
+     live in the top zone only and animate continuously. */
+  .project-visual::before{content:"";position:absolute;left:0;right:0;bottom:0;height:46%;background:linear-gradient(180deg,transparent,rgba(7,7,8,.88) 72%);z-index:0;pointer-events:none}
+  .viz-chart{bottom:6.4rem;height:56px}
+  /* Churn line chart: data flowing along the line */
+  .viz-line polyline{stroke-dasharray:10 7;animation:dashflow 1.4s linear infinite}
+  .viz-line circle{animation:nodepulse 1.8s ease-in-out infinite}
+  /* NLP rings: sonar pulse, staggered */
+  .viz-rings span{animation:ringpulse 2.4s ease-in-out infinite}
+  .viz-rings span:nth-child(2){animation-delay:.4s}
+  .viz-rings span:nth-child(3){animation-delay:.8s}
+  /* NLP bars: soft shimmer, staggered */
+  .viz-bars i{animation:barshine 2.2s ease-in-out infinite}
+  .viz-bars i:nth-child(2){animation-delay:.35s}
+  .viz-bars i:nth-child(3){animation-delay:.7s}
+  /* Data bars: gentle equalizer bob, staggered */
+  .viz-chart i{transform-origin:bottom;animation:barbob 1.8s ease-in-out infinite}
+  .viz-chart i:nth-child(2){animation-delay:.2s}
+  .viz-chart i:nth-child(3){animation-delay:.4s}
+  .viz-chart i:nth-child(4){animation-delay:.6s}
+  .viz-chart i:nth-child(5){animation-delay:.8s}
+  /* Deployment network: edges flow, nodes pulse */
+  .viz-net path{stroke-dasharray:6 6;animation:dashflow 1.2s linear infinite}
+  .viz-net circle{transform-box:fill-box;transform-origin:center;animation:nodepulse 1.8s ease-in-out infinite}
+  .viz-net circle:nth-child(3){animation-delay:.3s}
+  .viz-net circle:nth-child(4){animation-delay:.6s}
+  .viz-net circle:nth-child(5){animation-delay:.9s}
+}
+@keyframes dashflow{to{stroke-dashoffset:-34}}
+@keyframes ringpulse{0%,100%{transform:scale(.88);opacity:.95}50%{transform:scale(1.06);opacity:.45}}
+@keyframes barshine{0%,100%{filter:brightness(1)}50%{filter:brightness(1.5)}}
+@keyframes barbob{0%,100%{transform:scaleY(.82)}50%{transform:scaleY(1.06)}}
+@keyframes nodepulse{0%,100%{opacity:1}50%{opacity:.55}}
