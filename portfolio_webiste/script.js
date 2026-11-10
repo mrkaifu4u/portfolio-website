@@ -190,24 +190,82 @@
   var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxIXwrvVjy5i5B5rwu5DCjZE12g5bqf8wruhVQ_IW7CvMUZ6FcG_c9mDTicn_Jk6JB-/exec';
   var contactForm = document.getElementById('contactForm');
   if (contactForm) {
-    // Visitor IP + approximate location (city/region/country) for the
-    // sheet's IP Address and Location columns. Apps Script cannot see
-    // the visitor's IP, so the browser looks it up from a free IP
-    // geolocation service. If the lookup fails or is slow (2.5s cap),
-    // the form still sends without it — the message is never blocked.
+    // Visitor IP + location (city/region/country) for the sheet's IP
+    // Address and Location columns. Apps Script cannot see the visitor's
+    // IP, so the browser looks it up. Location comes from the device GPS
+    // first (accurate city), because IP geolocation is only approximate
+    // — it reports the ISP's node, which can be a nearby town instead of
+    // the visitor's actual city. If GPS is unavailable, denied or slow,
+    // the IP-based location is used instead. The form is never blocked:
+    // the whole lookup is capped at 5s and the message sends regardless.
     function getVisitorInfo() {
+      var result = {};
+      // IP lookup: fast, gives the IP and a fallback (approximate) place.
+      function ipLookup() {
+        return fetch('https://ipapi.co/json/')
+          .then(function (r) { return r.ok ? r.json() : {}; })
+          .then(function (d) {
+            if (d && d.ip) {
+              result.ip = d.ip;
+              var parts = [d.city, d.region, d.country_name].filter(function (x) { return x; });
+              if (parts.length) result.ipLocation = parts.join(', ');
+            }
+          })
+          .catch(function () {});
+      }
+      // GPS lookup: precise place name via the device location, then a
+      // free reverse-geocode. Needs the visitor's permission; resolves
+      // empty on denial, error or timeout so the IP fallback is used.
+      function gpsLookup() {
+        return new Promise(function (resolve) {
+          if (!navigator.geolocation) { resolve(); return; }
+          var settled = false;
+          var timer = setTimeout(function () { if (!settled) { settled = true; resolve(); } }, 3500);
+          navigator.geolocation.getCurrentPosition(
+            function (pos) {
+              if (settled) return;
+              fetch('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=' + pos.coords.latitude + '&longitude=' + pos.coords.longitude + '&localityLanguage=en')
+                .then(function (r) { return r.ok ? r.json() : {}; })
+                .then(function (d) {
+                  var parts = [d.city || d.locality, d.principalSubdivision, d.countryName].filter(function (x) { return x; });
+                  if (parts.length) result.gpsLocation = parts.join(', ');
+                })
+                .catch(function () {})
+                .finally(function () { if (!settled) { settled = true; clearTimeout(timer); resolve(); } });
+            },
+            function () { if (!settled) { settled = true; clearTimeout(timer); resolve(); } },
+            { timeout: 3500, maximumAge: 60000 }
+          );
+        });
+      }
+      // Prefer the precise GPS place; fall back to the IP-based place.
+      function collect() {
+        var out = {};
+        if (result.ip) out.ip = result.ip;
+        out.location = result.gpsLocation || result.ipLocation || '';
+        return out;
+      }
+      var both = Promise.all([ipLookup(), gpsLookup()]).then(collect);
       var timeout = new Promise(function (resolve) {
-        setTimeout(function () { resolve({}); }, 2500);
+        setTimeout(function () { resolve(collect()); }, 5000);
       });
-      var lookup = fetch('https://ipapi.co/json/')
-        .then(function (r) { return r.ok ? r.json() : {}; })
-        .then(function (d) {
-          if (!d || !d.ip) return {};
-          var parts = [d.city, d.region, d.country_name].filter(function (x) { return x; });
-          return { ip: d.ip, location: parts.join(', ') };
-        })
-        .catch(function () { return {}; });
-      return Promise.race([lookup, timeout]);
+      return Promise.race([both, timeout]);
+    }
+
+    // Phone field: digits only. Strip letters and other characters as
+    // the visitor types, so alphabets can never be entered. A leading
+    // "+" is kept (for country codes); any other "+" is dropped. The
+    // pattern attribute is a second layer — checkValidity() on submit
+    // rejects anything that is not a phone number.
+    var phoneInput = contactForm.querySelector('[name="phone"]');
+    if (phoneInput) {
+      phoneInput.addEventListener('input', function () {
+        var v = phoneInput.value.replace(/[^0-9+\s\-()]/g, '');
+        var hasLeadingPlus = v.charAt(0) === '+';
+        v = v.replace(/\+/g, '');
+        if (hasLeadingPlus) v = '+' + v;
+        if (v !== phoneInput.value) phoneInput.value = v;
+      });
     }
 
     contactForm.addEventListener('submit', function (e) {
