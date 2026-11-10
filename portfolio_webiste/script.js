@@ -154,16 +154,39 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeSuccessModal(); });
   }
 
-  // Contact form — success message only (no backend, nothing is sent or saved)
+  // Contact form — sends each message to Google Sheets via the Apps Script
+  // web app (portfolio_webiste_database, "contact" tab), then shows success.
+  // Apps Script answers without CORS headers, so the request is sent
+  // no-cors with a plain-text body; the row is still written server-side.
+  var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxIXwrvVjy5i5B5rwu5DCjZE12g5bqf8wruhVQ_IW7CvMUZ6FcG_c9mDTicn_Jk6JB-/exec';
   var contactForm = document.getElementById('contactForm');
   if (contactForm) {
     contactForm.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!contactForm.checkValidity()) { contactForm.reportValidity(); return; }
+      var sendBtn = contactForm.querySelector('.form-send');
       var ok = document.getElementById('formSuccess');
-      if (ok) { ok.hidden = false; }
-      contactForm.reset();
-      openSuccessModal();
+      var data = {
+        name: contactForm.querySelector('[name="name"]').value.trim(),
+        email: contactForm.querySelector('[name="email"]').value.trim(),
+        purpose: contactForm.querySelector('[name="purpose"]').value,
+        message: contactForm.querySelector('[name="message"]').value.trim()
+      };
+      if (sendBtn) { sendBtn.disabled = true; sendBtn.textContent = 'Sending…'; }
+      fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(data)
+      }).then(function () {
+        if (ok) { ok.hidden = false; ok.textContent = 'Message sent successfully — thank you for reaching out. I\'ll get back to you shortly.'; }
+        contactForm.reset();
+        openSuccessModal();
+      }).catch(function () {
+        if (ok) { ok.hidden = false; ok.textContent = 'Could not send right now — please email me directly at shaikhkaif7014@gmail.com.'; }
+      }).finally(function () {
+        if (sendBtn) { sendBtn.disabled = false; sendBtn.textContent = 'Send Message'; }
+      });
     });
   }
 
