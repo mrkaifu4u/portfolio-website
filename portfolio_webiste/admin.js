@@ -15,6 +15,9 @@
   var messages = [];
   var selectedId = null;
   var currentTab = 'messages';
+  var filterText = '';
+  var filterStatus = 'All';
+  var filterPriority = 'All';
 
   function isAdminHash() {
     var h = location.hash || '';
@@ -205,7 +208,20 @@
   function renderMessagesTab() {
     root.innerHTML = dashboardShell(
       '<div class="admin-row"><h2>Messages</h2>' +
-      '<button class="admin-btn admin-btn-red" id="addMsgBtn">+ Add Message</button></div>' +
+      '<span><button class="admin-btn admin-btn-ghost" id="exportCsvBtn">Export CSV</button> ' +
+      '<button class="admin-btn admin-btn-red" id="addMsgBtn">+ Add Message</button></span></div>' +
+      '<div class="admin-stats" id="msgStats"></div>' +
+      '<div class="admin-filters">' +
+      '<input type="search" id="filterText" placeholder="Search name, email or message…" value="' + esc(filterText) + '">' +
+      '<select id="filterStatus">' +
+      ['All', 'New', 'Read', 'Replied'].map(function (s) {
+        return '<option' + (filterStatus === s ? ' selected' : '') + '>' + s + '</option>';
+      }).join('') + '</select>' +
+      '<select id="filterPriority">' +
+      ['All', 'High', 'Medium', 'Low'].map(function (p) {
+        return '<option' + (filterPriority === p ? ' selected' : '') + '>' + p + '</option>';
+      }).join('') + '</select>' +
+      '</div>' +
       '<p class="admin-msg" id="msgListMsg">Loading…</p>' +
       '<div class="admin-table-wrap"><table class="admin-table" id="msgTable">' +
       '<thead><tr><th>Date</th><th>Name</th><th>Email</th><th>Purpose</th><th>Status</th><th>Priority</th></tr></thead>' +
@@ -217,7 +233,100 @@
       selectedId = 'NEW';
       renderMessageForm(null);
     });
+    document.getElementById('exportCsvBtn').addEventListener('click', exportCsv);
+    var ft = document.getElementById('filterText');
+    ft.addEventListener('input', function () { filterText = ft.value; renderTable(); });
+    document.getElementById('filterStatus').addEventListener('change', function (ev) {
+      filterStatus = ev.target.value; renderTable();
+    });
+    document.getElementById('filterPriority').addEventListener('change', function (ev) {
+      filterPriority = ev.target.value; renderTable();
+    });
     loadMessages();
+  }
+
+  function renderStats() {
+    var el = document.getElementById('msgStats');
+    if (!el) return;
+    var nNew = 0, nRead = 0, nReplied = 0, nHigh = 0;
+    messages.forEach(function (m) {
+      if (m.status === 'New') nNew++;
+      else if (m.status === 'Read') nRead++;
+      else if (m.status === 'Replied') nReplied++;
+      if (m.priority === 'High') nHigh++;
+    });
+    el.innerHTML =
+      statCard(messages.length, 'Total') + statCard(nNew, 'New') +
+      statCard(nRead, 'Read') + statCard(nReplied, 'Replied') +
+      statCard(nHigh, 'High priority');
+    function statCard(n, label) {
+      return '<div class="admin-stat"><span class="admin-stat-num">' + n +
+        '</span><span class="admin-stat-label">' + label + '</span></div>';
+    }
+  }
+
+  function filteredMessages() {
+    var q = (filterText || '').toLowerCase();
+    return messages.filter(function (m) {
+      if (filterStatus !== 'All' && m.status !== filterStatus) return false;
+      if (filterPriority !== 'All' && m.priority !== filterPriority) return false;
+      if (q) {
+        var hay = ((m.name || '') + ' ' + (m.email || '') + ' ' +
+          (m.message || '') + ' ' + (m.purpose || '')).toLowerCase();
+        if (hay.indexOf(q) === -1) return false;
+      }
+      return true;
+    });
+  }
+
+  function renderTable() {
+    var msg = document.getElementById('msgListMsg');
+    var list = filteredMessages();
+    if (msg) {
+      msg.textContent = list.length + ' of ' + messages.length +
+        ' message(s). Click a row to view / edit.';
+    }
+    var tbody = document.querySelector('#msgTable tbody');
+    if (!tbody) return;
+    tbody.innerHTML = list.map(function (m) {
+      return '<tr data-id="' + esc(m.submissionId) + '">' +
+        '<td>' + esc(m.date) + ' ' + esc(m.time) + '</td>' +
+        '<td>' + esc(m.name) + '</td>' +
+        '<td>' + esc(m.email) + '</td>' +
+        '<td>' + esc(m.purpose) + '</td>' +
+        '<td>' + esc(m.status) + '</td>' +
+        '<td>' + esc(m.priority) + '</td></tr>';
+    }).join('');
+    tbody.querySelectorAll('tr').forEach(function (tr) {
+      tr.addEventListener('click', function () {
+        selectedId = tr.getAttribute('data-id');
+        var m = messages.find(function (x) { return x.submissionId === selectedId; });
+        renderMessageForm(m || null);
+      });
+    });
+  }
+
+  function exportCsv() {
+    var list = filteredMessages();
+    var head = ['Submission ID', 'Date', 'Time', 'Name', 'Email', 'Phone', 'Purpose',
+      'Message', 'Status', 'Priority', 'Location', 'Device', 'IP', 'Source', 'Admin Notes'];
+    var rows = [head].concat(list.map(function (m) {
+      return [m.submissionId, m.date, m.time, m.name, m.email, m.phone, m.purpose,
+        m.message, m.status, m.priority, m.location, m.deviceType, m.ip, m.source, m.adminNotes];
+    }));
+    var csv = rows.map(function (r) {
+      return r.map(function (v) {
+        return '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+      }).join(',');
+    }).join('\r\n');
+    var blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'portfolio-messages-' + new Date().toISOString().slice(0, 10) + '.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
   }
 
   function loadMessages() {
@@ -229,24 +338,8 @@
         return;
       }
       messages = r.messages || [];
-      msg.textContent = messages.length + ' message(s). Click a row to view / edit.';
-      var tbody = document.querySelector('#msgTable tbody');
-      tbody.innerHTML = messages.map(function (m) {
-        return '<tr data-id="' + esc(m.submissionId) + '">' +
-          '<td>' + esc(m.date) + ' ' + esc(m.time) + '</td>' +
-          '<td>' + esc(m.name) + '</td>' +
-          '<td>' + esc(m.email) + '</td>' +
-          '<td>' + esc(m.purpose) + '</td>' +
-          '<td>' + esc(m.status) + '</td>' +
-          '<td>' + esc(m.priority) + '</td></tr>';
-      }).join('');
-      tbody.querySelectorAll('tr').forEach(function (tr) {
-        tr.addEventListener('click', function () {
-          selectedId = tr.getAttribute('data-id');
-          var m = messages.find(function (x) { return x.submissionId === selectedId; });
-          renderMessageForm(m || null);
-        });
-      });
+      renderStats();
+      renderTable();
       if (selectedId && selectedId !== 'NEW') {
         var m = messages.find(function (x) { return x.submissionId === selectedId; });
         if (m) renderMessageForm(m);
@@ -291,7 +384,15 @@
       '<button class="admin-btn admin-btn-red" type="submit">' + (isNew ? 'Add Message' : 'Save Changes') + '</button>' +
       (isNew ? '' : '<button class="admin-btn admin-btn-danger" type="button" id="delMsgBtn">Delete</button>') +
       '<button class="admin-btn admin-btn-ghost" type="button" id="cancelMsgBtn">Close</button>' +
-      '</div></form>';
+      '</div></form>' +
+      (isNew ? '' :
+      '<div class="admin-reply">' +
+      '<h3>Reply by Email</h3>' +
+      '<p class="admin-note">Replies go to ' + esc(d.email || '') + ' from your Gmail. Sending marks this message Replied.</p>' +
+      '<textarea id="replyText" rows="4" placeholder="Write your reply…"></textarea>' +
+      '<p class="admin-msg" id="replyMsg"></p>' +
+      '<button class="admin-btn admin-btn-red" type="button" id="sendReplyBtn">Send Reply</button>' +
+      '</div>');
     var form = document.getElementById('msgForm');
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
@@ -346,6 +447,25 @@
             alert((r && r.error) || 'Delete failed.');
           }
         });
+      });
+    }
+    var sendReply = document.getElementById('sendReplyBtn');
+    if (sendReply) {
+      sendReply.addEventListener('click', function () {
+        var text = document.getElementById('replyText').value.trim();
+        var rmsg = document.getElementById('replyMsg');
+        if (!text) { rmsg.textContent = 'Write a reply first.'; return; }
+        rmsg.textContent = 'Sending…';
+        api('adminReplyMessage', { submissionId: d.submissionId, reply: text }).then(function (r) {
+          if (r && r.ok) {
+            rmsg.textContent = 'Reply sent. Message marked Replied.';
+            document.getElementById('replyText').value = '';
+            loadMessages();
+          } else {
+            if (r && r.error === 'not logged in') { clearToken(); go('#admin_login'); return; }
+            rmsg.textContent = (r && r.error) || 'Reply failed.';
+          }
+        }).catch(function () { rmsg.textContent = 'Could not reach the server.'; });
       });
     }
   }
@@ -419,6 +539,16 @@
   function renderSettingsTab() {
     root.innerHTML = dashboardShell(
       '<h2>Settings</h2>' +
+      '<form class="admin-form" id="siteForm">' +
+      '<h3>Site Settings</h3>' +
+      '<p class="admin-note">The contact info shown on the public site. Saving updates it everywhere on the site.</p>' +
+      '<label>Contact email<input type="email" id="setEmail" required></label>' +
+      '<label>Contact phone<input type="tel" id="setPhone" required></label>' +
+      '<label>Location<input type="text" id="setLocation" required></label>' +
+      '<label class="admin-check"><input type="checkbox" id="setTelegram"> Send a Telegram notification for each new form message</label>' +
+      '<p class="admin-msg" id="siteMsg"></p>' +
+      '<button class="admin-btn admin-btn-red" type="submit">Save Site Settings</button>' +
+      '</form>' +
       '<form class="admin-form" id="pwForm">' +
       '<h3>Change Password</h3>' +
       '<label>Current password<input type="password" id="pwCur" required autocomplete="current-password"></label>' +
@@ -430,6 +560,34 @@
       '<p class="admin-note">Your login is stored in the Google Sheet tab “admin_users”. Changing it here updates that tab.</p>'
     );
     bindDash();
+    api('adminGetSettings', {}).then(function (r) {
+      if (r && r.ok && r.settings) {
+        document.getElementById('setEmail').value = r.settings.email || '';
+        document.getElementById('setPhone').value = r.settings.phone || '';
+        document.getElementById('setLocation').value = r.settings.location || '';
+        document.getElementById('setTelegram').checked = !!r.settings.telegram;
+      }
+    }).catch(function () {});
+    document.getElementById('siteForm').addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var msg = document.getElementById('siteMsg');
+      msg.textContent = 'Saving…';
+      api('adminSetSettings', {
+        settings: {
+          email: document.getElementById('setEmail').value.trim(),
+          phone: document.getElementById('setPhone').value.trim(),
+          location: document.getElementById('setLocation').value.trim(),
+          telegram: document.getElementById('setTelegram').checked
+        }
+      }).then(function (r) {
+        if (r && r.ok) {
+          msg.textContent = 'Site settings saved. The public site now shows the new contact info.';
+        } else {
+          if (r && r.error === 'not logged in') { clearToken(); go('#admin_login'); return; }
+          msg.textContent = (r && r.error) || 'Save failed.';
+        }
+      }).catch(function () { msg.textContent = 'Could not reach the server.'; });
+    });
     document.getElementById('pwForm').addEventListener('submit', function (ev) {
       ev.preventDefault();
       var msg = document.getElementById('pwMsg');

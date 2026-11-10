@@ -208,6 +208,34 @@
       })
       .catch(function () { /* keep the built-in PDF link */ });
   })();
+  // Contact info — show the email / phone / location saved in admin
+  // Settings (doGet ?action=getSettings). If the lookup fails, the
+  // built-in values in the HTML stay, so the page never breaks.
+  (function updateContactInfo() {
+    fetch(FORM_ENDPOINT + '?action=getSettings')
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d || !d.ok) return;
+        if (d.email) {
+          document.querySelectorAll('a[href^="mailto:"]').forEach(function (a) {
+            a.href = 'mailto:' + d.email;
+            if (a.textContent.indexOf('@') !== -1) a.textContent = d.email;
+          });
+        }
+        if (d.phone) {
+          var tel = d.phone.replace(/[^0-9+]/g, '');
+          document.querySelectorAll('a[href^="tel:"]').forEach(function (a) {
+            a.href = 'tel:' + tel;
+            a.textContent = d.phone;
+          });
+        }
+        if (d.location) {
+          var loc = document.getElementById('siteLocation');
+          if (loc) loc.textContent = d.location;
+        }
+      })
+      .catch(function () { /* keep the built-in contact info */ });
+  })();
   var contactForm = document.getElementById('contactForm');
   if (contactForm) {
     // Visitor IP + location (city/region/country) for the sheet's IP

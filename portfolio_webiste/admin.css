@@ -33,6 +33,17 @@ body.admin-mode .cursor{display:none!important}
 .admin-btn-danger:hover{background:rgba(255,107,107,.12)}
 .admin-btn-danger.armed{background:#e8112d;color:#fff;border-color:#e8112d}
 .admin-note{color:#b9b3a8;font-size:.88rem;margin-top:1.4rem}
+.admin-stats{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:1rem}
+.admin-stat{background:#111113;border:1px solid #2a2a2e;border-radius:10px;padding:.8rem 1.1rem;min-width:110px}
+.admin-stat-num{display:block;font-size:1.5rem;font-weight:900;color:#fff}
+.admin-stat-label{font-size:.78rem;color:#b9b3a8;text-transform:uppercase;letter-spacing:.06em}
+.admin-filters{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:.8rem}
+.admin-filters input,.admin-filters select{padding:.6rem .8rem;background:#0a0a0c;border:1px solid #333338;border-radius:8px;color:#f5f3ef;font-size:.9rem;font-family:inherit;box-sizing:border-box}
+.admin-filters input{flex:1;min-width:200px}
+.admin-reply{background:#111113;border:1px solid #2a2a2e;border-radius:12px;padding:1.4rem;margin-top:1.4rem}
+.admin-reply textarea{width:100%;padding:.7rem .8rem;background:#0a0a0c;border:1px solid #333338;border-radius:8px;color:#f5f3ef;font-size:.95rem;font-family:inherit;box-sizing:border-box;resize:vertical}
+.admin-check{display:flex!important;align-items:center;gap:.6rem;font-weight:600}
+.admin-check input{width:auto!important;margin-top:0!important}
 
 .admin-dash{max-width:1080px;margin:0 auto;padding:1.2rem 1.2rem 3rem}
 .admin-topbar{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;border-bottom:1px solid #2a2a2e;padding-bottom:1rem;margin-bottom:1.4rem}
