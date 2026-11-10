@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800;900&family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=37" />
+  <link rel="stylesheet" href="style.css?v=38" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23c1272d'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='%23f2e3c6' font-family='Arial' font-weight='bold'>MK</text></svg>" />
 </head>
 <body>
@@ -23,16 +23,16 @@
     <header class="topbar">
       <a class="brand" href="#home" aria-label="Mohamad Kaifoddin — home"><span class="brand-mark">MK</span></a>
       <nav class="topnav" id="topnav" aria-label="Sections">
-        <a href="#work">Work</a>
-        <a href="#experience">Experience</a>
-        <a href="#skills">Skills</a>
+        <a href="#home">Home</a>
         <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#work">Work</a>
+        <a href="#skills">Skills</a>
         <a href="#education">Education</a>
         <a href="#contact">Contact</a>
-        <a href="Mohamad_Kaifoddin_AI_ML_Engineer_1-3Yrs.pdf" target="_blank" rel="noopener">Resume</a>
       </nav>
       <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="topnav"><span></span><span></span><span></span></button>
-      <span class="available"><i></i> Available for opportunities</span>
+      <a class="hire-me" href="#get-in-touch">Hire Me</a>
     </header>
 
     <!-- HERO -->
@@ -85,7 +85,7 @@
     <section class="block" id="services">
       <div class="sec-head reveal">
         <h2 class="sec-title">WHAT I <em>DO</em></h2>
-        <span class="sec-kicker">END-TO-END ML — DATA TO DEPLOYMENT</span>
+        <span class="sec-kicker">FROM DATA TO DEPLOYMENT</span>
       </div>
       <div class="cards-5">
         <article class="card reveal"><div class="card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8 7.5 10.5 16M16 7.5 13.5 16M8.5 6h7"/></svg></div><h3>MACHINE LEARNING</h3><p>Classification &amp; prediction models with scikit-learn — trained, tuned and evaluated on structured datasets.</p></article>
@@ -99,7 +99,10 @@
     <!-- MY PROCESS + FEATURED WORK -->
     <section class="block split">
       <div class="process reveal">
-        <h2 class="sec-title">MY <em>PROCESS</em></h2>
+        <div class="sec-head">
+          <h2 class="sec-title">MY <em>PROCESS</em></h2>
+          <span class="sec-kicker">A PRACTICAL ML WORKFLOW</span>
+        </div>
         <ol class="steps">
           <li><span>01</span><div class="step-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg></div><div><h3>DISCOVER</h3><p>Pull the data — SQL &amp; MongoDB queries that shape the training set.</p></div></li>
           <li><span>02</span><div class="step-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18l-7 8v5l-4 2v-7L3 5z"/></svg></div><div><h3>CLEAN &amp; ENGINEER</h3><p>Missing values, encoding and scaling — features that actually carry signal.</p></div></li>
@@ -112,7 +115,7 @@
       <div class="work" id="work">
         <div class="work-head reveal">
           <h2 class="sec-title">FEATURED <em>WORK</em></h2>
-          <a class="sec-kicker" href="https://github.com/mrkaifu4u" target="_blank" rel="noopener">GitHub — mrkaifu4u →</a>
+          <span class="sec-kicker">MY RECENT ML PROJECTS</span>
         </div>
         <div class="projects">
           <article class="project reveal">
@@ -188,6 +191,12 @@
             <div class="project-tags"><span>REST APIS</span><span>SPRING BOOT</span><span>GIT</span><span>LINUX</span></div>
             <div class="project-meta"><span><strong>3+</strong> Models Live</span><span><strong>Real-Time</strong> Predictions</span><span><strong>2025</strong> Ongoing</span></div>
           </article>
+          <div class="work-stats reveal" aria-label="Performance statistics">
+            <div class="work-stat"><strong>10+</strong><span>MODELS TRAINED</span></div>
+            <div class="work-stat"><strong>10K+</strong><span>RECORDS PROCESSED</span></div>
+            <div class="work-stat"><strong>+8–10%</strong><span>ACCURACY GAIN</span></div>
+            <div class="work-stat"><strong>−30%</strong><span>DATA PREP TIME</span></div>
+          </div>
         </div>
       </div>
     </section>
@@ -196,7 +205,7 @@
     <section class="block" id="experience">
       <div class="sec-head reveal">
         <h2 class="sec-title">WORK <em>EXPERIENCE</em></h2>
-        <span class="sec-kicker">APRIL 2025 — PRESENT</span>
+        <span class="sec-kicker">MY PROFESSIONAL JOURNEY</span>
       </div>
       <article class="job-card reveal">
         <div class="job-top">
@@ -226,42 +235,62 @@
 
 
 
-    <!-- ABOUT ME + TOOLS I USE -->
-    <section class="block split about-split" id="about">
-      <div class="about reveal">
+    <!-- ABOUT ME -->
+    <section class="block" id="about">
+      <div class="sec-head reveal">
         <h2 class="sec-title">ABOUT <em>ME</em></h2>
-        <p class="about-role">ML ENGINEER · ARTMAC SOFT PVT LTD · HYDERABAD, INDIA</p>
-        <div class="about-inner">
+        <span class="sec-kicker">A LITTLE MORE ABOUT ME</span>
+      </div>
+      <div class="about reveal">
+        <div class="about-col-photo">
           <figure class="about-photo"><img src="kaif_2.jpeg" alt="Portrait of Mohamad Kaifoddin" /><figcaption>ML ENGINEER</figcaption></figure>
-          <div>
-            <p>I’m an <b>AI/ML Engineer at Artmac Soft Pvt Ltd</b> with a strong foundation in Python, scikit-learn and NLP. My work spans the full machine learning lifecycle — <b>model experimentation, data pipelines, API deployment, and production support</b>.</p>
-            <p>Day to day, that means engineering preprocessing pipelines for datasets of 10,000+ records, tuning models until the metrics move, and integrating trained models into backend systems so predictions are available in <b>real time</b> — not just in a notebook.</p>
-            <p>I hold a <b>Bachelor of Computer Science</b> and am currently pursuing my <b>MCA</b>, while deepening my work in transformers, FastAPI and scalable ML deployment.</p>
+          <div class="lang-row">
+            <div class="lang-box"><div class="lname">ENGLISH</div><div class="lvl">Advanced</div><div class="dots"><i></i><i></i><i></i><i></i><i></i></div></div>
+            <div class="lang-box"><div class="lname">HINDI</div><div class="lvl">Advanced</div><div class="dots"><i></i><i></i><i></i><i></i><i></i></div></div>
+            <div class="lang-box"><div class="lname">MARATHI</div><div class="lvl">Advanced</div><div class="dots"><i></i><i></i><i></i><i></i><i></i></div></div>
           </div>
         </div>
-        <ul class="traits">
-          <li><span class="tdot" aria-hidden="true"></span><span><b>End-to-end ownership</b> — data to deployed model</span></li>
-          <li><span class="tdot" aria-hidden="true"></span><span><b>Data-obsessed</b> — clean features before clever models</span></li>
-          <li><span class="tdot" aria-hidden="true"></span><span><b>Production mindset</b> — APIs, Git &amp; Linux workflows</span></li>
-          <li><span class="tdot" aria-hidden="true"></span><span><b>Always learning</b> — transformers &amp; FastAPI next</span></li>
-        </ul>
-        <div class="lang-row">
-          <div class="lang-box"><div class="lname">ENGLISH</div><div class="lvl">Advanced</div><div class="dots"><i></i><i></i><i></i><i></i><i></i></div></div>
-          <div class="lang-box"><div class="lname">HINDI</div><div class="lvl">Advanced</div><div class="dots"><i></i><i></i><i></i><i></i><i></i></div></div>
-          <div class="lang-box"><div class="lname">MARATHI</div><div class="lvl">Advanced</div><div class="dots"><i></i><i></i><i></i><i></i><i></i></div></div>
+        <div class="about-col-text">
+          <p class="about-role">ML ENGINEER · ARTMAC SOFT PVT LTD · HYDERABAD, INDIA</p>
+          <p>I’m an <b>AI/ML Engineer at Artmac Soft Pvt Ltd</b> with a strong foundation in Python, scikit-learn and NLP. My work spans the full machine learning lifecycle — <b>model experimentation, data pipelines, API deployment, and production support</b>.</p>
+          <p>Day to day, that means engineering preprocessing pipelines for datasets of 10,000+ records, tuning models until the metrics move, and integrating trained models into backend systems so predictions are available in <b>real time</b> — not just in a notebook.</p>
+          <p>I hold a <b>Bachelor of Computer Science</b> and am currently pursuing my <b>MCA</b>, while deepening my work in transformers, FastAPI and scalable ML deployment.</p>
+          <ul class="traits">
+            <li><span class="tdot" aria-hidden="true"></span><span><b>End-to-end ownership</b> — data to deployed model</span></li>
+            <li><span class="tdot" aria-hidden="true"></span><span><b>Data-obsessed</b> — clean features before clever models</span></li>
+            <li><span class="tdot" aria-hidden="true"></span><span><b>Production mindset</b> — APIs, Git &amp; Linux workflows</span></li>
+            <li><span class="tdot" aria-hidden="true"></span><span><b>Always learning</b> — transformers &amp; FastAPI next</span></li>
+          </ul>
         </div>
       </div>
-      <div class="tools reveal">
+    </section>
+
+    <!-- TOOLS I USE -->
+    <section class="block" id="tools">
+      <div class="sec-head reveal">
         <h2 class="sec-title">TOOLS <em>I USE</em></h2>
+        <span class="sec-kicker">TECHNOLOGIES I WORK WITH</span>
+      </div>
+      <div class="tools reveal">
         <div class="tool-grid">
-          <span><b>Py<i>thon</i></b>CORE LANGUAGE</span><span><b>Sk<i>learn</i></b>ML LIBRARY</span><span><b>Pd<i>+</i>Np</b>DATA WRANGLING</span><span><b>SQ<i>L</i></b>DATABASES</span><span><b>Gi<i>t</i></b>VERSION CONTROL</span><span><b>Do<i>cker</i></b>CONTAINERS</span><span><b>AW<i>S</i></b>CLOUD</span><span><b>Fa<i>st</i>API</b>MODEL APIS</span><span><b>Li<i>nux</i></b>DEV ENVIRONMENT</span>
+          <span><img class="tool-logo" src="https://cdn.simpleicons.org/python/3776AB" alt="" loading="lazy" onerror="this.style.display='none'" /><b>Py<i>thon</i></b>CORE LANGUAGE</span>
+          <span><img class="tool-logo" src="https://cdn.simpleicons.org/scikitlearn/F7931E" alt="" loading="lazy" onerror="this.style.display='none'" /><b>Sk<i>learn</i></b>ML LIBRARY</span>
+          <span><img class="tool-logo" src="https://cdn.simpleicons.org/pandas/150458" alt="" loading="lazy" onerror="this.style.display='none'" /><b>Pd<i>+</i>Np</b>DATA WRANGLING</span>
+          <span><img class="tool-logo" src="https://cdn.simpleicons.org/mysql/4479A1" alt="" loading="lazy" onerror="this.style.display='none'" /><b>SQ<i>L</i></b>DATABASES</span>
+          <span><img class="tool-logo" src="https://cdn.simpleicons.org/git/F05032" alt="" loading="lazy" onerror="this.style.display='none'" /><b>Gi<i>t</i></b>VERSION CONTROL</span>
+          <span><img class="tool-logo" src="https://cdn.simpleicons.org/docker/2496ED" alt="" loading="lazy" onerror="this.style.display='none'" /><b>Do<i>cker</i></b>CONTAINERS</span>
+          <span><img class="tool-logo" src="https://cdn.simpleicons.org/amazonaws/FF9900" alt="" loading="lazy" onerror="this.style.display='none'" /><b>AW<i>S</i></b>CLOUD</span>
+          <span><img class="tool-logo" src="https://cdn.simpleicons.org/fastapi/009688" alt="" loading="lazy" onerror="this.style.display='none'" /><b>Fa<i>st</i>API</b>MODEL APIS</span>
+          <span><img class="tool-logo" src="https://cdn.simpleicons.org/linux/FCC624" alt="" loading="lazy" onerror="this.style.display='none'" /><b>Li<i>nux</i></b>DEV ENVIRONMENT</span>
         </div>
-        <blockquote class="tools-quote">
-          <span class="qmark">“</span>
-          I turn raw data into <b>models that predict, classify — and run in production.</b> Clean features first, clever models second, deployment always.
-          <cite><span>—</span> My Working Principle</cite>
-        </blockquote>
-        <p class="lang">Based in <strong>Hyderabad, Telangana, India</strong> · Working across the full ML lifecycle since April 2025.</p>
+        <div class="tools-side">
+          <blockquote class="tools-quote">
+            <span class="qmark">“</span>
+            I turn raw data into <b>models that predict, classify — and run in production.</b> Clean features first, clever models second, deployment always.
+            <cite><span>—</span> My Working Principle</cite>
+          </blockquote>
+          <p class="lang">Based in <strong>Hyderabad, Telangana, India</strong> · Working across the full ML lifecycle since April 2025.</p>
+        </div>
       </div>
     </section>
 
@@ -269,10 +298,10 @@
     <section class="block" id="skills">
       <div class="sec-head reveal">
         <h2 class="sec-title">TECHNICAL <em>SKILLS</em></h2>
-        <span class="sec-kicker">THE STACK BEHIND THE MODELS</span>
+        <span class="sec-kicker">MY CORE SKILLS &amp; EXPERTISE</span>
       </div>
       <div class="skill-groups">
-        <div class="skill-group reveal open"><h3><button class="skill-toggle" type="button" aria-expanded="true"><span class="skill-title">Machine Learning</span><span class="skill-chev" aria-hidden="true">⌄</span></button></h3><div class="skill-chips"><span>Python</span><span>Scikit-learn</span><span>Pandas</span><span>NumPy</span><span>NLP</span><span>Transformers</span></div></div>
+        <div class="skill-group reveal open selected"><h3><button class="skill-toggle" type="button" aria-expanded="true"><span class="skill-title">Machine Learning</span><span class="skill-chev" aria-hidden="true">⌄</span></button></h3><div class="skill-chips"><span>Python</span><span>Scikit-learn</span><span>Pandas</span><span>NumPy</span><span>NLP</span><span>Transformers</span></div></div>
         <div class="skill-group reveal"><h3><button class="skill-toggle" type="button" aria-expanded="false"><span class="skill-title">Programming</span><span class="skill-chev" aria-hidden="true">⌄</span></button></h3><div class="skill-chips"><span>Java</span><span>C</span><span>C++</span><span>JavaScript</span></div></div>
         <div class="skill-group reveal"><h3><button class="skill-toggle" type="button" aria-expanded="false"><span class="skill-title">Databases</span><span class="skill-chev" aria-hidden="true">⌄</span></button></h3><div class="skill-chips"><span>SQL</span><span>MySQL</span><span>MongoDB</span></div></div>
         <div class="skill-group reveal"><h3><button class="skill-toggle" type="button" aria-expanded="false"><span class="skill-title">Backend &amp; APIs</span><span class="skill-chev" aria-hidden="true">⌄</span></button></h3><div class="skill-chips"><span>REST APIs</span><span>Spring Boot</span><span>FastAPI</span></div></div>
@@ -285,7 +314,7 @@
     <section class="block" id="education">
       <div class="sec-head reveal">
         <h2 class="sec-title">EDUCATION <em>&amp; CERTIFICATION</em></h2>
-        <span class="sec-kicker">LEARNING NEVER STOPS</span>
+        <span class="sec-kicker">MY ACADEMIC &amp; PROFESSIONAL LEARNING</span>
       </div>
       <div class="edu-grid">
         <div class="timeline-wrap reveal" id="eduTimeline">
@@ -307,12 +336,26 @@
     </section>
 
     <!-- CONTACT FORM -->
-    <section class="block contact-block" id="get-in-touch">
+    <section class="block" id="get-in-touch">
       <div class="sec-head reveal">
         <h2 class="sec-title">GET IN <em>TOUCH</em></h2>
-        <span class="sec-kicker">TELL ME WHAT YOU'RE WORKING ON</span>
+        <span class="sec-kicker">LET'S WORK TOGETHER</span>
       </div>
-      <form class="contact-form reveal" id="contactForm" novalidate>
+      <div class="contact-grid">
+        <div class="contact-art reveal" aria-hidden="true">
+          <svg viewBox="0 0 320 260" fill="none">
+            <path d="M48 196 C 96 150, 168 118, 252 62" stroke="#e8112d" stroke-width="2" stroke-dasharray="3 9" opacity=".55" stroke-linecap="round" />
+            <path d="M248 44 L 298 96 L 260 90 L 248 116 L 240 88 Z" fill="#e8112d" />
+            <path d="M248 44 L 298 96 L 260 90 Z" fill="#ff2238" />
+            <rect x="48" y="148" width="180" height="102" rx="14" fill="#101013" stroke="#e8112d" stroke-width="2" />
+            <path d="M52 160 L 138 214 L 224 160" stroke="#e8112d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M52 246 L 118 196 M 224 246 L 158 196" stroke="#e8112d" stroke-width="2" opacity=".65" stroke-linecap="round" />
+            <path d="M272 158 l4 10 10 4 -10 4 -4 10 -4 -10 -10 -4 10 -4z" fill="#ff2238" />
+            <circle cx="66" cy="116" r="4" fill="#ff2238" />
+            <circle cx="292" cy="140" r="3" fill="#f5f3ef" opacity=".7" />
+          </svg>
+        </div>
+        <form class="contact-form reveal" id="contactForm" novalidate>
         <input type="text" name="name" placeholder="Name" autocomplete="name" required aria-label="Name" />
         <input type="email" name="email" placeholder="Email" autocomplete="email" required aria-label="Email" />
         <input type="tel" name="phone" placeholder="Phone (optional)" autocomplete="tel" aria-label="Phone Number" />
@@ -334,10 +377,12 @@
         <button type="submit" class="btn btn-red form-send">Send Message</button>
         <p class="form-success" id="formSuccess" hidden>Message sent successfully — thank you for reaching out. I'll get back to you shortly.</p>
       </form>
+      </div>
     </section>
 
     <!-- LET'S COLLABORATE + SCAN TO CONNECT -->
     <footer class="block footer" id="contact">
+      <span class="sec-kicker foot-kicker">OPEN TO NEW OPPORTUNITIES</span>
       <div class="foot-col reveal">
         <h2 class="foot-big">LET'S<br /><em>COLLABORATE</em></h2>
         <p>Have an ML problem, a dataset that needs answers, or a role to discuss? I'd love to hear from you.</p>
@@ -385,6 +430,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
-  <script src="script.js?v=37"></script>
+  <script src="script.js?v=38"></script>
 </body>
 </html>

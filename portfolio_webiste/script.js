@@ -232,6 +232,24 @@
     });
   });
 
+  // Technical Skills master-detail (desktop reference: click a category
+  // on the left to show its chips in the detail panel on the right)
+  var isDesktop = function () { return window.matchMedia('(min-width:769px)').matches; };
+  document.querySelectorAll('.skill-toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (!isDesktop()) return;
+      var group = btn.closest('.skill-group');
+      if (!group) return;
+      document.querySelectorAll('.skill-group').forEach(function (g) {
+        g.classList.remove('selected');
+        var b = g.querySelector('.skill-toggle');
+        if (b) b.setAttribute('aria-expanded', 'false');
+      });
+      group.classList.add('selected');
+      btn.setAttribute('aria-expanded', 'true');
+    });
+  });
+
   // Custom cursor dot (desktop only)
   var cursor = document.getElementById('cursor');
   if (cursor && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {

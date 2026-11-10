@@ -585,3 +585,136 @@ a.sec-kicker:hover{text-decoration:underline}
   .lang-box{padding:.55rem .4rem}
   .dots i{width:12px}
 }
+
+/* ============================================================
+   DESKTOP REFERENCE LAYER — matches the 12-screen desktop
+   reference (AI_ML_Engineer_Portfolio_Showcase__1.png).
+   Desktop only (min-width 769px). The mobile storyboard layer
+   above (max-width 768px) is untouched.
+   Real content only: Kaifoddin, shaikhkaif7014@gmail.com,
+   +91 70361 17014, github.com/mrkaifu4u, resume stats.
+   ============================================================ */
+
+@media (min-width:769px){
+  /* --- Top bar: Hire Me button --- */
+  .hire-me{display:inline-flex;align-items:center;flex:none;background:var(--red);color:#fff;font-weight:800;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.62rem 1.15rem;border-radius:999px;box-shadow:0 4px 14px rgba(232,17,45,.4);transition:transform .25s,background .25s,box-shadow .25s;white-space:nowrap}
+  .hire-me:hover{background:var(--red-bright);transform:translateY(-2px);box-shadow:0 8px 20px rgba(232,69,44,.5)}
+  .topbar{gap:1.2rem}
+
+  /* --- Hero: red pill, Archivo name, rectangular photo, no tagline --- */
+  .hero-grid{grid-template-columns:1fr 400px 200px;gap:2rem;align-items:center}
+  .hero-left{margin-top:4.5rem}
+  .hero-left .hello{font-family:var(--font-display);font-weight:800;font-size:.95rem;letter-spacing:.04em;color:#fff;background:var(--red);width:fit-content;padding:.55rem 1.1rem;border-radius:999px;line-height:1;margin:0 0 1rem;box-shadow:0 6px 18px rgba(232,17,45,.4)}
+  .hero-left h2{font-family:var(--font-display);font-weight:900;font-size:clamp(2.8rem,4.6vw,3.9rem);letter-spacing:-.01em;line-height:1.06;margin-top:.2rem}
+  .hero-text{font-size:1rem;line-height:1.65;max-width:460px}
+  .hero-photo{align-items:center;margin-bottom:0}
+  .hero-photo::after{display:none}
+  .hero-photo img:not(.hero-photo-m){display:none}
+  .hero-photo .hero-photo-m{display:block;width:100%;max-width:400px;max-height:none;aspect-ratio:4/5;object-fit:cover;object-position:top center;border-radius:16px;border:1px solid rgba(232,17,45,.6);box-shadow:0 0 0 1px rgba(232,17,45,.25),0 24px 60px rgba(0,0,0,.6),0 0 60px rgba(232,17,45,.35);filter:none;margin:0;transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
+  .hero-photo:hover .hero-photo-m{transform:scale(1.03) translateY(-4px);box-shadow:0 0 0 1px rgba(232,17,45,.4),0 30px 70px rgba(0,0,0,.65),0 0 80px rgba(232,17,45,.5)}
+  .hero-right .hero-side-note{display:none}
+  .hero-right .stat strong{font-size:2.1rem}
+  .hero-right .stat>span:last-child{font-size:.68rem;letter-spacing:.14em}
+
+  /* --- What I Do: 3 + 2 grid --- */
+  .cards-5{grid-template-columns:repeat(3,1fr);gap:1.1rem}
+  .card{min-height:0;padding:1.35rem 1.25rem}
+
+  /* --- Process + Work: stacked, process horizontal --- */
+  .split{grid-template-columns:1fr;gap:2.6rem}
+  .steps{display:flex;gap:1.6rem;position:relative}
+  .steps::before{content:"";position:absolute;left:22px;right:22px;top:22px;transform:translateY(-50%);height:2px;background:repeating-linear-gradient(90deg,var(--red-bright) 0 8px,transparent 8px 16px);opacity:.7;z-index:0}
+  .steps li{flex:1;flex-direction:column;gap:.7rem;align-items:flex-start;padding:0;border-bottom:0;position:relative}
+  .steps li:hover{padding-left:0;background:none;transform:translateY(-4px)}
+  .steps li>span{flex:none;width:44px;height:44px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;position:relative;z-index:1;box-shadow:0 0 0 5px var(--bg),0 0 18px rgba(232,17,45,.4);min-width:44px}
+  .steps .step-ic{display:none}
+  .steps h3{font-size:.95rem}
+  .steps p{font-size:.86rem;line-height:1.55}
+  .work{border-top:1px solid var(--line);padding-top:2.2rem}
+  .work-head{border-bottom:1px solid var(--line);padding-bottom:.9rem;margin-bottom:1.8rem;align-items:flex-end}
+  .projects{grid-template-columns:repeat(3,1fr);gap:1.3rem}
+  .project:nth-child(4){grid-column:1}
+  .work-stats{display:grid;grid-template-columns:1fr 1fr;grid-column:2/4;gap:1rem;align-content:center}
+  .work-stat{background:var(--panel);border:1px solid var(--line-soft);border-radius:10px;padding:1.5rem 1.2rem;text-align:center;transition:transform .3s,border-color .3s}
+  .work-stat:hover{transform:translateY(-4px);border-color:var(--red)}
+  .work-stat strong{display:block;font-family:var(--font-display);font-weight:800;font-size:1.9rem;line-height:1;color:var(--red-bright)}
+  .work-stat span{display:block;margin-top:.5rem;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .project-visual{min-height:190px}
+
+  /* --- Work Experience: red checkmarks --- */
+  .job-points li{padding-left:1.4rem}
+  .job-points li::before{content:"✓";color:var(--red-bright);font-weight:800;font-size:.9rem;background:none;width:auto;height:auto;top:.05em;left:0}
+
+  /* --- About: photo + languages left, text + traits right --- */
+  .about{display:grid;grid-template-columns:360px 1fr;gap:2.4rem;align-items:start}
+  .about-col-photo{display:flex;flex-direction:column;gap:1.2rem}
+  .about-col-photo .about-photo{width:100%}
+  .about-col-photo img{width:100%;max-width:360px;aspect-ratio:4/5;object-fit:cover;object-position:top center;border-radius:12px;border:2px solid var(--red);box-shadow:0 0 0 4px rgba(232,17,45,.15),0 14px 30px rgba(0,0,0,.5);transition:transform .4s,box-shadow .4s}
+  .about-col-photo img:hover{transform:scale(1.02);box-shadow:0 0 0 4px rgba(232,17,45,.35),0 18px 36px rgba(0,0,0,.55)}
+  .about-col-photo .lang-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem;margin-top:0}
+  .about-col-photo .lang-box{min-width:0;flex:none;padding:.6rem .5rem;text-align:center}
+  .about-col-photo .lname{font-size:.82rem}
+  .about-col-photo .lvl{font-size:.55rem}
+  .about-col-photo .dots{justify-content:center}
+  .about-col-photo .dots i{width:12px;height:5px}
+  .about-col-text .about-role{margin:0 0 1rem}
+  .about-col-text p{color:var(--cream-dim);font-size:1rem;line-height:1.65;margin-bottom:.9rem}
+  .about-col-text p b{color:var(--cream)}
+  .about-col-text .traits{grid-template-columns:1fr;gap:.55rem;margin-top:1.2rem}
+  .about-col-text .traits li{font-size:.9rem}
+
+  /* --- Tools: grid left, quote right, brand logos --- */
+  .tools{display:grid;grid-template-columns:1.15fr 1fr;gap:2.4rem;align-items:start}
+  .tool-grid{gap:.7rem}
+  .tool-grid span{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem .4rem;min-height:112px}
+  .tool-logo{width:38px;height:38px;margin:0 auto .55rem;display:block}
+  .tools-side{display:flex;flex-direction:column;gap:1rem}
+  .tools-side .tools-quote{margin-top:0;padding:1.6rem 1.4rem;font-size:1.05rem;line-height:1.6;border:1px solid rgba(255,34,56,.5);box-shadow:0 0 30px rgba(232,17,45,.12)}
+  .tools-side .lang{margin-top:0}
+
+  /* --- Technical Skills: master-detail --- */
+  .skill-groups{display:grid;grid-template-columns:340px 1fr;gap:.6rem 1.6rem;align-items:start}
+  .skill-group{display:contents}
+  .skill-group h3{grid-column:1;margin:0}
+  .skill-group .skill-toggle{cursor:pointer;padding:1rem 1.1rem;border:1px solid var(--line-soft);border-radius:10px;background:var(--panel);transition:background .25s,border-color .25s,transform .25s}
+  .skill-group .skill-toggle:hover{border-color:var(--red);transform:translateX(4px)}
+  .skill-group .skill-title{font-size:1rem}
+  .skill-group .skill-chev{display:block;transform:rotate(-90deg);color:var(--muted);font-size:1rem;transition:transform .3s,color .3s}
+  .skill-group.selected .skill-toggle{background:var(--red);border-color:var(--red);color:#fff}
+  .skill-group.selected .skill-title{color:#fff}
+  .skill-group.selected .skill-chev{color:#fff;transform:rotate(-90deg)}
+  .skill-group .skill-chips{display:none;grid-column:2;grid-row:1/7}
+  .skill-group.selected .skill-chips{display:flex;flex-wrap:wrap;gap:.55rem;align-content:flex-start;background:var(--panel);border:1px solid rgba(255,34,56,.5);border-radius:12px;padding:1.5rem;box-shadow:0 0 30px rgba(232,17,45,.12);min-height:100%}
+  .skill-group.selected .skill-chips span{font-size:.95rem;padding:.5rem 1rem}
+
+  /* --- Get in Touch: illustration left, form right --- */
+  .contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:2.6rem;align-items:center}
+  .contact-art svg{width:100%;max-width:380px;height:auto;margin:0 auto;display:block}
+  .contact-form{grid-template-columns:1fr 1fr}
+  .contact-form textarea,.contact-form .form-send,.contact-form .form-success{grid-column:1/-1}
+
+  /* --- Footer: two columns + centred tagline --- */
+  .footer{grid-template-columns:1.1fr 1fr;position:relative}
+  .foot-kicker{display:block;grid-column:1/-1;text-align:right}
+  .foot-tag{grid-column:1/-1;text-align:center;margin-top:.4rem}
+  .foot-tag::before{display:none}
+  .foot-tag p:first-child{text-align:center}
+  .foot-tag .signature{text-align:center}
+  .foot-cta{flex-direction:row;gap:.7rem;flex-wrap:wrap}
+}
+
+/* --- Desktop-only elements: hidden on mobile (mobile UI unchanged) --- */
+@media (max-width:768px){
+  .hire-me{display:none}
+  .work-stats{display:none}
+  .contact-art{display:none}
+  .tool-logo{display:none}
+  /* About: reproduce the validated mobile layout (portrait left + text) */
+  .about{display:grid;grid-template-columns:110px 1fr;gap:1rem;align-items:start}
+  .about-col-photo{display:contents}
+  .about-col-photo .about-photo{grid-column:1;grid-row:1}
+  .about-col-photo img{width:110px}
+  .about-col-photo .lang-row{grid-column:1/-1;grid-row:2}
+  .about-col-text{grid-column:2;grid-row:1}
+  .about-col-text p{font-size:.92rem;line-height:1.6}
+}
