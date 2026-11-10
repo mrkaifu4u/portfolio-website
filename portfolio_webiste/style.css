@@ -646,6 +646,8 @@ a.sec-kicker:hover{text-decoration:underline}
   .work-stat strong{display:block;font-family:var(--font-display);font-weight:800;font-size:1.9rem;line-height:1;color:var(--red-bright)}
   .work-stat span{display:block;margin-top:.5rem;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
   .project-visual{min-height:190px}
+  .project-badge{left:.9rem;right:auto}
+  .project-view{display:inline-block;position:absolute;top:.9rem;right:.9rem;z-index:3;background:var(--red);color:#fff;font-weight:800;font-size:.66rem;letter-spacing:.06em;padding:.42rem .7rem;border-radius:999px;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.45)}
 
   /* --- Work Experience: red checkmarks --- */
   .job-points li{padding-left:1.4rem}
