@@ -166,11 +166,16 @@
       if (!contactForm.checkValidity()) { contactForm.reportValidity(); return; }
       var sendBtn = contactForm.querySelector('.form-send');
       var ok = document.getElementById('formSuccess');
+      var phoneField = contactForm.querySelector('[name="phone"]');
+      var isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
       var data = {
         name: contactForm.querySelector('[name="name"]').value.trim(),
         email: contactForm.querySelector('[name="email"]').value.trim(),
+        phone: phoneField ? phoneField.value.trim() : '',
         purpose: contactForm.querySelector('[name="purpose"]').value,
-        message: contactForm.querySelector('[name="message"]').value.trim()
+        message: contactForm.querySelector('[name="message"]').value.trim(),
+        source: 'Portfolio Website',
+        deviceType: isMobile ? 'Mobile' : (window.innerWidth <= 1024 ? 'Tablet' : 'Desktop')
       };
       if (sendBtn) { sendBtn.disabled = true; sendBtn.textContent = 'Sending…'; }
       fetch(FORM_ENDPOINT, {
