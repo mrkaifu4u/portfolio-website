@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800;900&family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=33" />
+  <link rel="stylesheet" href="style.css?v=34" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23c1272d'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='%23f2e3c6' font-family='Arial' font-weight='bold'>MK</text></svg>" />
 </head>
 <body>
@@ -307,9 +307,9 @@
         <span class="sec-kicker">TELL ME WHAT YOU'RE WORKING ON</span>
       </div>
       <form class="contact-form reveal" id="contactForm" novalidate>
-        <input type="text" name="name" placeholder="Name" required aria-label="Name" />
-        <input type="email" name="email" placeholder="Email" required aria-label="Email" />
-        <select name="purpose" required aria-label="Select Purpose">
+        <input type="text" name="name" placeholder="Name" autocomplete="name" required aria-label="Name" />
+        <input type="email" name="email" placeholder="Email" autocomplete="email" required aria-label="Email" />
+        <select name="purpose" autocomplete="off" required aria-label="Select Purpose">
           <option value="" selected disabled>Select Purpose</option>
           <option>Job Opportunity</option>
           <option>Freelance Project</option>
@@ -323,7 +323,7 @@
           <option>General Inquiry</option>
           <option>Other</option>
         </select>
-        <textarea name="message" placeholder="Message" rows="5" required aria-label="Message"></textarea>
+        <textarea name="message" placeholder="Message" rows="5" autocomplete="off" required aria-label="Message"></textarea>
         <button type="submit" class="btn btn-red form-send">Send Message</button>
         <p class="form-success" id="formSuccess" hidden>Message sent successfully — thank you for reaching out. I'll get back to you shortly.</p>
       </form>
@@ -378,6 +378,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
-  <script src="script.js?v=33"></script>
+  <script src="script.js?v=34"></script>
 </body>
 </html>
