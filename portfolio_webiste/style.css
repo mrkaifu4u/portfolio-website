@@ -854,3 +854,32 @@ a.sec-kicker:hover{text-decoration:underline}
 @keyframes barshine{0%,100%{filter:brightness(1)}50%{filter:brightness(1.5)}}
 @keyframes barbob{0%,100%{transform:scaleY(.82)}50%{transform:scaleY(1.06)}}
 @keyframes nodepulse{0%,100%{opacity:1}50%{opacity:.55}}
+
+/* ============================================================
+   v45 — user fixes (2026-11-10): bigger hero image, more top
+   margin, photo merges with the marquee; Featured Work headlines
+   sit on a clean dark zone (graphics fade out before the text).
+   Desktop only. Test found v44 left a ~225px gap under the photo
+   (grid row sat at the top) and graphics crossing headlines.
+   ============================================================ */
+@media (min-width:769px){
+  /* Hero: bigger image + more top margin + merge with marquee.
+     align-content:end puts the whole hero row at the bottom of the
+     hero, so the photo's bottom edge touches the marquee. */
+  .hero{padding-top:1.5rem;padding-bottom:0}
+  .hero-grid{align-content:end}
+  .hero-photo img{width:740px;max-height:min(84vh,820px)}
+
+  /* Featured Work: taller visual, graphics confined to the top,
+     and the dark scrim now sits ABOVE the graphics (z-index 1) so
+     it fades them out before the headline; headline + number sit
+     above the scrim (z-index 2) on a clean dark zone. */
+  .project-visual{min-height:250px}
+  .project-visual::before{height:55%;background:linear-gradient(180deg,transparent,rgba(7,7,8,.94) 62%);z-index:1}
+  .project-visual h3{z-index:2}
+  .project-num{z-index:2}
+  .viz-line,.viz-net{height:78px}
+  .viz-rings{top:1rem}
+  .viz-bars{top:2rem}
+  .viz-chart{bottom:8rem;height:46px}
+}
