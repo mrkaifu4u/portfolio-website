@@ -276,20 +276,23 @@
 
   // Technical Skills master-detail (desktop reference: click a category
   // on the left to show its chips in the detail panel on the right).
-  // v47: the panel is absolutely positioned in the right column, so
-  // line its top up with the clicked button (it no longer sits
-  // pinned to the top of the section).
+  // v48: the detail is a separate flex panel (.skill-detail), so
+  // fill it with the selected group's chips and line its top up
+  // with the clicked button (it no longer sits pinned to the top).
   var isDesktop = function () { return window.matchMedia('(min-width:769px)').matches; };
-  var alignSkillPanel = function () {
+  var renderSkillDetail = function () {
     if (!isDesktop()) return;
-    var groups = document.querySelector('.skill-groups');
+    var detail = document.getElementById('skillDetail');
+    var list = document.querySelector('.skill-list');
     var sel = document.querySelector('.skill-group.selected');
-    if (!groups || !sel) return;
+    if (!detail || !list || !sel) return;
     var btn = sel.querySelector('.skill-toggle');
     var chips = sel.querySelector('.skill-chips');
     if (!btn || !chips) return;
-    var top = btn.getBoundingClientRect().top - groups.getBoundingClientRect().top;
-    chips.style.top = Math.max(0, Math.round(top)) + 'px';
+    detail.innerHTML = '';
+    detail.appendChild(chips.cloneNode(true));
+    var top = btn.getBoundingClientRect().top - list.getBoundingClientRect().top;
+    detail.style.marginTop = Math.max(0, Math.round(top)) + 'px';
   };
   document.querySelectorAll('.skill-toggle').forEach(function (btn) {
     btn.addEventListener('click', function () {
@@ -303,11 +306,11 @@
       });
       group.classList.add('selected');
       btn.setAttribute('aria-expanded', 'true');
-      alignSkillPanel();
+      renderSkillDetail();
     });
   });
-  alignSkillPanel();
-  window.addEventListener('resize', alignSkillPanel);
+  renderSkillDetail();
+  window.addEventListener('resize', renderSkillDetail);
 
   // Custom cursor dot (desktop only)
   var cursor = document.getElementById('cursor');

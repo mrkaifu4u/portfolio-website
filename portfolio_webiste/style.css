@@ -917,7 +917,7 @@ a.sec-kicker:hover{text-decoration:underline}
 }
 
 /* ============================================================
-   v47 — Technical Skills empty space (2026-11-10).
+   v48 — Skills flexbox master-detail + PIPELINES band/chart (2026-11-10).
    Root cause (measured live): the detail panel was a grid item
    forced to grid-row:1, so it (a) pinned itself to the top and
    never sat beside the button clicked, leaving the space beside
@@ -933,4 +933,31 @@ a.sec-kicker:hover{text-decoration:underline}
   .skill-groups{position:relative}
   .skill-group .skill-chips{grid-column:auto;grid-row:auto}
   .skill-group.selected .skill-chips{position:absolute;left:calc(380px + 1.6rem);right:0;top:0;z-index:2}
+}
+
+/* ============================================================
+   v48 — Skills: robust flexbox master-detail (2026-11-10).
+   v47's absolute positioning did not take effect in the live
+   render (panel stayed pinned at the top, 103px gap persisted),
+   so the section is restructured: the buttons live in a flex
+   column (.skill-list) and the detail is a separate panel
+   (.skill-detail) that JS fills and lines up with the clicked
+   button. The in-group chips are hidden on desktop (they still
+   drive the mobile accordion). PIPELINES: the solid band is
+   taller (70%) so it covers the whole headline, and the chart
+   is moved up (bottom:12rem) so the bars clear the headline.
+   ============================================================ */
+@media (min-width:769px){
+  .skill-groups{display:flex;gap:1.6rem;align-items:flex-start;position:static}
+  .skill-list{flex:0 0 380px;display:flex;flex-direction:column;gap:.6rem;min-width:0}
+  .skill-group{display:block}
+  .skill-list .skill-group.selected .skill-chips{display:none;position:static}
+  .skill-detail{flex:1;min-width:0;background:var(--panel);border:1px solid rgba(255,34,56,.5);border-radius:12px;padding:30px 32px;box-shadow:0 0 30px rgba(232,17,45,.12)}
+  .skill-detail .skill-chips{display:flex;flex-wrap:wrap;gap:.55rem;align-content:flex-start}
+  .skill-detail .skill-note{flex-basis:100%;margin:.6rem 0 0;color:#cfcfcf;font-size:.92rem;line-height:1.55}
+  .project-visual::before{height:70%}
+  .viz-chart{bottom:12rem;height:36px}
+}
+@media (max-width:768px){
+  .skill-detail{display:none}
 }
