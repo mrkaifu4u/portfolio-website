@@ -42,7 +42,7 @@ body.admin-mode .cursor{display:none!important}
 
 /* ---------- sidebar shell ---------- */
 .admin-shell{display:flex;min-height:100vh}
-.admin-sidebar{width:260px;flex:none;background:#0d0d0f;border-right:1px solid #222226;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.admin-sidebar{width:260px;flex:none;background:#0d0d0f;border-right:1px solid #222226;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
 .admin-side-brand{display:flex;align-items:center;gap:.8rem;padding:1.2rem 1.2rem 1rem;border-bottom:1px solid #222226}
 .admin-side-brand-text{display:flex;flex-direction:column;line-height:1.25}
 .admin-side-brand-text strong{font-size:.95rem;font-weight:800}

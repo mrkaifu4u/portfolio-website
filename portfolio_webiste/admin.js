@@ -666,9 +666,12 @@
         return;
       }
       if (!r.cv) {
-        if (msg) msg.textContent = 'No CV uploaded yet. The site currently serves the built-in PDF.';
+        if (msg) msg.textContent = 'No CV uploaded yet — showing the built-in CV file below. Upload a new PDF to replace it.';
+        if (viewer) {
+          viewer.innerHTML = '<iframe class="admin-cv-viewer" src="Mohamad_Kaifoddin_AI_ML_Engineer_1-3Yrs.pdf" title="Built-in CV preview" loading="lazy"></iframe>' +
+            '<p class="admin-meta">This is the built-in CV that the Download Resume button serves right now.</p>';
+        }
         if (card) card.innerHTML = '';
-        if (viewer) viewer.innerHTML = '';
         return;
       }
       var d = r.cv.uploaded ? new Date(r.cv.uploaded) : null;
