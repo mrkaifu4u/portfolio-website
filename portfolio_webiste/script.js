@@ -3,6 +3,8 @@
 (function () {
   'use strict';
 
+  document.documentElement.classList.add('js');
+
   var progress = document.getElementById('progress');
   var backTop = document.getElementById('backTop');
   function onScroll() {
@@ -27,10 +29,14 @@
     // per element, never opacity.
     gsap.utils.toArray('.reveal').forEach(function (el) {
       if (el.closest('.hero') || el.closest('.cards-5')) return;
-      gsap.from(el, {
+      var vars = {
         y: 36, duration: 0.9, ease: 'power3.out',
         scrollTrigger: { trigger: el, start: 'top 88%', once: true }
-      });
+      };
+      // The certification card alone also fades in (opacity), so it
+      // appears with a subtle fade as well as the slide-up.
+      if (el.classList.contains('cert-card')) { vars.opacity = 0; }
+      gsap.from(el, vars);
     });
 
     // Animated counters — only real resume numbers
