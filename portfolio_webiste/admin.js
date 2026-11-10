@@ -1,6 +1,8 @@
-// Admin panel for Mohamad Kaifoddin's portfolio.
+// Admin panel v56 — left sidebar navigation + Dashboard.
 // Hash routes: #admin_login (login), #admin_forgot (forgot password),
-// #admin (dashboard: Messages / CV / Settings).
+// #admin (Dashboard), #admin_messages (Contact inbox), #admin_resume
+// (CV manager with PDF preview), #admin_profile (Profile),
+// #admin_settings (Settings).
 // The admin talks to the same Google Apps Script backend as the contact
 // form (FORM_ENDPOINT). The password is never in this file — login is
 // verified server-side against the "admin_users" tab in the Google Sheet.
@@ -14,7 +16,7 @@
   var root = null;
   var messages = [];
   var selectedId = null;
-  var currentTab = 'messages';
+  var currentTab = 'dashboard';
   var filterText = '';
   var filterStatus = 'All';
   var filterPriority = 'All';
@@ -68,7 +70,12 @@
     if (root) root.hidden = true;
   }
 
-  // ---------- views ----------
+  function notLoggedIn(r) {
+    if (r && r.error === 'not logged in') { clearToken(); go('#admin_login'); return true; }
+    return false;
+  }
+
+  // ---------- login / forgot password ----------
 
   function viewLogin() {
     root.innerHTML =
@@ -164,53 +171,203 @@
     });
   }
 
+  // ---------- sidebar shell ----------
+
+  var TABS = [
+    { id: 'dashboard', hash: '#admin', label: 'Dashboard', icon: '▦' },
+    { id: 'messages', hash: '#admin_messages', label: 'Messages', icon: '✉' },
+    { id: 'resume', hash: '#admin_resume', label: 'Resume', icon: '▤' },
+    { id: 'profile', hash: '#admin_profile', label: 'Profile', icon: '◉' },
+    { id: 'settings', hash: '#admin_settings', label: 'Settings', icon: '⚙' }
+  ];
+  var TITLES = {
+    dashboard: 'Dashboard',
+    messages: 'Messages',
+    resume: 'Resume',
+    profile: 'Profile',
+    settings: 'Settings'
+  };
+
+  function navItem(t) {
+    var badge = '';
+    if (t.id === 'messages') {
+      badge = '<span class="admin-nav-badge" id="navMsgBadge" hidden></span>';
+    }
+    return '<a href="' + t.hash + '" class="admin-nav-item' +
+      (currentTab === t.id ? ' active' : '') + '">' +
+      '<span class="admin-nav-icon">' + t.icon + '</span>' +
+      '<span class="admin-nav-label">' + t.label + '</span>' + badge + '</a>';
+  }
+
   function dashboardShell(inner) {
-    return '<div class="admin-dash">' +
-      '<header class="admin-topbar"><span class="admin-brand">MK &middot; Admin</span>' +
-      '<nav class="admin-tabs">' +
-      '<button data-tab="messages" class="' + (currentTab === 'messages' ? 'active' : '') + '">Messages</button>' +
-      '<button data-tab="cv" class="' + (currentTab === 'cv' ? 'active' : '') + '">CV</button>' +
-      '<button data-tab="settings" class="' + (currentTab === 'settings' ? 'active' : '') + '">Settings</button>' +
-      '</nav>' +
-      '<button class="admin-btn admin-btn-ghost" id="logoutBtn">Log Out</button>' +
+    var today = new Date().toLocaleDateString('en-IN', {
+      weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+    });
+    return '<div class="admin-shell">' +
+      '<aside class="admin-sidebar" id="adminSidebar">' +
+      '<div class="admin-side-brand">' +
+      '<span class="admin-logo admin-logo-sm">MK</span>' +
+      '<div class="admin-side-brand-text"><strong>Mohamad Kaifoddin</strong><span>Admin Panel</span></div>' +
+      '</div>' +
+      '<nav class="admin-nav">' + TABS.map(navItem).join('') + '</nav>' +
+      '<div class="admin-side-foot">' +
+      '<a href="#home" class="admin-side-link">↗ View live site</a>' +
+      '<button class="admin-btn admin-btn-ghost admin-logout" id="logoutBtn">Log Out</button>' +
+      '</div>' +
+      '</aside>' +
+      '<div class="admin-main-wrap">' +
+      '<header class="admin-header">' +
+      '<button class="admin-menu-btn" id="sideToggle" type="button" aria-label="Toggle menu">☰</button>' +
+      '<h2>' + (TITLES[currentTab] || 'Dashboard') + '</h2>' +
+      '<span class="admin-header-date">' + esc(today) + '</span>' +
       '</header>' +
       '<main class="admin-main">' + inner + '</main>' +
+      '</div>' +
       '</div>';
   }
 
-  function bindDash() {
-    root.querySelectorAll('.admin-tabs button').forEach(function (b) {
-      b.addEventListener('click', function () {
-        currentTab = b.getAttribute('data-tab');
-        selectedId = null;
-        renderDashboard();
-      });
-    });
+  function bindShell() {
     document.getElementById('logoutBtn').addEventListener('click', function () {
       clearToken();
       go('#admin_login');
     });
+    document.getElementById('sideToggle').addEventListener('click', function () {
+      document.getElementById('adminSidebar').classList.toggle('open');
+    });
+    // Tapping a nav item on a small screen closes the drawer.
+    root.querySelectorAll('.admin-nav-item').forEach(function (a) {
+      a.addEventListener('click', function () {
+        document.getElementById('adminSidebar').classList.remove('open');
+      });
+    });
+    updateNavBadge();
   }
 
-  function viewDashboard() {
-    if (currentTab === 'cv') { renderCvTab(); return; }
-    if (currentTab === 'settings') { renderSettingsTab(); return; }
-    renderMessagesTab();
+  function updateNavBadge() {
+    var b = document.getElementById('navMsgBadge');
+    if (!b) return;
+    var n = messages.filter(function (m) { return m.status === 'New'; }).length;
+    if (n > 0) {
+      b.hidden = false;
+      b.textContent = n;
+    } else {
+      b.hidden = true;
+    }
   }
 
-  function renderDashboard() {
+  function renderTab() {
     if (!getToken()) { go('#admin_login'); return; }
-    viewDashboard();
+    if (currentTab === 'messages') { renderMessagesTab(); return; }
+    if (currentTab === 'resume') { renderResumeTab(); return; }
+    if (currentTab === 'profile') { renderProfileTab(); return; }
+    if (currentTab === 'settings') { renderSettingsTab(); return; }
+    renderDashboardTab();
   }
 
-  // ---------- messages tab (CRUD) ----------
+  // ---------- dashboard tab ----------
+
+  function statCard(n, label, tone) {
+    return '<div class="admin-stat' + (tone ? ' admin-stat-' + tone : '') + '">' +
+      '<span class="admin-stat-num">' + n + '</span>' +
+      '<span class="admin-stat-label">' + label + '</span></div>';
+  }
+
+  function renderDashboardTab() {
+    root.innerHTML = dashboardShell(
+      '<p class="admin-welcome">Welcome back, <strong>Mohamad</strong>. Here is what is happening on your portfolio.</p>' +
+      '<div class="admin-stats" id="dashStats"><p class="admin-msg">Loading stats…</p></div>' +
+      '<div class="admin-dash-grid">' +
+      '<section class="admin-panel"><h3>Recent messages</h3><div id="dashRecent"><p class="admin-msg">Loading…</p></div>' +
+      '<p><a class="admin-link" href="#admin_messages">View all messages →</a></p></section>' +
+      '<section class="admin-panel"><h3>Resume</h3><div id="dashCv"><p class="admin-msg">Loading…</p></div>' +
+      '<p><a class="admin-link" href="#admin_resume">Manage resume →</a></p></section>' +
+      '<section class="admin-panel"><h3>Quick actions</h3>' +
+      '<div class="admin-actions">' +
+      '<a class="admin-btn admin-btn-red" href="#admin_messages">+ Add Message</a>' +
+      '<a class="admin-btn admin-btn-ghost" href="#admin_resume">Upload CV</a>' +
+      '<button class="admin-btn admin-btn-ghost" id="dashExportBtn" type="button">Export CSV</button>' +
+      '<a class="admin-btn admin-btn-ghost" href="#home" target="_blank" rel="noopener">View Live Site</a>' +
+      '</div>' +
+      '<h3 class="admin-h3">Notifications</h3><div id="dashNotify"><p class="admin-msg">Loading…</p></div>' +
+      '</section>' +
+      '</div>'
+    );
+    bindShell();
+    document.getElementById('dashExportBtn').addEventListener('click', exportCsv);
+    loadDashboard();
+  }
+
+  function loadDashboard() {
+    // Messages → stats + recent list + sidebar badge.
+    api('adminListMessages', {}).then(function (r) {
+      if (!r || !r.ok) { if (notLoggedIn(r)) return; return; }
+      messages = r.messages || [];
+      updateNavBadge();
+      var nNew = 0, nRead = 0, nReplied = 0, nHigh = 0;
+      messages.forEach(function (m) {
+        if (m.status === 'New') nNew++;
+        else if (m.status === 'Read') nRead++;
+        else if (m.status === 'Replied') nReplied++;
+        if (m.priority === 'High') nHigh++;
+      });
+      var s = document.getElementById('dashStats');
+      if (s) {
+        s.innerHTML = statCard(messages.length, 'Total messages') +
+          statCard(nNew, 'New', 'red') + statCard(nRead, 'Read') +
+          statCard(nReplied, 'Replied', 'green') + statCard(nHigh, 'High priority');
+      }
+      var rec = document.getElementById('dashRecent');
+      if (rec) {
+        if (!messages.length) {
+          rec.innerHTML = '<p class="admin-msg">No messages yet. New form submissions will appear here.</p>';
+        } else {
+          rec.innerHTML = '<ul class="admin-recent">' + messages.slice(0, 5).map(function (m) {
+            return '<li><a href="#admin_messages"><strong>' + esc(m.name) + '</strong>' +
+              '<span>' + esc(m.purpose || '') + ' · ' + esc(m.date || '') + '</span>' +
+              '<em class="admin-pill admin-pill-' + (m.status || '').toLowerCase() + '">' + esc(m.status || '') + '</em>' +
+              '</a></li>';
+          }).join('') + '</ul>';
+        }
+      }
+    }).catch(function () {});
+    // CV status card.
+    api('adminGetCV', {}).then(function (r) {
+      var el = document.getElementById('dashCv');
+      if (!el) return;
+      if (!r || !r.ok || !r.cv) {
+        el.innerHTML = '<p class="admin-msg">No CV uploaded yet. The site serves the built-in PDF.</p>';
+        return;
+      }
+      var d = r.cv.uploaded ? new Date(r.cv.uploaded) : null;
+      el.innerHTML = '<p><strong>' + esc(r.cv.name) + '</strong></p>' +
+        '<p class="admin-meta">Uploaded: ' + (d ? esc(d.toLocaleDateString('en-IN')) : '—') +
+        (r.cv.size ? ' · ' + Math.round(r.cv.size / 1024) + ' KB' : '') + '</p>' +
+        '<p><a class="admin-link" href="' + esc(r.cv.url) + '" target="_blank" rel="noopener">Download current CV ↓</a></p>';
+    }).catch(function () {});
+    // Telegram notification status.
+    api('adminGetSettings', {}).then(function (r) {
+      var el = document.getElementById('dashNotify');
+      if (!el) return;
+      if (!r || !r.ok || !r.settings) {
+        el.innerHTML = '<p class="admin-msg">Could not load notification settings.</p>';
+        return;
+      }
+      el.innerHTML = '<p class="admin-meta">Telegram notifications: <strong>' +
+        (r.settings.telegram ? 'ON' : 'OFF') + '</strong> — ' +
+        (r.settings.telegram
+          ? 'you get a Telegram message for every new form submission.'
+          : 'new form submissions will not ping Telegram.') + '</p>' +
+        '<p class="admin-meta">Contact email on the site: <strong>' + esc(r.settings.email || '') + '</strong></p>';
+    }).catch(function () {});
+  }
+
+  // ---------- messages tab (Contact inbox, CRUD) ----------
 
   function renderMessagesTab() {
     root.innerHTML = dashboardShell(
       '<div class="admin-row"><h2>Messages</h2>' +
       '<span><button class="admin-btn admin-btn-ghost" id="exportCsvBtn">Export CSV</button> ' +
       '<button class="admin-btn admin-btn-red" id="addMsgBtn">+ Add Message</button></span></div>' +
-      '<div class="admin-stats" id="msgStats"></div>' +
       '<div class="admin-filters">' +
       '<input type="search" id="filterText" placeholder="Search name, email or message…" value="' + esc(filterText) + '">' +
       '<select id="filterStatus">' +
@@ -228,7 +385,7 @@
       '<tbody></tbody></table></div>' +
       '<div id="msgDetail"></div>'
     );
-    bindDash();
+    bindShell();
     document.getElementById('addMsgBtn').addEventListener('click', function () {
       selectedId = 'NEW';
       renderMessageForm(null);
@@ -245,26 +402,6 @@
     loadMessages();
   }
 
-  function renderStats() {
-    var el = document.getElementById('msgStats');
-    if (!el) return;
-    var nNew = 0, nRead = 0, nReplied = 0, nHigh = 0;
-    messages.forEach(function (m) {
-      if (m.status === 'New') nNew++;
-      else if (m.status === 'Read') nRead++;
-      else if (m.status === 'Replied') nReplied++;
-      if (m.priority === 'High') nHigh++;
-    });
-    el.innerHTML =
-      statCard(messages.length, 'Total') + statCard(nNew, 'New') +
-      statCard(nRead, 'Read') + statCard(nReplied, 'Replied') +
-      statCard(nHigh, 'High priority');
-    function statCard(n, label) {
-      return '<div class="admin-stat"><span class="admin-stat-num">' + n +
-        '</span><span class="admin-stat-label">' + label + '</span></div>';
-    }
-  }
-
   function filteredMessages() {
     var q = (filterText || '').toLowerCase();
     return messages.filter(function (m) {
@@ -277,6 +414,10 @@
       }
       return true;
     });
+  }
+
+  function pill(text, kind) {
+    return '<span class="admin-pill admin-pill-' + kind + '">' + esc(text) + '</span>';
   }
 
   function renderTable() {
@@ -294,8 +435,8 @@
         '<td>' + esc(m.name) + '</td>' +
         '<td>' + esc(m.email) + '</td>' +
         '<td>' + esc(m.purpose) + '</td>' +
-        '<td>' + esc(m.status) + '</td>' +
-        '<td>' + esc(m.priority) + '</td></tr>';
+        '<td>' + pill(m.status, (m.status || '').toLowerCase()) + '</td>' +
+        '<td>' + pill(m.priority, (m.priority || '').toLowerCase()) + '</td></tr>';
     }).join('');
     tbody.querySelectorAll('tr').forEach(function (tr) {
       tr.addEventListener('click', function () {
@@ -333,19 +474,19 @@
     var msg = document.getElementById('msgListMsg');
     api('adminListMessages', {}).then(function (r) {
       if (!r || !r.ok) {
-        if (r && r.error === 'not logged in') { clearToken(); go('#admin_login'); return; }
-        msg.textContent = (r && r.error) || 'Could not load messages.';
+        if (notLoggedIn(r)) return;
+        if (msg) msg.textContent = (r && r.error) || 'Could not load messages.';
         return;
       }
       messages = r.messages || [];
-      renderStats();
+      updateNavBadge();
       renderTable();
       if (selectedId && selectedId !== 'NEW') {
         var m = messages.find(function (x) { return x.submissionId === selectedId; });
         if (m) renderMessageForm(m);
       }
     }).catch(function () {
-      msg.textContent = 'Could not reach the server.';
+      if (msg) msg.textContent = 'Could not reach the server.';
     });
   }
 
@@ -412,7 +553,7 @@
           selectedId = isNew ? (r.submissionId || null) : d.submissionId;
           loadMessages();
         } else {
-          if (r && r.error === 'not logged in') { clearToken(); go('#admin_login'); return; }
+          if (notLoggedIn(r)) return;
           msg.textContent = (r && r.error) || 'Save failed.';
         }
       }).catch(function () { msg.textContent = 'Could not reach the server.'; });
@@ -444,7 +585,9 @@
             document.getElementById('msgDetail').innerHTML = '';
             loadMessages();
           } else {
-            alert((r && r.error) || 'Delete failed.');
+            if (notLoggedIn(r)) return;
+            var m = document.getElementById('msgFormMsg');
+            if (m) m.textContent = (r && r.error) || 'Delete failed.';
           }
         });
       });
@@ -462,7 +605,7 @@
             document.getElementById('replyText').value = '';
             loadMessages();
           } else {
-            if (r && r.error === 'not logged in') { clearToken(); go('#admin_login'); return; }
+            if (notLoggedIn(r)) return;
             rmsg.textContent = (r && r.error) || 'Reply failed.';
           }
         }).catch(function () { rmsg.textContent = 'Could not reach the server.'; });
@@ -470,13 +613,15 @@
     }
   }
 
-  // ---------- CV tab ----------
+  // ---------- resume tab (CV manager: view, upload, delete) ----------
 
-  function renderCvTab() {
+  function renderResumeTab() {
     root.innerHTML = dashboardShell(
-      '<h2>CV Manager</h2>' +
+      '<h2>Resume</h2>' +
+      '<p class="admin-note">Your current CV, as visitors see it. Uploading a new PDF replaces it everywhere at once — the Download Resume button on the live site serves the new file immediately.</p>' +
       '<p class="admin-msg" id="cvMsg">Loading…</p>' +
-      '<div class="admin-card" id="cvCard"></div>' +
+      '<div id="cvViewerWrap"></div>' +
+      '<div class="admin-card-wide" id="cvCard"></div>' +
       '<form class="admin-form" id="cvForm">' +
       '<h3>Upload a new CV (PDF)</h3>' +
       '<label>Choose PDF<input type="file" id="cvFile" accept="application/pdf" required></label>' +
@@ -484,7 +629,7 @@
       '<button class="admin-btn admin-btn-red" type="submit">Upload &amp; Replace CV</button>' +
       '</form>'
     );
-    bindDash();
+    bindShell();
     loadCv();
     document.getElementById('cvForm').addEventListener('submit', function (ev) {
       ev.preventDefault();
@@ -501,7 +646,7 @@
             msg.textContent = 'CV updated. The Download Resume button now serves the new file.';
             loadCv();
           } else {
-            if (r && r.error === 'not logged in') { clearToken(); go('#admin_login'); return; }
+            if (notLoggedIn(r)) return;
             msg.textContent = (r && r.error) || 'Upload failed.';
           }
         }).catch(function () { msg.textContent = 'Could not reach the server.'; });
@@ -513,25 +658,146 @@
   function loadCv() {
     var msg = document.getElementById('cvMsg');
     var card = document.getElementById('cvCard');
+    var viewer = document.getElementById('cvViewerWrap');
     api('adminGetCV', {}).then(function (r) {
       if (!r || !r.ok) {
-        if (r && r.error === 'not logged in') { clearToken(); go('#admin_login'); return; }
-        msg.textContent = (r && r.error) || 'Could not load CV info.';
+        if (notLoggedIn(r)) return;
+        if (msg) msg.textContent = (r && r.error) || 'Could not load CV info.';
         return;
       }
       if (!r.cv) {
-        msg.textContent = 'No CV uploaded yet. The site currently serves the built-in PDF.';
-        card.innerHTML = '';
+        if (msg) msg.textContent = 'No CV uploaded yet. The site currently serves the built-in PDF.';
+        if (card) card.innerHTML = '';
+        if (viewer) viewer.innerHTML = '';
         return;
       }
       var d = r.cv.uploaded ? new Date(r.cv.uploaded) : null;
-      msg.textContent = 'Current CV (served by the Download Resume button):';
-      card.innerHTML =
-        '<p><strong>' + esc(r.cv.name) + '</strong></p>' +
-        '<p>Uploaded: ' + (d ? esc(d.toLocaleString()) : '—') +
-        (r.cv.size ? ' &middot; ' + Math.round(r.cv.size / 1024) + ' KB' : '') + '</p>' +
-        '<p><a href="' + esc(r.cv.url) + '" target="_blank" rel="noopener">Download / preview current CV</a></p>';
-    }).catch(function () { msg.textContent = 'Could not reach the server.'; });
+      if (msg) msg.textContent = 'Current CV (served by the Download Resume button):';
+      if (viewer) {
+        viewer.innerHTML = '<iframe class="admin-cv-viewer" src="' + esc(r.cv.preview || '') +
+          '" title="Current CV preview" loading="lazy"></iframe>' +
+          '<p class="admin-meta">If the preview does not load, <a href="' + esc(r.cv.url) +
+          '" target="_blank" rel="noopener">open the PDF in a new tab</a>.</p>';
+      }
+      if (card) {
+        card.innerHTML =
+          '<p><strong>' + esc(r.cv.name) + '</strong></p>' +
+          '<p class="admin-meta">Uploaded: ' + (d ? esc(d.toLocaleString('en-IN')) : '—') +
+          (r.cv.size ? ' &middot; ' + Math.round(r.cv.size / 1024) + ' KB' : '') + '</p>' +
+          '<div class="admin-row">' +
+          '<a class="admin-btn admin-btn-red" href="' + esc(r.cv.url) + '" target="_blank" rel="noopener">Download CV</a> ' +
+          '<button class="admin-btn admin-btn-danger" type="button" id="delCvBtn">Delete CV</button>' +
+          '</div>' +
+          '<p class="admin-note">Deleting removes the file from Drive. The site then falls back to the built-in PDF until you upload a new one.</p>';
+        var del = document.getElementById('delCvBtn');
+        var delArmed = false;
+        var delTimer = null;
+        del.addEventListener('click', function () {
+          if (!delArmed) {
+            delArmed = true;
+            del.textContent = 'Confirm Delete?';
+            del.classList.add('armed');
+            delTimer = setTimeout(function () {
+              delArmed = false;
+              del.textContent = 'Delete CV';
+              del.classList.remove('armed');
+            }, 5000);
+            return;
+          }
+          clearTimeout(delTimer);
+          del.textContent = 'Deleting…';
+          api('adminDeleteCV', {}).then(function (r2) {
+            if (r2 && r2.ok) {
+              loadCv();
+            } else {
+              if (notLoggedIn(r2)) return;
+              del.textContent = 'Delete CV';
+              if (msg) msg.textContent = (r2 && r2.error) || 'Delete failed.';
+            }
+          }).catch(function () {
+            del.textContent = 'Delete CV';
+            if (msg) msg.textContent = 'Could not reach the server.';
+          });
+        });
+      }
+    }).catch(function () {
+      if (msg) msg.textContent = 'Could not reach the server.';
+    });
+  }
+
+  // ---------- profile tab ----------
+
+  function renderProfileTab() {
+    root.innerHTML = dashboardShell(
+      '<h2>Profile</h2>' +
+      '<p class="admin-note">Your public identity on the portfolio — name, role, bio and links. Saving updates the live site at once (hero name, role, intro text, About section and GitHub link).</p>' +
+      '<form class="admin-form" id="profileForm">' +
+      '<div class="admin-grid">' +
+      '<label>Full name<input type="text" id="pfName" required></label>' +
+      '<label>Title / Role<input type="text" id="pfTitle" required placeholder="AI/ML Engineer"></label>' +
+      '<label>Company<input type="text" id="pfCompany" placeholder="Artmac Soft Pvt Ltd"></label>' +
+      '<label>Location<input type="text" id="pfLocation" placeholder="Hyderabad, Telangana, India"></label>' +
+      '<label>Contact email<input type="email" id="pfEmail" required></label>' +
+      '<label>Contact phone<input type="tel" id="pfPhone" required></label>' +
+      '<label>GitHub URL<input type="url" id="pfGithub" placeholder="https://github.com/mrkaifu4u"></label>' +
+      '<label>LinkedIn URL<input type="url" id="pfLinkedin" placeholder="https://www.linkedin.com/in/…"></label>' +
+      '</div>' +
+      '<label>Short bio — shown under your name on the home page<textarea id="pfBio" rows="3"></textarea></label>' +
+      '<label>About — first paragraph of the About section<textarea id="pfAbout" rows="5"></textarea></label>' +
+      '<p class="admin-msg" id="pfMsg">Loading…</p>' +
+      '<button class="admin-btn admin-btn-red" type="submit">Save Profile</button>' +
+      '</form>'
+    );
+    bindShell();
+    api('adminGetProfile', {}).then(function (r) {
+      var msg = document.getElementById('pfMsg');
+      if (!r || !r.ok || !r.profile) {
+        if (notLoggedIn(r)) return;
+        if (msg) msg.textContent = (r && r.error) || 'Could not load profile.';
+        return;
+      }
+      var p = r.profile;
+      document.getElementById('pfName').value = p.name || '';
+      document.getElementById('pfTitle').value = p.title || '';
+      document.getElementById('pfCompany').value = p.company || '';
+      document.getElementById('pfLocation').value = p.location || '';
+      document.getElementById('pfEmail').value = p.email || '';
+      document.getElementById('pfPhone').value = p.phone || '';
+      document.getElementById('pfGithub').value = p.github || '';
+      document.getElementById('pfLinkedin').value = p.linkedin || '';
+      document.getElementById('pfBio').value = p.bio || '';
+      document.getElementById('pfAbout').value = p.about || '';
+      if (msg) msg.textContent = '';
+    }).catch(function () {
+      var msg = document.getElementById('pfMsg');
+      if (msg) msg.textContent = 'Could not reach the server.';
+    });
+    document.getElementById('profileForm').addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var msg = document.getElementById('pfMsg');
+      msg.textContent = 'Saving…';
+      api('adminSetProfile', {
+        profile: {
+          name: document.getElementById('pfName').value.trim(),
+          title: document.getElementById('pfTitle').value.trim(),
+          company: document.getElementById('pfCompany').value.trim(),
+          location: document.getElementById('pfLocation').value.trim(),
+          email: document.getElementById('pfEmail').value.trim(),
+          phone: document.getElementById('pfPhone').value.trim(),
+          github: document.getElementById('pfGithub').value.trim(),
+          linkedin: document.getElementById('pfLinkedin').value.trim(),
+          bio: document.getElementById('pfBio').value.trim(),
+          about: document.getElementById('pfAbout').value.trim()
+        }
+      }).then(function (r) {
+        if (r && r.ok) {
+          msg.textContent = 'Profile saved. The live site now shows the new name, role, bio and About text.';
+        } else {
+          if (notLoggedIn(r)) return;
+          msg.textContent = (r && r.error) || 'Save failed.';
+        }
+      }).catch(function () { msg.textContent = 'Could not reach the server.'; });
+    });
   }
 
   // ---------- settings tab ----------
@@ -559,7 +825,7 @@
       '</form>' +
       '<p class="admin-note">Your login is stored in the Google Sheet tab “admin_users”. Changing it here updates that tab.</p>'
     );
-    bindDash();
+    bindShell();
     api('adminGetSettings', {}).then(function (r) {
       if (r && r.ok && r.settings) {
         document.getElementById('setEmail').value = r.settings.email || '';
@@ -583,7 +849,7 @@
         if (r && r.ok) {
           msg.textContent = 'Site settings saved. The public site now shows the new contact info.';
         } else {
-          if (r && r.error === 'not logged in') { clearToken(); go('#admin_login'); return; }
+          if (notLoggedIn(r)) return;
           msg.textContent = (r && r.error) || 'Save failed.';
         }
       }).catch(function () { msg.textContent = 'Could not reach the server.'; });
@@ -605,7 +871,7 @@
           msg.textContent = 'Password changed.';
           document.getElementById('pwForm').reset();
         } else {
-          if (r && r.error === 'not logged in') { clearToken(); go('#admin_login'); return; }
+          if (notLoggedIn(r)) return;
           msg.textContent = (r && r.error) || 'Change failed.';
         }
       }).catch(function () { msg.textContent = 'Could not reach the server.'; });
@@ -625,9 +891,12 @@
       viewLogin();
     } else if (h === '#admin_forgot') {
       viewForgot();
-    } else if (h === '#admin') {
+    } else if (h === '#admin' || h === '#admin_messages' || h === '#admin_resume' ||
+               h === '#admin_profile' || h === '#admin_settings') {
       if (!getToken()) { go('#admin_login'); return; }
-      renderDashboard();
+      currentTab = h === '#admin' ? 'dashboard' : h.replace('#admin_', '');
+      selectedId = null;
+      renderTab();
     }
   }
 

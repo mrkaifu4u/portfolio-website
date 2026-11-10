@@ -236,6 +236,57 @@
       })
       .catch(function () { /* keep the built-in contact info */ });
   })();
+  // Profile — show the name / title / bio / About text saved in admin
+  // Profile (doGet ?action=getProfile). If the lookup fails, the
+  // built-in values in the HTML stay, so the page never breaks.
+  (function updateProfile() {
+    fetch(FORM_ENDPOINT + '?action=getProfile')
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d || !d.ok) return;
+        if (d.name) {
+          var h = document.getElementById('heroName');
+          if (h) {
+            var parts = d.name.split(/\s+/).filter(function (x) { return x; });
+            h.innerHTML = parts.length > 1
+              ? parts[0] + '<br>' + parts.slice(1).join(' ')
+              : parts[0] || '';
+          }
+          document.title = d.name + ' — ' + (d.title || 'AI/ML Engineer');
+        }
+        if (d.title) {
+          var role = document.getElementById('heroRole');
+          if (role) role.textContent = d.title;
+        }
+        if (d.bio) {
+          var bio = document.getElementById('heroBio');
+          if (bio) bio.textContent = d.bio;
+        }
+        if (d.about) {
+          var about = document.getElementById('aboutText');
+          if (about) about.textContent = d.about;
+        }
+        if (d.title || d.company || d.location) {
+          var ar = document.getElementById('aboutRole');
+          if (ar) {
+            var bits = [];
+            if (d.title) bits.push(d.title);
+            if (d.company) bits.push(d.company);
+            if (d.location) bits.push(d.location);
+            ar.textContent = bits.join(' · ').toUpperCase();
+          }
+        }
+        if (d.github) {
+          document.querySelectorAll('a[href*="github.com"]').forEach(function (a) {
+            a.href = d.github;
+            if (a.textContent.indexOf('github.com') !== -1) {
+              a.textContent = d.github.replace(/^https?:\/\//, '');
+            }
+          });
+        }
+      })
+      .catch(function () { /* keep the built-in profile */ });
+  })();
   var contactForm = document.getElementById('contactForm');
   if (contactForm) {
     // Visitor IP + location (city/region/country) for the sheet's IP
