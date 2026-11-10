@@ -601,16 +601,22 @@ a.sec-kicker:hover{text-decoration:underline}
   .hire-me:hover{background:var(--red-bright);transform:translateY(-2px);box-shadow:0 8px 20px rgba(232,69,44,.5)}
   .topbar{gap:1.2rem}
 
-  /* --- Hero: red pill, Archivo name, rectangular photo, no tagline --- */
-  .hero-grid{grid-template-columns:1fr 400px 200px;gap:2rem;align-items:center}
-  .hero-left{margin-top:4.5rem}
+  /* --- Hero: red pill, Archivo name, rectangular photo, no tagline ---
+     769-1100px (tablet): photo on top, text + stats below, so the name
+     never slides under the photo. The 3-column hero lives in the
+     min-width:1101px block below. */
+  .hero-grid{grid-template-columns:1fr 1fr;gap:1.5rem;align-items:center}
+  .hero-left{grid-column:1/-1;margin-top:0}
+  .hero-photo{grid-column:1/-1;order:-1}
+  .hero-right{grid-column:1/-1}
+  .hero-right .stats{flex-direction:row;gap:1.8rem;flex-wrap:wrap}
   .hero-left .hello{font-family:var(--font-display);font-weight:800;font-size:.95rem;letter-spacing:.04em;color:#fff;background:var(--red);width:fit-content;padding:.55rem 1.1rem;border-radius:999px;line-height:1;margin:0 0 1rem;box-shadow:0 6px 18px rgba(232,17,45,.4)}
   .hero-left h2{font-family:var(--font-display);font-weight:900;font-size:clamp(2.8rem,4.6vw,3.9rem);letter-spacing:-.01em;line-height:1.06;margin-top:.2rem}
   .hero-text{font-size:1rem;line-height:1.65;max-width:460px}
   .hero-photo{align-items:center;margin-bottom:0}
   .hero-photo::after{display:none}
   .hero-photo img:not(.hero-photo-m){display:none}
-  .hero-photo .hero-photo-m{display:block;width:100%;max-width:400px;max-height:none;aspect-ratio:4/5;object-fit:cover;object-position:top center;border-radius:16px;border:1px solid rgba(232,17,45,.6);box-shadow:0 0 0 1px rgba(232,17,45,.25),0 24px 60px rgba(0,0,0,.6),0 0 60px rgba(232,17,45,.35);filter:none;margin:0;transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
+  .hero-photo .hero-photo-m{display:block;width:100%;max-width:340px;max-height:none;aspect-ratio:4/5;object-fit:cover;object-position:top center;border-radius:16px;border:1px solid rgba(232,17,45,.6);box-shadow:0 0 0 1px rgba(232,17,45,.25),0 24px 60px rgba(0,0,0,.6),0 0 60px rgba(232,17,45,.35);filter:none;margin:0 auto;transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
   .hero-photo:hover .hero-photo-m{transform:scale(1.03) translateY(-4px);box-shadow:0 0 0 1px rgba(232,17,45,.4),0 30px 70px rgba(0,0,0,.65),0 0 80px rgba(232,17,45,.5)}
   .hero-right .hero-side-note{display:none}
   .hero-right .stat strong{font-size:2.1rem}
@@ -717,4 +723,16 @@ a.sec-kicker:hover{text-decoration:underline}
   .about-col-photo .lang-row{grid-column:1/-1;grid-row:2}
   .about-col-text{grid-column:2;grid-row:1}
   .about-col-text p{font-size:.92rem;line-height:1.6}
+}
+
+/* --- Desktop hero, 1101px and up: 3-column layout (text / photo / stats).
+     Below 1101px the min-width:769px block above keeps the photo on top
+     so the name can never slide under it. --- */
+@media (min-width:1101px){
+  .hero-grid{grid-template-columns:1fr 400px 200px;gap:2rem;align-items:center}
+  .hero-left{grid-column:auto;margin-top:4.5rem}
+  .hero-photo{grid-column:auto;order:0}
+  .hero-photo .hero-photo-m{max-width:400px}
+  .hero-right{grid-column:auto}
+  .hero-right .stats{flex-direction:column;gap:1rem;flex-wrap:nowrap}
 }
