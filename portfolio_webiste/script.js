@@ -95,17 +95,29 @@
     var fillEl = document.getElementById('timelineFill');
     var eduEl = document.getElementById('eduTimeline');
     if (fillEl && eduEl) {
-      var eduObs = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) { fillEl.style.height = '100%'; fillEl.style.transition = 'height 1.2s ease'; }
+      // Progressive, scroll-linked fill (mirrors the GSAP scrub above):
+      // 0% when the timeline top reaches 78% of the viewport, 100% when
+      // its bottom reaches 55%. Dots light up one by one as they pass 72%.
+      var eduItems = Array.prototype.slice.call(document.querySelectorAll('.timeline-item'));
+      var ticking = false;
+      function updateTimeline() {
+        ticking = false;
+        var r = eduEl.getBoundingClientRect();
+        var vh = window.innerHeight || document.documentElement.clientHeight;
+        var start = vh * 0.78, end = vh * 0.55;
+        var total = (r.bottom - r.top) + (start - end);
+        var p = Math.max(0, Math.min(1, (start - r.top) / total));
+        fillEl.style.height = (p * 100).toFixed(1) + '%';
+        eduItems.forEach(function (item) {
+          var ir = item.getBoundingClientRect();
+          if (ir.top < vh * 0.72) { item.classList.add('active'); }
+          else { item.classList.remove('active'); }
         });
-      }, { threshold: 0.3 });
-      eduObs.observe(eduEl);
-      document.querySelectorAll('.timeline-item').forEach(function (item) {
-        new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) { if (e.isIntersecting) item.classList.add('active'); });
-        }, { threshold: 0.6 }).observe(item);
-      });
+      }
+      function onEduScroll() { if (!ticking) { ticking = true; requestAnimationFrame(updateTimeline); } }
+      window.addEventListener('scroll', onEduScroll, { passive: true });
+      window.addEventListener('resize', onEduScroll);
+      updateTimeline();
     }
   }
 
@@ -188,7 +200,7 @@
         contactForm.reset();
         openSuccessModal();
       }).catch(function () {
-        if (ok) { ok.hidden = false; ok.textContent = 'Could not send right now — please email me directly at shaikhkaif7014@gmail.com.'; }
+        if (ok) { ok.hidden = false; ok.textContent = 'Could not send right now — please email me directly at skilltech011@gmail.com.'; }
       }).finally(function () {
         if (sendBtn) { sendBtn.disabled = false; sendBtn.textContent = 'Send Message'; }
       });
