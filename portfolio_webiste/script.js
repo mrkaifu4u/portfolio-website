@@ -188,6 +188,26 @@
   // Apps Script answers without CORS headers, so the request is sent
   // no-cors with a plain-text body; the row is still written server-side.
   var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxIXwrvVjy5i5B5rwu5DCjZE12g5bqf8wruhVQ_IW7CvMUZ6FcG_c9mDTicn_Jk6JB-/exec';
+  // Download Resume — point the resume links at the latest CV uploaded
+  // from the admin panel (Google Drive). If the lookup fails for any
+  // reason, the links keep pointing at the built-in PDF, so the button
+  // never breaks.
+  (function updateResumeLinks() {
+    var links = document.querySelectorAll('a[href*="Mohamad_Kaifoddin_AI_ML_Engineer_1-3Yrs.pdf"]');
+    if (!links.length) return;
+    fetch(FORM_ENDPOINT + '?action=getCV')
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d || !d.ok || !d.url) return;
+        links.forEach(function (a) {
+          a.href = d.url;
+          a.removeAttribute('download');
+          a.setAttribute('target', '_blank');
+          a.setAttribute('rel', 'noopener');
+        });
+      })
+      .catch(function () { /* keep the built-in PDF link */ });
+  })();
   var contactForm = document.getElementById('contactForm');
   if (contactForm) {
     // Visitor IP + location (city/region/country) for the sheet's IP

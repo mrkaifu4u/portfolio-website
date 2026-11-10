@@ -1,0 +1,59 @@
+/* Admin panel — same dark maroon / cream theme as the portfolio.
+   These rules only apply when the body has .admin-mode, so the public
+   portfolio is untouched. */
+body.admin-mode{background:#070708;color:#f5f3ef}
+body.admin-mode .poster,
+body.admin-mode .page-skeleton,
+body.admin-mode .progress,
+body.admin-mode .cursor{display:none!important}
+#admin-root{display:block;min-height:100vh;font-family:Archivo,Inter,system-ui,sans-serif}
+#admin-root[hidden]{display:none}
+
+.admin-card{max-width:520px;margin:8vh auto 0;background:#111113;border:1px solid #2a2a2e;border-radius:14px;padding:2rem}
+.admin-login{text-align:left}
+.admin-logo{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;background:#e8112d;color:#fff;font-family:Archivo,sans-serif;font-weight:900;font-size:1.25rem;border-radius:0;margin-bottom:1rem}
+.admin-card h1{font-size:1.6rem;font-weight:800;margin:0 0 .4rem}
+.admin-card h2{font-size:1.35rem;font-weight:800;margin:0 0 1rem}
+.admin-card h3{font-size:1.05rem;font-weight:700;margin:1.4rem 0 .8rem}
+.admin-sub{color:#b9b3a8;margin:0 0 1.4rem}
+.admin-card label{display:block;font-size:.85rem;font-weight:600;color:#d8d2c6;margin-bottom:1rem}
+.admin-card input,.admin-card select,.admin-card textarea{width:100%;margin-top:.4rem;padding:.7rem .8rem;background:#0a0a0c;border:1px solid #333338;border-radius:8px;color:#f5f3ef;font-size:.95rem;font-family:inherit;box-sizing:border-box}
+.admin-card input:focus,.admin-card select:focus,.admin-card textarea:focus{outline:none;border-color:#e8112d;box-shadow:0 0 0 3px rgba(232,17,45,.25)}
+.admin-msg{color:#e8112d;font-size:.9rem;min-height:1.2em;margin:.4rem 0 .8rem}
+.admin-link{margin-top:1rem;font-size:.9rem}
+.admin-link a,.admin-back a,.admin-card a{color:#ff4d5e;text-decoration:none}
+.admin-link a:hover,.admin-back a:hover,.admin-card a:hover{text-decoration:underline}
+.admin-back{margin-top:.6rem;font-size:.9rem}
+.admin-btn{display:inline-block;padding:.7rem 1.4rem;border-radius:0;border:0;cursor:pointer;font-weight:700;font-size:.9rem;font-family:inherit;text-decoration:none}
+.admin-btn-red{background:#e8112d;color:#fff}
+.admin-btn-red:hover{background:#f22}
+.admin-btn-ghost{background:transparent;color:#f5f3ef;border:1px solid #55555c}
+.admin-btn-ghost:hover{border-color:#f5f3ef}
+.admin-btn-danger{background:transparent;color:#ff6b6b;border:1px solid #ff6b6b}
+.admin-btn-danger:hover{background:rgba(255,107,107,.12)}
+.admin-note{color:#b9b3a8;font-size:.88rem;margin-top:1.4rem}
+
+.admin-dash{max-width:1080px;margin:0 auto;padding:1.2rem 1.2rem 3rem}
+.admin-topbar{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;border-bottom:1px solid #2a2a2e;padding-bottom:1rem;margin-bottom:1.4rem}
+.admin-brand{font-weight:900;font-size:1.1rem}
+.admin-tabs{display:flex;gap:.4rem;flex:1}
+.admin-tabs button{background:transparent;border:1px solid #333338;color:#d8d2c6;border-radius:999px;padding:.45rem 1rem;cursor:pointer;font-weight:600;font-family:inherit}
+.admin-tabs button.active{background:#e8112d;border-color:#e8112d;color:#fff}
+.admin-main h2{margin-bottom:.6rem}
+.admin-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.8rem}
+.admin-table-wrap{overflow-x:auto;border:1px solid #2a2a2e;border-radius:10px}
+.admin-table{width:100%;border-collapse:collapse;font-size:.9rem;min-width:640px}
+.admin-table th,.admin-table td{padding:.65rem .8rem;text-align:left;border-bottom:1px solid #222226;white-space:nowrap}
+.admin-table th{color:#b9b3a8;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em}
+.admin-table tbody tr{cursor:pointer}
+.admin-table tbody tr:hover{background:#161618}
+.admin-form{background:#111113;border:1px solid #2a2a2e;border-radius:12px;padding:1.4rem;margin-top:1.4rem}
+.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 1rem}
+.admin-grid label{margin-bottom:.9rem}
+.admin-meta{color:#b9b3a8;font-size:.85rem}
+.admin-form textarea{resize:vertical}
+@media (max-width:640px){
+  .admin-grid{grid-template-columns:1fr}
+  .admin-card{margin:4vh 1rem 0;padding:1.4rem}
+  .admin-dash{padding:1rem .8rem 2rem}
+}
