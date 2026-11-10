@@ -31,6 +31,7 @@ body.admin-mode .cursor{display:none!important}
 .admin-btn-ghost:hover{border-color:#f5f3ef}
 .admin-btn-danger{background:transparent;color:#ff6b6b;border:1px solid #ff6b6b}
 .admin-btn-danger:hover{background:rgba(255,107,107,.12)}
+.admin-btn-danger.armed{background:#e8112d;color:#fff;border-color:#e8112d}
 .admin-note{color:#b9b3a8;font-size:.88rem;margin-top:1.4rem}
 
 .admin-dash{max-width:1080px;margin:0 auto;padding:1.2rem 1.2rem 3rem}

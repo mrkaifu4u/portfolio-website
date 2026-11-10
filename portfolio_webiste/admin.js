@@ -322,8 +322,21 @@
     });
     var del = document.getElementById('delMsgBtn');
     if (del) {
+      var delArmed = false;
+      var delTimer = null;
       del.addEventListener('click', function () {
-        if (!confirm('Delete this message? This cannot be undone.')) return;
+        if (!delArmed) {
+          delArmed = true;
+          del.textContent = 'Confirm Delete?';
+          del.classList.add('armed');
+          delTimer = setTimeout(function () {
+            delArmed = false;
+            del.textContent = 'Delete';
+            del.classList.remove('armed');
+          }, 5000);
+          return;
+        }
+        clearTimeout(delTimer);
         api('adminDeleteMessage', { submissionId: d.submissionId }).then(function (r) {
           if (r && r.ok) {
             selectedId = null;
