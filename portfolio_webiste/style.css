@@ -294,7 +294,6 @@ a.sec-kicker:hover{text-decoration:underline}
 .modal-card{background:var(--panel2);border:1px solid var(--line-soft);border-top:3px solid #00c985;border-radius:16px;padding:1.8rem 1.8rem 2rem;max-width:430px;width:100%;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.6);animation:pop .35s cubic-bezier(.2,.8,.2,1)}
 @keyframes pop{from{transform:scale(.9) translateY(12px);opacity:0}to{transform:none;opacity:1}}
 .modal-anim{width:150px;height:150px;margin:0 auto}
-.modal-check{width:90px;height:90px;margin:0 auto;border-radius:50%;background:rgba(0,201,133,.15);border:2px solid #00c985;color:#00c985;display:flex;align-items:center;justify-content:center;font-size:2.6rem;font-weight:800}
 .modal-card h3{font-family:var(--font-display);font-weight:800;font-size:1.4rem;margin-top:.6rem}
 .modal-msg{color:#7ee2a8;font-weight:600;font-size:1.05rem;line-height:1.5;margin:.8rem 0 1.4rem}
 .foot-big{font-family:var(--font-display);font-weight:900;font-size:clamp(2.2rem,4.5vw,3.2rem);line-height:1.02;letter-spacing:.01em;text-transform:uppercase}
@@ -917,7 +916,7 @@ a.sec-kicker:hover{text-decoration:underline}
 }
 
 /* ============================================================
-   v48 — Skills flexbox master-detail + PIPELINES band/chart (2026-11-10).
+   v49 — success pop-up only JSON tick, send-button spinner, page skeleton loader (2026-11-10).
    Root cause (measured live): the detail panel was a grid item
    forced to grid-row:1, so it (a) pinned itself to the top and
    never sat beside the button clicked, leaving the space beside
@@ -961,3 +960,29 @@ a.sec-kicker:hover{text-decoration:underline}
 @media (max-width:768px){
   .skill-detail{display:none}
 }
+
+/* ============================================================
+   v49 — Success pop-up, send button, skeleton loader (2026-11-10).
+   (a) The pop-up now shows ONLY the Lottie success.json tick.
+       The plain-tick fallback (.modal-check) is removed — its
+       display:flex rule overrode the hidden attribute, so it
+       showed beside the JSON animation — and the leading tick
+       is removed from the message text.
+   (b) Send Message button shows a circular progress spinner
+       while the form is sending (class .sending).
+   (c) Full-page skeleton loader: shimmering placeholder blocks
+       while the page loads, fading out once loaded.
+   ============================================================ */
+.form-send .btn-spinner{display:none;width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;animation:btn-spin .7s linear infinite;vertical-align:-2px;margin-right:.55rem}
+.form-send.sending .btn-spinner{display:inline-block}
+.form-send.sending{opacity:.85}
+@keyframes btn-spin{to{transform:rotate(360deg)}}
+.page-skeleton{position:fixed;inset:0;z-index:200;background:#070708;padding:1.5rem;display:flex;flex-direction:column;gap:1.2rem;transition:opacity .5s ease}
+.page-skeleton.done{opacity:0;pointer-events:none}
+.sk{border-radius:10px;background:linear-gradient(90deg,#17171a 25%,#26262b 50%,#17171a 75%);background-size:200% 100%;animation:sk-shimmer 1.3s linear infinite}
+@keyframes sk-shimmer{from{background-position:200% 0}to{background-position:-200% 0}}
+.sk-topbar{height:52px}
+.sk-hero{height:280px}
+.sk-row{display:flex;gap:1.2rem}
+.sk-row .sk-card{flex:1;height:150px}
+.sk-wide{height:180px}

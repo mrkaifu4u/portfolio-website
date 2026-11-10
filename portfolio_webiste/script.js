@@ -5,6 +5,18 @@
 
   document.documentElement.classList.add('js');
 
+  // Page skeleton loader — fade it out once the page is fully loaded,
+  // with a safety timeout so it can never block the page.
+  var pageSkeleton = document.getElementById('pageSkeleton');
+  function hideSkeleton() {
+    if (!pageSkeleton) return;
+    pageSkeleton.classList.add('done');
+    setTimeout(function () { if (pageSkeleton.parentNode) pageSkeleton.parentNode.removeChild(pageSkeleton); }, 600);
+  }
+  if (document.readyState === 'complete') { setTimeout(hideSkeleton, 400); }
+  else { window.addEventListener('load', function () { setTimeout(hideSkeleton, 400); }); }
+  setTimeout(hideSkeleton, 3500);
+
   var progress = document.getElementById('progress');
   var backTop = document.getElementById('backTop');
   function onScroll() {
@@ -163,7 +175,6 @@
     if (!successModal) return;
     successModal.hidden = false;
     if (successAnim) { successAnim.goToAndPlay(0); }
-    else { var fb = document.getElementById('successFallback'); if (fb) fb.hidden = false; }
   }
   function closeSuccessModal() { if (successModal) successModal.hidden = true; }
   if (successModal) {
@@ -203,6 +214,7 @@
       e.preventDefault();
       if (!contactForm.checkValidity()) { contactForm.reportValidity(); return; }
       var sendBtn = contactForm.querySelector('.form-send');
+      var sendLabel = sendBtn ? sendBtn.querySelector('.btn-label') : null;
       var ok = document.getElementById('formSuccess');
       var phoneField = contactForm.querySelector('[name="phone"]');
       var isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
@@ -215,7 +227,7 @@
         source: 'Portfolio Website',
         deviceType: isMobile ? 'Mobile' : (window.innerWidth <= 1024 ? 'Tablet' : 'Desktop')
       };
-      if (sendBtn) { sendBtn.disabled = true; sendBtn.textContent = 'Sending…'; }
+      if (sendBtn) { sendBtn.disabled = true; sendBtn.classList.add('sending'); if (sendLabel) sendLabel.textContent = 'Sending…'; }
       getVisitorInfo().then(function (info) {
         if (info.ip) data.ip = info.ip;
         if (info.location) data.location = info.location;
@@ -232,7 +244,7 @@
       }).catch(function () {
         if (ok) { ok.hidden = false; ok.textContent = 'Could not send right now — please email me directly at skilltech011@gmail.com.'; }
       }).finally(function () {
-        if (sendBtn) { sendBtn.disabled = false; sendBtn.textContent = 'Send Message'; }
+        if (sendBtn) { sendBtn.disabled = false; sendBtn.classList.remove('sending'); if (sendLabel) sendLabel.textContent = 'Send Message'; }
       });
     });
   }

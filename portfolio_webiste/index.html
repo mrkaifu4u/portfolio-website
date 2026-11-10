@@ -11,10 +11,19 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800;900&family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=48" />
+  <link rel="stylesheet" href="style.css?v=49" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23c1272d'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='%23f2e3c6' font-family='Arial' font-weight='bold'>MK</text></svg>" />
+  <noscript><style>.page-skeleton{display:none!important}</style></noscript>
 </head>
 <body>
+  <!-- PAGE SKELETON LOADER : shimmering placeholders while the page loads -->
+  <div class="page-skeleton" id="pageSkeleton" aria-hidden="true">
+    <div class="sk sk-topbar"></div>
+    <div class="sk sk-hero"></div>
+    <div class="sk-row"><div class="sk sk-card"></div><div class="sk sk-card"></div><div class="sk sk-card"></div></div>
+    <div class="sk-row"><div class="sk sk-card"></div><div class="sk sk-card"></div></div>
+    <div class="sk sk-wide"></div>
+  </div>
   <div class="progress" id="progress" aria-hidden="true"></div>
   <div class="cursor" id="cursor" aria-hidden="true"></div>
 
@@ -377,7 +386,7 @@
           <option>Other</option>
         </select>
         <textarea name="message" placeholder="Message" rows="5" autocomplete="off" required aria-label="Message"></textarea>
-        <button type="submit" class="btn btn-red form-send">Send Message</button>
+        <button type="submit" class="btn btn-red form-send"><span class="btn-spinner" aria-hidden="true"></span><span class="btn-label">Send Message</span></button>
         <p class="form-success" id="formSuccess" hidden>Message sent successfully — thank you for reaching out. I'll get back to you shortly.</p>
       </form>
       </div>
@@ -423,8 +432,7 @@
   <div class="modal" id="successModal" hidden role="dialog" aria-modal="true" aria-labelledby="successModalMsg">
     <div class="modal-card">
       <div class="modal-anim" id="successAnim" aria-hidden="true"></div>
-      <div class="modal-check" id="successFallback" hidden>✓</div>
-      <p class="modal-msg" id="successModalMsg">✓ Thanks! Your message has been received — I'll get back to you soon.</p>
+      <p class="modal-msg" id="successModalMsg">Thanks! Your message has been received — I'll get back to you soon.</p>
       <button type="button" class="btn btn-red" id="modalClose">Close</button>
     </div>
   </div>
@@ -432,6 +440,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
-  <script src="script.js?v=48"></script>
+  <script src="script.js?v=49"></script>
 </body>
 </html>
