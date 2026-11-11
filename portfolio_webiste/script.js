@@ -233,9 +233,23 @@
           var loc = document.getElementById('siteLocation');
           if (loc) loc.textContent = d.location;
         }
+        if (d.formEnabled === false) disableContactForm(d.email);
       })
       .catch(function () { /* keep the built-in contact info */ });
   })();
+  // Contact form on/off — when the admin turns the form off in Settings,
+  // hide the fields and show a notice instead of the form.
+  function disableContactForm(email) {
+    window.__formDisabled = true;
+    var f = document.getElementById('contactForm');
+    if (!f) return;
+    var mail = email || 'skilltech011@gmail.com';
+    var note = document.createElement('p');
+    note.className = 'form-disabled-note';
+    note.textContent = 'The contact form is currently unavailable. Please email me directly at ' + mail + '.';
+    f.parentNode.insertBefore(note, f);
+    f.style.display = 'none';
+  }
   // Profile — show the name / title / bio / About text saved in admin
   // Profile (doGet ?action=getProfile). If the lookup fails, the
   // built-in values in the HTML stay, so the page never breaks.
@@ -369,6 +383,7 @@
 
     contactForm.addEventListener('submit', function (e) {
       e.preventDefault();
+      if (window.__formDisabled) return;
       if (!contactForm.checkValidity()) { contactForm.reportValidity(); return; }
       var sendBtn = contactForm.querySelector('.form-send');
       var sendLabel = sendBtn ? sendBtn.querySelector('.btn-label') : null;
