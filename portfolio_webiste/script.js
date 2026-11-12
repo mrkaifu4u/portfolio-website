@@ -446,6 +446,33 @@
     });
   }
 
+  // PRODUCTS dropdown in the navbar — click to open the submenu, click
+  // outside or Escape to close it. The submenu link opens in a new tab.
+  var navDrop = document.getElementById('navProducts');
+  if (navDrop) {
+    var navDropBtn = navDrop.querySelector('.nav-drop-btn');
+    var closeNavDrop = function () {
+      navDrop.classList.remove('open');
+      if (navDropBtn) navDropBtn.setAttribute('aria-expanded', 'false');
+    };
+    if (navDropBtn) {
+      navDropBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = navDrop.classList.toggle('open');
+        navDropBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    }
+    navDrop.querySelectorAll('.nav-sub a').forEach(function (a) {
+      a.addEventListener('click', closeNavDrop);
+    });
+    document.addEventListener('click', function (e) {
+      if (!navDrop.contains(e.target)) closeNavDrop();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeNavDrop();
+    });
+  }
+
   // Technical Skills accordion (mobile storyboard: first group open, rest collapsed)
   var isMobile = function () { return window.matchMedia('(max-width:768px)').matches; };
   document.querySelectorAll('.skill-toggle').forEach(function (btn) {
